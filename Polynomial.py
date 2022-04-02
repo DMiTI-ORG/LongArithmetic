@@ -45,8 +45,13 @@ class Polynomial:
 
 
     def multiply(self, polynomial: Self) -> Self:
-        # P-8
-        pass
+        # P-8 
+        result = Polynomial(0, [])
+        for i in range(self.highest_degree):
+            new_arr = polynomial.multiply_by_monomial(self.highest_degree - i)
+            new_arr = new_arr.multiply_by_rational(self.array[i])
+            result = result.add(new_arr)
+        return result
 
 
     def quotient(self, polynomial: Self) -> Self:
