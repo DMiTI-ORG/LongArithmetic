@@ -58,5 +58,10 @@ class WholeNumber:
         # Z-10
         pass
 
+    
+    def __eq__(self, other: Self) -> bool:
+        return (self.array == other.array) and (self.highest_position == other.highest_position) and (self.sign == other.sign)
+
+
     def __str__(self) -> str:
         return ('-' if self.sign else '') + ''.join(map(str, self.array))

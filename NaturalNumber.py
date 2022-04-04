@@ -49,11 +49,7 @@ class NaturalNumber:
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:
         # N-9 
-        new_num = number.multiply_digit(digit)
-        if self.compare(new_num) != 1:
-            return self.subtract(new_num)
-        else:
-            return 'Error'
+        pass
 
 
 
@@ -76,9 +72,14 @@ class NaturalNumber:
         # N-13
         pass
 
+
     def lcm(self, number: Self) -> Self:
         # N-14
         pass
+
+
+    def __eq__(self, other: Self) -> bool:
+        return (self.array == other.array) and (self.highest_position == other.highest_position)
 
 
     def __str__(self) -> str:

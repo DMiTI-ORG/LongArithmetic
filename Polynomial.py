@@ -46,12 +46,7 @@ class Polynomial:
 
     def multiply(self, polynomial: Self) -> Self:
         # P-8 
-        result = Polynomial(0, [])
-        for i in range(self.highest_degree):
-            new_arr = polynomial.multiply_by_monomial(self.highest_degree - i)
-            new_arr = new_arr.multiply_by_rational(self.array[i])
-            result = result.add(new_arr)
-        return result
+        pass
 
 
     def quotient(self, polynomial: Self) -> Self:
@@ -77,6 +72,10 @@ class Polynomial:
     def multiple_roots_to_simple(self) -> Self:
         # P-13
         pass
+
+    
+    def __eq__(self, other: Self) -> bool:
+        return (self.array == other.array) and (self.highest_degree == other.highest_degree)
 
     
     def __str__(self) -> str:
