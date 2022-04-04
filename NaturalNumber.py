@@ -39,20 +39,15 @@ class NaturalNumber:
         pass
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:
-<<<<<<< HEAD
-        # N-9 
-        pass
-=======
         """
-              module: SUB_NDN_N
-              author: Smirnov Nikita
->>>>>>> 3d73229 (Complete N-9, P-8)
+        module: SUB_NDN_N
+        author: Smirnov Nikita
 
-              arguments:
-                  number: an instance of the class NaturalNumber
-                  digit: one digit to multiply with number
+        arguments:
+            number: an instance of the class NaturalNumber
+            digit: one digit to multiply with number
 
-              This method subtract from self number another number multiplied with digit
+        This method subtract from self number another number multiplied with digit
         """
 
         new_num = number.multiply_digit(digit)
@@ -85,10 +80,6 @@ class NaturalNumber:
 
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_position == other.highest_position)
-
-    def __eq__(self, other: Self) -> bool:
-        return (self.array == other.array) and (self.highest_position == other.highest_position)
-
 
     def __str__(self) -> str:
         return ''.join(map(str, self.array))

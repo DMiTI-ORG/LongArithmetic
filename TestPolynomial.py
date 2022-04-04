@@ -1,10 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
-
 from Polynomial import Polynomial
 
-
-import Polynomial
 
 class TestPolynomial(TestCase):
     '''
