@@ -70,8 +70,20 @@ class Polynomial:
         pass
 
     def derivative(self) -> Self:
-        # P-12
-        pass
+        """
+        module: <DER_P_P>
+        author: <Nickolay>
+
+        This function calculates the derivative of a polynomial
+        """
+        result_degree = self.highest_degree - 1  # Calculate the highest degree of the resulting polynomial
+        result = Polynomial(result_degree, [])  # Create an instance of the polynomial class to store the result
+        current_degree = self.highest_degree  # Remember the degree we differentiate first
+        for coefficient in self.array[:-1]:  # Loop through all coefficients except the last one
+            # The new coefficient is obtained by multiplying the old one by the current degree
+            result.array.append(coefficient.multiply(RationalNumber((0, 1, [current_degree]), (1, [1]))))
+            current_degree -= 1
+        return result
 
     def multiple_roots_to_simple(self) -> Self:
         # P-13

@@ -34,21 +34,31 @@ class RationalNumber:
 
 
     def subtract(self, number: Self) -> Self:
-        #  находим общий знаменатель
+        """
+        module: <SUB_Q_Q>
+        author: <Nickolay>
+
+        Arguments:
+            self: число из которого вычитают
+            number: число которое вычитают
+
+        This function allows you to subtract from one rational number another
+               """
+        # find the common denominator
         common_denominator = self.denominator.lcm(number.denominator)
-        #  находим новый числитель первой дроби
+        # find the new numerator of the first fraction
         new_numerator1 = self.numerator.multiply(common_denominator.quotient(self.denominator))
-        #  находим новый числитель второй дроби
+        # find the new numerator of the second fraction
         new_numerator2 = number.numerator.multiply(common_denominator.quotient(number.denominator))
-        #  находим общий числитель, вычитая два полученных
+        # find the common numerator by subtracting the two obtained
         result_numerator = new_numerator2.subtract(new_numerator2)
-        # получаем результат
+        # get the result of subtraction
         result_rational = RationalNumber((result_numerator.sign,
                                           result_numerator.highest_position,
                                           result_numerator.array),
                                          (common_denominator.highest_position,
                                           common_denominator.array))
-        # сокращаем его и выводим
+        # reduce it and output
         result_rational.reduce()
         return result_rational
 
