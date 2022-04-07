@@ -71,11 +71,9 @@ class RationalNumber:
     def divide(self, number: Self) -> Self:
         # Q-8
         pass
-
     
     def __eq__(self, other: Self) -> bool:
         return self.numerator == other.numerator
-
 
     def __str__(self) -> str:
         line = f'\n{"-" * max(self.numerator.highest_position, self.denominator.highest_position)}\n'
