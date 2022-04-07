@@ -30,8 +30,11 @@ class WholeNumber:
 
 
     def to_natural(self) -> NaturalNumber:
-        # Z-5
-        pass
+        if self.sign == 0:
+            number = NaturalNumber(self.highest_position, self.array)
+            return number
+        else:
+            return 'Error'
 
 
     def add(self, number: Self) -> Self:
