@@ -21,7 +21,19 @@ class WholeNumber:
 
     def multiply_by_minus_one(self) -> Self:
         # Z-3
-        pass
+        """
+     module: MUL_ZM_Z
+     author: Rakhmatulin Marat
+     arguments:
+     number: an instance of the Integerclass
+     new_sign: the number by which we will divide
+     This method subtract from self number another number multiplied with digit
+        """
+        if (self.sign == 1):
+            new_sign = 0
+        else:
+            new_sign = 1
+        return WholeNumber(new_sign, self.highest_position, self.array)
 
 
     def natural_to_whole(self) -> Self:
