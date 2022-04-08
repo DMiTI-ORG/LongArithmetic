@@ -13,7 +13,7 @@ class TestPolynomial(TestCase):
         self.assertEqual(self.calc.foo(100, 200), 1)
         bar.return_value = 5
         self.assertEqual(self.calc.foo(100, 200), 5)
-     """""
+     """
 
 
     @patch.object(Polynomial, 'multiply_by_rational')

@@ -82,13 +82,16 @@ class NaturalNumber:
         current_dividend = NaturalNumber(current_position, dividend.array[:current_position])
         # If suddenly the value of the taken number turned out to be less than the divisor,
         # then we take 1 more digit from the dividend
-        if current_dividend.first_division_digit(divider).array[0] == 0:
+        if current_dividend.compare(divider) == 1:
             current_dividend.array.append(dividend.array[current_position])
             current_position += 1
         # Actually division by a column
         while current_position < dividend.highest_position:  # Until we reach the end of the number
             # First, we take the first digit of the incomplete quotient from dividing the selected number by the divisor
-            quotient = current_dividend.first_division_digit(divider).array[0]
+            if current_dividend.compare(divider) == 2:
+                quotient = current_dividend.first_division_digit(divider).array[0]
+            else:
+                quotient = 0
             result.array.append(quotient)  # add the found number to the result
             result.highest_position += 1  # increase the size of the resulting number by 1
             # find the remainder of dividing the selected number by the divisor
@@ -111,24 +114,7 @@ class NaturalNumber:
 
     def gcd(self, number: Self) -> Self:
         # N-13
-        a = ""
-        b = ""
-        for i in self.array:
-            a += str(i)
-        for i in number.array:
-            b += str(i)
-        a = int(a)
-        b = int(b)
-        while a != 0 and b != 0:
-            if a > b:
-                a = a % b
-            else:
-                b = b % a
-        c = str(a + b)
-        result = NaturalNumber(len(c), [])
-        for i in c:
-            result.array.append(int(i))
-        return result
+        pass
 
 
     def lcm(self, number: Self) -> Self:

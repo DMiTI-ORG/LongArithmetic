@@ -98,6 +98,3 @@ class Polynomial:
             string += '{:+}'.format(self.array[i]) + 'x^' + f'{self.highest_degree - i}'
         string += '{:+}'.format(self.array[-1])
         return string
-
-    def __eq__(self, other: Self) -> bool:
-        return (self.array == other.array) and (self.highest_degree == other.highest_degree)
