@@ -3,7 +3,7 @@ from typing_extensions import Self
 
 
 class WholeNumber:
-    def __init__(self, sign :int, highest_position: int, array: list):
+    def __init__(self, sign: int, highest_position: int, array: list):
         self.sign = sign
         self.highest_position = highest_position
         self.array = array
@@ -25,9 +25,8 @@ class WholeNumber:
      module: MUL_ZM_Z
      author: Rakhmatulin Marat
      arguments:
-     number: an instance of the Integerclass
-     new_sign: the number by which we will divide
-     This method subtract from self number another number multiplied with digit
+     new_sign: new number sign
+     This method multiplies the number by minus one
         """
         if (self.sign == 1):
             new_sign = 0
@@ -60,10 +59,23 @@ class WholeNumber:
         # Z-8
         pass
 
-
     def quotient(self, number: Self) -> Self:
         # Z-9
-        pass
+        """
+        module: DIV_ZZ_Z
+        author: Rakhmatulin Marat
+        arguments:
+            number: an instance of the WholeNumber
+        This method divides one integer by another that is not equal to zero
+         """
+        if number.is_positive() != 0:
+            number_1 = self.abs()
+            number_2 = number.abs()
+            number_3 = number_1.quotient(number_2)
+            number_3 = number_3.add_one()
+            return number_3
+        else:
+            return 'Error'
 
 
     def remainder(self, number: Self) -> Self:
