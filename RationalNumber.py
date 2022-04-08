@@ -39,8 +39,8 @@ class RationalNumber:
 
 
     def multiply(self, number: Self) -> Self:
-        # Q-7
-        pass
+        result = RationalNumber(self.numerator.multiply(number.numerator), self.denominator.multiply(number.denominator))
+        return result
 
 
     def divide(self, number: Self) -> Self:

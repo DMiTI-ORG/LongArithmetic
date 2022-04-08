@@ -18,6 +18,6 @@ class TestWhole(TestCase):
         number_2 = WholeNumber(0, 1, [0])
         number_3 = WholeNumber(1, 1, [7])
 
-        self.assertEqual(NaturalNumber(2, [2, 1]), str(number_1.to_natural))
-        self.assertEqual(NaturalNumber(1, [0]), str(number_2.to_natural))
-        self.assertEqual('Error', str(number_3.to_natural))
+        self.assertEqual(NaturalNumber(2, [2, 1]), number_1.to_natural())
+        self.assertEqual(NaturalNumber(1, [0]), number_2.to_natural())
+        self.assertEqual('Error', number_3.to_natural())
