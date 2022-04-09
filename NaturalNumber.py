@@ -59,8 +59,17 @@ class NaturalNumber:
         pass
 
     def multiply_by_powered_ten(self, digit: int) -> Self:
-        # N-7
-        pass
+        """
+        module: MUL_Nk_N
+        author: Trunov Egor
+
+        arguments:
+            digit: one digit to multiply with number
+
+        This method multiply self number by powered ten digit
+        """
+        self.array += [0] * digit
+
 
     def multiply(self, number: Self) -> Self:
         # N-8
@@ -94,8 +103,16 @@ class NaturalNumber:
         pass
 
     def remainder(self, number: Self) -> Self:
-        # N-12
-        pass
+        """
+        module: MOD_NN_N
+        author: Trunov Egor
+
+        arguments:
+            number: an instance of the class NaturalNumber
+
+        This method calculate
+        """
+        return self.subtract_k_by_number(number.multiply(self.quotient(number)), 1)
 
     def gcd(self, number: Self) -> Self:
         # N-13
