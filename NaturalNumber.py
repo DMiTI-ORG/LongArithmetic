@@ -23,8 +23,44 @@ class NaturalNumber:
         pass
 
     def subtract(self, number: Self) -> Self:
-        # N-5
-        pass
+        """
+        module: SUB_NN_N
+        author: Smirnov Kirill
+
+        arguments:
+            number: an instance of the class NaturalNumber
+            digit: one digit to muliply with number
+
+        subtract one number from another
+        """
+        comp = self.compare(number)
+        if comp == 1:
+            t = self
+            self = number
+            number = t
+        new_array = self.array
+        posittion = self.highest_position - 1
+        while posittion >= 0:
+            if self.array[posittion] - number.array[posittion] >= 0:
+                new_array[posittion] = self.array[posittion] - number.array[posittion]
+            else:
+                temporary_position = posittion - 1
+                while new_array[temporary_position] != 0:
+                    temporary_position -= 1
+                new_array[temporary_position] - 1
+                temporary_position += 1
+                while temporary_position < posittion:
+                    new_array[temporary_position] += 9
+                    temporary_position += 1
+                new_array[temporary_position] += 10
+                new_array = self.array[posittion] - number.array[posittion]
+            posittion -= 1
+        posittion += 1
+        while posittion < self.highest_position - 1 and new_array[0] == 0:
+            new_array.pop(0)
+            posittion += 1
+
+        return NaturalNumber(self.highest_position - posittion, new_array)
 
     def multiply_digit(self, digit: int) -> Self:
         # N-6
