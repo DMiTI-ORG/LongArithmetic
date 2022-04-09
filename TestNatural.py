@@ -1,4 +1,4 @@
-import imp
+
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -15,20 +15,21 @@ class TestNatural(TestCase):
         bar.return_value = 5
         self.assertEqual(self.calc.foo(100, 200), 5)'''
 
-    @patch.object(NaturalNumber, 'multiply_digit')
-    @patch.object(NaturalNumber, 'compare')
-    @patch.object(NaturalNumber, 'subtract')
-    def test_subtract_k_by_number(self, subtract, compare, multiply_digit):
+    @patch.object(NaturalNumber, 'gcd')
+    @patch.object(NaturalNumber, 'multiply')
+
+    def test_lcm(self, multiply, gcd):
+
         number_1 = NaturalNumber(2, [4, 1])
         number_2 = NaturalNumber(2, [3, 0])
-        number_3 = NaturalNumber(2, [1, 1])
+        number_3 = NaturalNumber(4, [1, 2, 3, 0])
 
-        compare.return_value = 2
-        subtract.return_value = NaturalNumber(2, [1, 1])
-        multiply_digit.return_value = NaturalNumber(2, [3, 0])
-        self.assertEqual(str(number_3), str(number_1.subtract_k_by_number(number_2, 1)))
+        gcd.return_value = 1
+        multiply.return_value = 1230
 
-        multiply_digit.return_value = NaturalNumber(1, [5])
-        compare.return_value = 1
-        subtract.return_value = NaturalNumber(1, [-1])
-        self.assertEqual(number_1.subtract_k_by_number(number_2, 1), 'Error')
+        self.assertEqual(str(number_3), str(number_1.lcm(number_2)))
+
+        multiply.return_value = 0
+        gcd.return_value = 1
+        self.assertEqual(number_1.lcm(number_2), 'Error')
+

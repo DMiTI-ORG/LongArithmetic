@@ -75,11 +75,30 @@ class NaturalNumber:
 
 
     def lcm(self, number: Self) -> Self:
-        # N-14
-        pass
+        """
+        module: LCM_NN_N
+        author: Zhulanov Aleksandr
+
+        arguments:
+        number: an instance of the class NaturalNumber
+
+        This method passes lcm of the natural numbers
+        """
+        mult = number.multiply()
+        nod = number.gcd()
+        nok = 0
+        new_number = 0
+        if mult > 0 and nod != 0:
+            while new_number < mult:
+                new_number += nod
+                nok += 1
+            return nok
+        else:
+            return 'Error'
 
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_position == other.highest_position)
 
     def __str__(self) -> str:
         return ''.join(map(str, self.array))
+
