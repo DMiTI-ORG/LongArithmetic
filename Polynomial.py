@@ -43,8 +43,14 @@ class Polynomial:
         pass
 
     def get_degree(self) -> NaturalNumber:
-        # P-6
-        pass
+        """
+            module: MUL_PQ_P
+            author: Zhulanov Aleksandr
+
+            This method returned polynomial degree
+        """
+        result = NaturalNumber(len(str(self.highest_degree)), list(str(self.highest_degree)))
+        return result
 
     def take_out_gdc_lcm(self) -> Self:
         # P-7

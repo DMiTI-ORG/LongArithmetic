@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
 from Polynomial import Polynomial
-from RationalNumber import RationalNumber
+from NaturalNumber import NaturalNumber
 
 class TestPolynomial(TestCase):
     '''
@@ -13,20 +13,13 @@ class TestPolynomial(TestCase):
         bar.return_value = 5
         self.assertEqual(self.calc.foo(100, 200), 5)'''
 
-    @patch.object(Polynomial, 'multiply')
-    def test_multiply(self, multiply):
-        number_1 = Polynomial(3, [1, 0, 0, 1])
-        number_2 = RationalNumber((0, 3, [2, 4, 1]), (1, [1]))
-        number_3 = Polynomial(3, [241, 0, 0, 241])
+    def test_get_degree(self):
+        number_1 = Polynomial(5, [1, 0, 0, 1, 6, 9])
+        number_2 = NaturalNumber(1, [5])
 
-        multiply.return_value = number_3
-
-        self.assertEqual(str(number_1.multiply(number_2)), str(number_3))
+        self.assertEqual(str(number_1.get_degree()), str(number_2))
 
         number_1 = Polynomial(3, [1, 0, 0, 1])
-        number_2 = RationalNumber((1, 3, [2, 4, 1]), (1, [1]))
-        number_3 = Polynomial(3, [-241, 0, 0, -241])
+        number_2 = NaturalNumber(1, [3])
 
-        multiply.return_value = number_3
-
-        self.assertEqual(str(number_1.multiply(number_2)), str(number_3))
+        self.assertEqual(str(number_1.get_degree()), str(number_2))
