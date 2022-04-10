@@ -58,13 +58,8 @@ class Polynomial:
         return result
 
     def quotient(self, polynomial: Self) -> Self:
-        result=Polynomial(0, [])
-        k = 0
-        while self.get_degree()>=polynomial.get_degree():
-            polynomial.multiply_by_monomial(self.highest_degree-polynomial.highest_degree)
-            result.highest_degree+=1
-            result.array[k] = self.array[k].divide(polynomial.array[k])
-        return
+        # P-9
+        pass
 
     def remainder(self, polynomial: Self) -> Self:
         # P-10

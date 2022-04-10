@@ -39,7 +39,19 @@ class RationalNumber:
 
 
     def multiply(self, number: Self) -> Self:
-        result = RationalNumber(self.numerator.multiply(number.numerator), self.denominator.multiply(number.denominator))
+        """
+        module: MUL_QQ_Q
+        author: Fomin Kirill
+
+        arguments:
+            number: an instance of the RationalNumber class
+
+        This method multiplies self and number and returns the result
+        """
+        
+        result = RationalNumber((0, 0, []), (0, []))
+        result.numerator = self.numerator.multiply(number.numerator)
+        result.denominator = self.denominator.multiply(number.denominator)
         return result
 
 

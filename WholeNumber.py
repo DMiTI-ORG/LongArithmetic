@@ -30,6 +30,17 @@ class WholeNumber:
 
 
     def to_natural(self) -> NaturalNumber:
+
+        """
+        module: TRANS_Z_N
+        author: Fomin Kirill
+
+        arguments:
+            number: an instance of the WholeNumber class
+
+        Transfers an instance of WholeNumber class into a NaturalNumber class
+        """
+
         if self.sign == 0:
             number = NaturalNumber(self.highest_position, self.array)
             return number
