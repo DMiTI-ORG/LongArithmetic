@@ -35,18 +35,32 @@ class NaturalNumber:
         pass
 
     def multiply(self, number: Self) -> Self:
-        # N-8
-        pass
+        """
+                module: MUL_NN_N
+                author: Starodubtsev Maxim
+                arguments:
+                    number: an instance of the class NaturalNumber
+
+                This method multiplies two natural numbers
+
+        """
+        res = NaturalNumber(1, [0])
+        num = NaturalNumber(1, [0])
+        k = 0
+        for i in reversed(range(self.highest_position)):
+            num = number.multiply_digit(self.array[i])
+            num = num.multiply_by_powered_ten(k)
+            k = k + 1
+            res = res.add(num)
+        return res
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:
         """
         module: SUB_NDN_N
         author: Smirnov Nikita
-
         arguments:
             number: an instance of the class NaturalNumber
             digit: one digit to multiply with number
-
         This method subtract from self number another number multiplied with digit
         """
 
