@@ -32,9 +32,7 @@ class TestWhole(TestCase):
         is_positive.return_value = 2
         abs.return_value = NaturalNumber(2, [2, 0])
         abs.return_value = NaturalNumber(1, [5])
-
         quotient.return_value = NaturalNumber(1, [4])
         self.assertEqual(str(number_3), str(number_1.quotient(number_2)))
-
         is_positive.return_value = 0
         self.assertEqual(str('Error'), str(number_1.quotient(number_4)))
