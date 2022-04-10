@@ -1,4 +1,4 @@
-import imp
+import importlib
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -51,5 +51,18 @@ class TestNatural(TestCase):
         multiply.return_value = NaturalNumber (2, [4,0])
         subtract_k_by_number.return_value = NaturalNumber (1, [1])
         self.assertEqual(str(number.remainder(number_2)), str(number_3))
+
+    @patch.object(NaturalNumber, 'is_zero')
+    @patch.object(NaturalNumber, 'compare')
+    @patch.object(NaturalNumber, 'remainder')
+    def test_gcd(self, is_zero, compare, ramainder):
+        num_1 = NaturalNumber(4, [3, 5, 4, 6])
+        num_2 = NaturalNumber(2, [24, 12])
+        res_num = NaturalNumber(4, [0, 0, 4, 6])
+
+        num_1.is_zero = Mock(side_effect=['yes', 'yes', 'yes', 'yes'])
+        num_2.is_zero = Mock(side_effect=['no', 'no', 'yes', 'yes'])
+        num_1.compare = Mock(side_effect=[1, 1])
+        self.assertEqual(num_1.gcd(num_2), res_num)
 
 

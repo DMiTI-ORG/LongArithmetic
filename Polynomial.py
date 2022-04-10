@@ -25,8 +25,16 @@ class Polynomial:
         pass
 
     def highest_coefficient(self) -> RationalNumber:
-        # P-5
-        pass
+        """
+        module: LED_P_Q
+        author: Dolganov Ivan
+
+        arguments:
+
+        This method finds the highest coefficient of the polynomial
+        """
+        res = self.array[0]
+        return res
 
     def get_degree(self) -> NaturalNumber:
         # P-6
