@@ -45,9 +45,25 @@ class WholeNumber:
 
 
     def multiply(self, number: Self) -> Self:
-        # Z-8
-        pass
+        """
+        module: MUL_ZZ_Z
+        author: Chadina Alena
 
+        arguments:
+            number: an instance of the class WholeNumber
+
+        This method multiply two whole numbers
+        """
+        
+        result=WholeNumber((self.sign+number.sign)%2, 0, [])
+        self_copy=NaturalNumber(self.highest_position, self.array)
+        number_copy=NaturalNumber(number.highest_position, number.array)
+        result_natural=NaturalNumber(0, [])
+        result_natural=NaturalNumber.multiply(self_copy, number_copy) #multiply two natural numbers
+        result.highest_position=result_natural.highest_position
+        result.array=result_natural.array
+        return result
+        
 
     def quotient(self, number: Self) -> Self:
         # Z-9
