@@ -67,8 +67,33 @@ class NaturalNumber:
 
 
     def first_division_digit(self, number: Self, digit: int) -> Self:
-        # N-10
-        pass
+        """
+               module: DIV_NN_Dk
+               author: Teryokhina Sofya
+
+               arguments:
+                   number: an instance of the class NaturalNumber
+
+               This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
+        """
+        new_array = self.array
+        new_highest_position = self.highest_position
+        new_number = NaturalNumber(new_hp, new_ar)
+        result = 0
+        degree = new_highest_position - number.highest_position
+        while degree >= 0:
+            number1 = number.multiply_by_powered_ten(k)
+            if new_number.compare(number1) != 1:
+                while new_number.compare(number1) != 1:
+                    result += 1
+                    new_number.subtract(number1)
+                degree = -1
+            else:
+                degree -= 1
+        result_highest_position = 1
+        result_array = [1]
+        result_array[0] = result
+        return NaturalNumber(result_highest_position, result_array)
 
     def quotient(self, number: Self) -> Self:
         # N-11
