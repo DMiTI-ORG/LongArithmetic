@@ -4,7 +4,7 @@ from RationalNumber import RationalNumber
 
 
 class Polynomial:
-    def __init__(self, highest_degree: int, array: list):
+    def __init__(self, highest_degree: int, array: list) -> object:
         self.highest_degree = highest_degree
         self.array = array
 
@@ -66,8 +66,22 @@ class Polynomial:
         pass
 
     def gcd(self, polynomial: Self) -> Self:
-        # P-11
-        pass
+        """
+        module: GCF_PP_P
+        author: Azamatova Altana
+
+        arguments:
+            number: an instance of the class Polynomial
+
+        this method finds the greatest common divisor
+        """
+        firstpoly = self
+        while polynomial.highest_degree != 0:
+            remainder1 = firstpoly
+            firstpoly = polynomial
+            polynomial = remainder1.remainder(polynomial)
+        result = firstpoly
+        return result
 
     def derivative(self) -> Self:
         # P-12
@@ -86,3 +100,4 @@ class Polynomial:
             string += '{:+}'.format(self.array[i]) + 'x^' + f'{self.highest_degree - i}'
         string += '{:+}'.format(self.array[-1])
         return string
+

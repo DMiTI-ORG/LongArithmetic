@@ -24,9 +24,18 @@ class RationalNumber:
 
 
     def to_whole(self) -> WholeNumber:
-        # Q-4
-        pass
+        """
+        module: TRANS_Q_Z
+        author: Azamatova Altana
 
+        this method returns the numerator of the fraction
+        """
+        if self.denominator == NaturalNumber(1, [1]):
+            result = self.numerator
+
+        else:
+            result = 'ERROR'
+        return result
 
     def add(self, number: Self) -> Self:
         # Q-5

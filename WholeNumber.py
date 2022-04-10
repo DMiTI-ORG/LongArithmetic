@@ -55,10 +55,73 @@ class WholeNumber:
 
 
     def remainder(self, number: Self) -> Self:
-        # Z-10
-        pass
+        """
+        module: MOD_ZZ_Z
+        author: Azamatova Altana
 
-    
+        arguments:
+            number: an instance of the class WholeNumber
+
+        this method finds the remainder of the division of integers
+        """
+        result = WholeNumber(0, 0, [])
+        one = WholeNumber(0, 1, [1])
+        first_Z = int(''.join(map(str, self.array)))
+        second_Z = int(''.join(map(str, number.array)))
+        if self.sign == 0 and number.sign == 0:
+            if second_Z == 0:
+                return 'ERROR'
+            elif first_Z == second_Z:
+                result = WholeNumber(0, 1, [0])
+            elif ((self.highest_position > number.highest_position) or(first_Z > second_Z)):
+                div = self.quotient(number)
+                mul = number.multiply(div)
+                result = self.subtract(mul)
+            elif ((self.highest_position < number.highest_position) or (first_Z < second_Z)):
+                result = self
+        elif self.sign == 1 and number.sign == 0:
+            self.multiply_by_minus_one()
+            if second_Z == 0:
+                return 'ERROR'
+            elif first_Z == second_Z:
+                result = WholeNumber(1, 1, [0])
+            elif ((self.highest_position > number.highest_position) or(first_Z > second_Z)):
+                div = self.quotient(number)
+                div.sign = 1
+                sub = div.subtract(one)
+                mul = number.multiply(sub)
+                self.multiply_by_minus_one()
+                result = self.subtract(mul)
+            elif ((self.highest_position < number.highest_position) or (first_Z < second_Z)):
+                result = self.subtract(number)
+
+        elif self.sign == 0 and number.sign == 1:
+            number.multiply_by_minus_one()
+            if second_Z == 0:
+                return 'ERROR'
+            elif first_Z == second_Z:
+                result = WholeNumber(1, 1, [0])
+            elif ((self.highest_position > number.highest_position) or (first_Z > second_Z)):
+                div = self.quotient(number)
+                mul = number.multiply(div)
+                result = self.subtract(mul)
+            elif ((self.highest_position < number.highest_position) or (first_Z < second_Z)):
+                result = self
+
+        if self.sign == 1 and number.sign == 1:
+            if second_Z == 0:
+                return 'ERROR'
+            elif first_Z == second_Z:
+                result = WholeNumber(0, 1, [0])
+            elif ((self.highest_position < number.highest_position) or (first_Z < second_Z)):
+                result = self
+            elif ((self.highest_position > number.highest_position) or (first_Z > second_Z)):
+                div = self.quotient(number)
+                mul = number.multiply(div)
+                result = self.subtract(mul)
+
+        return result
+
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_position == other.highest_position) and (self.sign == other.sign)
 
