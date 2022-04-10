@@ -1,6 +1,6 @@
 import imp
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 from WholeNumber import WholeNumber
 from NaturalNumber import NaturalNumber 
@@ -35,3 +35,16 @@ class TestRational(TestCase):
         number_six=RationalNumber([0, 6, [1, 2, 3, 2, 4, 6]], [3, [1, 2, 3]]) #123246 123
         self.assertEqual(str(number_six.is_whole()), 'True')
 
+
+
+    @patch.object(WholeNumber, 'multiply')
+    def test_divide(self, multiply):
+        number_1=RationalNumber((1, 2, [2, 9]), (3, [1, 7, 2])) # -29/172
+        number_2=RationalNumber((0, 2, [1, 3]), (2, [1, 9])) # 13/19
+        multiply.side_effect=[WholeNumber(1, 3, [5, 5, 1]), WholeNumber(0, 4, [2, 2, 3, 6])]
+        self.assertEqual(str(RationalNumber((1, 3, [5, 5, 1]), (4, [2, 2, 3, 6]))), str(number_1.divide(number_2))) # -551/2236
+
+        number_1=RationalNumber((1, 2, [4, 5]), (2, [1, 1])) # -45/11
+        number_2=RationalNumber((1, 3, [1, 0, 0]), (2, [9, 9])) # -100/99
+        multiply.side_effect=[WholeNumber(1, 4, [4, 4, 5, 5]), WholeNumber(1, 4, [1, 1, 0, 0])]
+        self.assertEqual(str(RationalNumber((0, 4, [4, 4, 5, 5]), (4, [1, 1, 0, 0]))), str(number_1.divide(number_2))) # 4455/1100
