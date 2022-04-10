@@ -7,20 +7,63 @@ class NaturalNumber:
         self.array = array
 
     def compare(self, number: Self) -> int:
-        # N-1
-        pass
+        position = 0
+        answer = 0
+        if self.highest_position > number.highest_position:
+            answer = 2
+        elif self.highest_position < number.highest_position:
+            answer = 1
+        else:
+            while position < self.highest_position:
+                if self.array[position] > number.array[position]:
+                    answer = 2
+                    position = self.highest_position
+                elif self.array[position] < number.array[position]:
+                    answer = 1
+                    position = self.highest_position
+                else:
+                    position += 1
+        return answer
 
     def is_zero(self) -> bool:
-        # N-2
-        pass
+        if self.highest_position == 1:
+            if self.array[0] == 0:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def add_one(self) -> Self:
         # N-3
         pass
 
     def add(self, number: Self) -> Self:
-        # N-4
-        pass
+        comparison = self.compare(number)
+        if comparison == 1:
+            x = self
+            self = number
+            number = x
+        array_answer = [0] * self.highest_position
+
+        dozens = 0
+
+        if self.highest_position > number.highest_position:
+            number.array = [0] * (self.highest_position - number.highest_position) + number.array
+        elif self.highest_position < number.highest_position:
+            self.array = [0] * (number.highest_position - self.highest_position) + self.array
+
+        for i in range(self.highest_position - 1, -1, -1):
+            array_answer[i] = self.array[i] + number.array[i] + dozens
+            dozens = 0
+
+            if array_answer[i] > 10:
+                array_answer[i] = array_answer[i] % 10
+                dozens = 1
+        if dozens != 0:
+            array_answer = [dozens] + array_answer
+
+        return array_answer
 
     def subtract(self, number: Self) -> Self:
         # N-5
@@ -31,17 +74,8 @@ class NaturalNumber:
         pass
 
     def multiply_by_powered_ten(self, digit: int) -> Self:
-        """
-        module: MUL_Nk_N
-        author: Trunov Egor
-
-        arguments:
-            digit: one digit to multiply with number
-
-        This method multiply self number by powered ten digit
-        """
-        self.array += [0] * digit
-
+        # N-7
+        pass
 
     def multiply(self, number: Self) -> Self:
         # N-8
@@ -75,16 +109,8 @@ class NaturalNumber:
         pass
 
     def remainder(self, number: Self) -> Self:
-        """
-        module: MOD_NN_N
-        author: Trunov Egor
-
-        arguments:
-            number: an instance of the class NaturalNumber
-
-        This method calculate
-        """
-        return self.subtract_k_by_number(number.multiply(self.quotient(number)), 1)
+        # N-12
+        pass
 
     def gcd(self, number: Self) -> Self:
         # N-13
