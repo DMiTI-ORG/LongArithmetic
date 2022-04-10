@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
 from Polynomial import Polynomial
+from RationalNumber import RationalNumber
 
 class TestPolynomial(TestCase):
     '''
@@ -27,20 +28,31 @@ class TestPolynomial(TestCase):
 
     @patch.object(Polynomial, 'remainder')
     def test_gcd(self, remainder):
-        number_1 = Polynomial(2, [6.25, -17.5, 12.25])
-        number_2 = Polynomial(1, [2.5, -3.5])
-        number_3 = Polynomial(1, [2.5, -3.5])
+        #x^3 – x^2 – 5x – 3
+        number_1 = Polynomial(3, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((1, 1, [1]), (1, [1])),
+                                  RationalNumber((1, 1, [5]), (1, [1])), RationalNumber((1, 1, [3]), (1, [1]))])
+        #x^2 + x – 12
+        number_2 = Polynomial(2, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [1]), (1, [1])),
+                                  RationalNumber((1, 2, [1, 2]), (1, [1]))])
+        #x - 3
+        number_3 = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((1, 1, [3]), (1, [1]))])
 
-        c1 = Polynomial(1, [2.5, -3.5])
+        #x - 3
+        c1 = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((1, 1, [3]), (1, [1]))])
         c2 = Polynomial(0, [])
         remainder.side_effect = [c1, c2]
         self.assertEqual(number_3, number_1.gcd(number_2))
 
-        number_1 = Polynomial(3, [0.125, -1.6875, 7.59375, -11.390625])
-        number_2 = Polynomial(2, [0.25, -2.25, 5.0625])
-        number_3 = Polynomial(1, [0.5, -2.25])
+        #x^2 + 2x - 24
+        number_1 = Polynomial(2, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [2]), (1, [1])),
+                                  RationalNumber((1, 2, [2, 4]), (1, [1]))])
+        #x + 6
+        number_2 = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [6]), (1, [1]))])
+        # x + 6
+        number_3 = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [6]), (1, [1]))])
 
-        c1 = Polynomial(1, [0.5, -2.25])
+        # x + 6
+        c1 = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [6]), (1, [1]))])
         c2 = Polynomial(0, [])
         remainder.side_effect = [c1, c2]
         self.assertEqual(number_3, number_1.gcd(number_2))
