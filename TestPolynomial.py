@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
 from Polynomial import Polynomial
+from RationalNumber import RationalNumber
 
 
 class TestPolynomial(TestCase):
@@ -25,3 +26,13 @@ class TestPolynomial(TestCase):
         multiply_by_rational.return_value = number_2
         add.return_value = number_3
         self.assertEqual(str(number_1.multiply(number_2)), str(number_3))
+
+    @patch.object(RationalNumber, 'add')
+    def test_add(self, add):
+        num_1 = Polynomial(5, [RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(5, 2), RationalNumber(3, 4), RationalNumber(6, 7)])
+        num_2 = Polynomial(3, [RationalNumber(3, 2), RationalNumber(2, 6), RationalNumber(2, 5)])
+        res_num = Polynomial(5, [RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(8, 2), RationalNumber(17, 12), RationalNumber(44, 35)])
+
+        num_1.add = Mock(side_effect=[RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(8, 2), RationalNumber(17, 12), RationalNumber(44, 35)])
+        self.assertEqual(num_1.add(num_2), res_num)
+        

@@ -9,8 +9,32 @@ class Polynomial:
         self.array = array
 
     def add(self, polynomial: Self) -> Self:
-        # P-1
-        pass
+        num = [0] * abs(self.highest_degree - polynomial.highest_degree)   #Creating an array of zeros
+        if self.highest_degree > polynomial.highest_degree:
+            arr = num.extend(polynomial.array)   #Equating arrays
+            i = 0
+            res_arr = [0] * self.highest_degree
+            while i < self.highest_degree:
+                res_arr[i] = self.array[i].add(arr[i])   #Adding arrays
+                res = Polynomial(self.highest_degree, res_arr)   #Creating a class instance
+                i += 1
+        elif self.highest_degree < polynomial.highest_degree:
+            arr = num.extend(self.array)
+            i = 0
+            res_arr = [0] * polynomial.highest_degree
+            while i < polynomial.highest_degree:
+                res_arr[i] = polynomial.array[i].add(arr[i])
+                res = Polynomial(polynomial.highest_degree, res_arr)
+                i += 1
+        else:
+            i = 0
+            res_arr = [0] * self.highest_degree
+            while i < self.highest_degree:
+                res_arr[i] = self.array[i].add(polynomial.array[i])
+                res = Polynomial(self.highest_degree, res_arr)
+                i += 1
+        return res
+        
 
     def subtract(self, polynomial: Self) -> Self:
         # P-2
