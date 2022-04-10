@@ -21,8 +21,18 @@ class WholeNumber:
 
     def multiply_by_minus_one(self) -> Self:
         # Z-3
-        pass
-
+            """
+         module: MUL_ZM_Z
+         author: Rakhmatulin Marat
+         arguments:
+         new_sign: new number sign
+         This method multiplies the number by minus one
+            """
+            if self.sign == 1:
+                new_sign = 0
+            else:
+                new_sign = 1
+            return WholeNumber(new_sign, self.highest_position, self.array)
 
     def natural_to_whole(self) -> Self:
         # Z-4
@@ -51,7 +61,20 @@ class WholeNumber:
 
     def quotient(self, number: Self) -> Self:
         # Z-9
-        pass
+        """
+        module: DIV_ZZ_Z
+        author: Rakhmatulin Marat
+        arguments:
+             number: an instance of the WholeNumber
+        This method divides one integer by another that is not equal to zero
+        """
+        if number.is_positive() != 0:
+            number_1 = self.abs()
+            number_2 = number.abs()
+            number_3 = number_1.quotient(number_2)
+            return number_3
+        else:
+            return 'Error'
 
 
     def remainder(self, number: Self) -> Self:
