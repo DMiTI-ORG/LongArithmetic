@@ -2,6 +2,8 @@ from typing_extensions import Self
 
 
 class NaturalNumber:
+
+
     def __init__(self, highest_position: int, array: list):
         self.highest_position = highest_position
         self.array = array
@@ -27,8 +29,25 @@ class NaturalNumber:
         pass
 
     def multiply_digit(self, digit: int) -> Self:
-        # N-6
-        pass
+
+        res = [0] * self.highest_position
+        discharge = 0
+
+        for i in reversed(range(self.highest_position)):
+            i = i * digit.highest_position
+            i = i + discharge
+            discharge = 0
+            if i // 10 >= 1:
+                discharge = 0
+                discharge += i // 10
+                i = i % 10
+            res = res.add(i)
+        if (self.highest_position*digit)//10 >= 1:
+            res.add((self.highest_position * digit.highest_position) // 10)
+            self.highest_position += 1
+        res.reverse()
+        return res
+
 
     def multiply_by_powered_ten(self, digit: int) -> Self:
         # N-7
