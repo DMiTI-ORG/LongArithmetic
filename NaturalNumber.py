@@ -30,7 +30,7 @@ class NaturalNumber:
 
     def multiply_digit(self, digit: int) -> Self:
         """
-        module:
+        module: MUL_ND_N
         author: Starodubtsev Maxim
 
         arguments:
