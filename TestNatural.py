@@ -48,5 +48,8 @@ class TestNatural(TestCase):
 
     def test_multiply_digit(self):
         number_1 = NaturalNumber(3, [1, 1, 1])
-        number_2 = NaturalNumber(1, [4])
-        self.assertEqual([4, 4, 4], number_1.multiply_digit(number_2))
+        self.assertEqual(str(NaturalNumber(3, [4, 4, 4])), str(number_1.multiply_digit(4)))
+
+
+
+

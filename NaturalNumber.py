@@ -29,24 +29,22 @@ class NaturalNumber:
         pass
 
     def multiply_digit(self, digit: int) -> Self:
-
-        res = [0] * self.highest_position
+        res = NaturalNumber(self.highest_position, [0] * self.highest_position)
         discharge = 0
-
+        n = 0
         for i in reversed(range(self.highest_position)):
-            i = i * digit.highest_position
-            i = i + discharge
+            n = self.array[i] * digit
+            n = n + discharge
             discharge = 0
-            if i // 10 >= 1:
-                discharge = 0
-                discharge += i // 10
-                i = i % 10
-            res = res.add(i)
-        if (self.highest_position*digit)//10 >= 1:
-            res.add((self.highest_position * digit.highest_position) // 10)
-            self.highest_position += 1
-        res.reverse()
+            if n // 10 >= 1:
+                discharge += n // 10
+                n = n % 10
+            res.array[i] = n
+        if discharge > 0:
+            res.array.insert(0, discharge)
+
         return res
+
 
 
     def multiply_by_powered_ten(self, digit: int) -> Self:
