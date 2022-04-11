@@ -29,6 +29,15 @@ class NaturalNumber:
         pass
 
     def multiply_digit(self, digit: int) -> Self:
+        """
+        module:
+        author: Starodubtsev Maxim
+
+        arguments:
+            digit: one digit to multiply with number
+
+        this method multiplies a number by a digit
+        """
         res = NaturalNumber(self.highest_position, [0] * self.highest_position)
         discharge = 0
         n = 0
