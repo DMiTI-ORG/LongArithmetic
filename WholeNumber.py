@@ -10,13 +10,29 @@ class WholeNumber:
 
 
     def abs(self) -> NaturalNumber:
-        # Z-1
-        pass
+        '''
+        module: ABS_Z_N
+        author: Banit Maxim
+        
+        This method returns an instance of the class NaturalNumber
+        '''
+        number = NaturalNumber(self.highest_position, self.array)
+        return number
 
 
     def is_positive(self) -> int:
-        # Z-2
-        pass
+        '''
+        module: POZ_Z_D
+        author: Banit Maxim
+
+        This method determines whether a number is positive|negative or zero
+        '''
+        if self.sign == 0 and all(x != 0 for x in self.array):
+            return 2
+        elif self.sign == 1 and all(x != 0 for x in self.array):
+            return 1
+        else:
+            return 0
 
 
     def multiply_by_minus_one(self) -> Self:
