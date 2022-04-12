@@ -55,8 +55,20 @@ class Polynomial:
 
 
     def remainder(self, polynomial: Self) -> Self:
-        # P-10
-        pass
+        '''
+        module: MOD_PP_P
+        author: Bunkevich Gleb
+        argruments:
+            self - polynomial
+            polynomial - polynomial
+
+        this function return remainder from dividing a polynomial by a polynomial when dividing with a remainder
+        '''
+    def remainder(self, polynomial: Self) -> Self:
+	quotient =  self.quotient(polynomial)
+        polynomial_without_remainder=  quotient.multiply(polynomial) 
+        remainder = self.subtract(polynomial_without_remainder)
+        return remainder
 
 
     def gcd(self, polynomial: Self) -> Self:
