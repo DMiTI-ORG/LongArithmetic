@@ -1,7 +1,6 @@
 from typing_extensions import Self
-from NaturalNumber import NaturalNumber
 from RationalNumber import RationalNumber
-
+from RationalNumber import NaturalNumber
 
 class Polynomial:
     def __init__(self, highest_degree: int, array: list):
@@ -14,7 +13,27 @@ class Polynomial:
 
     def subtract(self, polynomial: Self) -> Self:
         # P-2
-        pass
+        """
+        module: SUB_PP_P
+        author: Rakhmatulin Marat
+        arguments:
+            polynomial: an instance of the Polynomial
+        This method subtracts from one polynomial another
+        """
+        if self.highest_degree >= polynomial.highest_degree:
+            degree_difference = self.highest_degree - polynomial.highest_degree
+            absent_degrees = list([0] * degree_difference)
+            polynomial.array = absent_degrees + polynomial.array
+            for i in range(0, self.highest_degree + 1):
+                polynomial_1 = self.array[i].subtract(polynomial.array[i])
+            return polynomial_1
+        else:
+            degree_difference = polynomial.highest_degree - self.highest_degree
+            absent_degrees = list([0] * degree_difference)
+            self.array = absent_degrees + self.array
+            for i in range(0, polynomial.highest_degree + 1):
+                polynomial_1 = self.array[i].subtract(polynomial.array[i])
+            return polynomial_1
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
         # P-3
@@ -77,6 +96,7 @@ class Polynomial:
         # P-13
         pass
 
+
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_degree == other.highest_degree)
 
@@ -86,3 +106,4 @@ class Polynomial:
             string += '{:+}'.format(self.array[i]) + 'x^' + f'{self.highest_degree - i}'
         string += '{:+}'.format(self.array[-1])
         return string
+

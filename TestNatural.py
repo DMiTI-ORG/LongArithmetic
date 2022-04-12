@@ -13,7 +13,8 @@ class TestNatural(TestCase):
         bar.return_value = 1
         self.assertEqual(self.calc.foo(100, 200), 1)
         bar.return_value = 5
-        self.assertEqual(self.calc.foo(100, 200), 5)'''
+        self.assertEqual(self.calc.foo(100, 200), 5)
+    '''
 
     @patch.object(NaturalNumber, 'multiply_digit')
     @patch.object(NaturalNumber, 'compare')
@@ -32,3 +33,34 @@ class TestNatural(TestCase):
         compare.return_value = 1
         subtract.return_value = NaturalNumber(1, [-1])
         self.assertEqual(number_1.subtract_k_by_number(number_2, 1), 'Error')
+
+    @patch.object(NaturalNumber, 'compare')
+    def test_subtract(self, compare):
+        number_1 = NaturalNumber(2, [4, 1])
+        number_2 = NaturalNumber(2, [3, 0])
+        number_3 = NaturalNumber(2, [1, 1])
+        number_4 = NaturalNumber(2, [1, 2])
+        number_5 = NaturalNumber(2, [1, 1])
+        number_6 = NaturalNumber(1, [1])
+
+        compare.return_value = 2
+        self.assertEqual(number_3, number_1.subtract(number_2))
+        self.assertEqual(number_6, number_4.subtract(number_5))
+
+    def test_multiply_by_powered_ten(self):
+        number = NaturalNumber(2, [4, 1])
+        number_2 = NaturalNumber(4,[4,1,0,0])
+        number.multiply_by_powered_ten(2)
+        self.assertEqual(str(number), str(number_2))
+
+    @patch.object(NaturalNumber, 'subtract_k_by_number')
+    @patch.object(NaturalNumber, 'multiply')
+    @patch.object(NaturalNumber, 'quotient')
+    def test_remainder(self, quotient, multiply, subtract_k_by_number):
+        number = NaturalNumber(2, [4, 1])
+        number_2 = NaturalNumber(2,[4,0])
+        number_3 = NaturalNumber(1,[1])
+        quotient.return_value = NaturalNumber (1,[1])
+        multiply.return_value = NaturalNumber (2, [4,0])
+        subtract_k_by_number.return_value = NaturalNumber (1, [1])
+        self.assertEqual(str(number.remainder(number_2)), str(number_3))
