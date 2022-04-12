@@ -60,8 +60,24 @@ class Polynomial:
             return polynomial_1
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
-        # P-3
-        pass
+
+        """
+            module: MUL_PQ_P
+            author: Zhulanov Aleksandr
+
+            arguments:
+                number: an instance of the class Rational
+
+            This method multiplies polynomial and rational
+        """
+        result = Polynomial(0, [])
+        array_before = self
+        for i in range(self.highest_degree + 1):
+            num_before = array_before.array[i]
+            num_after = num_before.multiply(number)
+            array_before.array[i] = num_after
+        result = array_before
+        return result
 
     def multiply_by_monomial(self, k: int) -> Self:
         '''
@@ -82,8 +98,14 @@ class Polynomial:
         pass
 
     def get_degree(self) -> NaturalNumber:
-        # P-6
-        pass
+        """
+            module: MUL_PQ_P
+            author: Zhulanov Aleksandr
+
+            This method returned polynomial degree
+        """
+        result = NaturalNumber(len(str(self.highest_degree)), list(str(self.highest_degree)))
+        return result
 
     def take_out_gdc_lcm(self) -> Self:
         # P-7
