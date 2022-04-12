@@ -38,8 +38,23 @@ class RationalNumber:
         return result
 
     def add(self, number: Self) -> Self:
-        # Q-5
-        pass
+
+        """
+        module: ADD_ZZ_Z
+        author: Dolganov Ivan
+
+        arguments:
+            number: an instance of the class NaturalNumber
+
+        This method adds fractional numbers
+        """
+
+        denom = lcm(self.denominator, number.denominator)  # функция нока
+        frac1 = multiply(self.numerator, ((denom)))  # фунция умножения целых чисел
+        frac2 = multiply(number.numerator, ((denom)))  # фунция умножения целых чисел
+        numer = add(frac1, frac2)  # функция сложения чисел
+        res = RationalNumber(numer, denom)
+        return res
 
 
     def subtract(self, number: Self) -> Self:
