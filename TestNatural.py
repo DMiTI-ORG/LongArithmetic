@@ -1,5 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
+from mock.mock import Mock
+
 from NaturalNumber import NaturalNumber
 
 class TestNatural(TestCase):
@@ -36,6 +38,22 @@ class TestNatural(TestCase):
         subtract.return_value = NaturalNumber(1, [-1])
         self.assertEqual(number_1.subtract_k_by_number(number_2, 1), 'Error')
 
+    @patch.object(NaturalNumber, 'add')
+    @patch.object(NaturalNumber, 'multiply_by_powered_ten')
+    def test_multiply(self, multiply_by_powered_ten, add):
+        number_1 = NaturalNumber(3, [1, 1, 1])
+        number_2 = NaturalNumber(2, [2, 4])
+        number_3 = NaturalNumber(4, [2, 6, 6, 4])
+        number_1.multiply_digit = Mock(side_effect=[NaturalNumber(3, [4, 4, 4]), NaturalNumber(3, [2, 2, 2])])
+        multiply_by_powered_ten.side_effect = [NaturalNumber(3, [4, 4, 4]), NaturalNumber(4, [2, 2, 2, 0])]
+        add.side_effect = [NaturalNumber(3, [4, 4, 4]), NaturalNumber(4, [2, 6, 6, 4])]
+        self.assertEqual(str(number_2.multiply(number_1)), str(number_3))
+
+
+    def test_multiply_digit(self):
+        number_1 = NaturalNumber(3, [1, 1, 1])
+        self.assertEqual(str(NaturalNumber(3, [4, 4, 4])), str(number_1.multiply_digit(4)))
+
     @patch.object(NaturalNumber, 'compare')
     def test_subtract(self, compare):
         number_1 = NaturalNumber(2, [4, 1])
@@ -54,6 +72,7 @@ class TestNatural(TestCase):
         number_2 = NaturalNumber(4,[4,1,0,0])
         number.multiply_by_powered_ten(2)
         self.assertEqual(str(number), str(number_2))
+
 
     @patch.object(NaturalNumber, 'subtract_k_by_number')
     @patch.object(NaturalNumber, 'multiply')
