@@ -48,8 +48,20 @@ class RationalNumber:
 
 
     def multiply(self, number: Self) -> Self:
-        # Q-7
-        pass
+        """
+        module: MUL_QQ_Q
+        author: Fomin Kirill
+
+        arguments:
+            number: an instance of the RationalNumber class
+
+        This method multiplies self and number and returns the result
+        """
+        
+        result = RationalNumber((0, 0, []), (0, []))
+        result.numerator = self.numerator.multiply(number.numerator)
+        result.denominator = self.denominator.multiply(number.denominator)
+        return result
 
 
     def divide(self, number: Self) -> Self:

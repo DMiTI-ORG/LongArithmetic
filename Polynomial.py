@@ -1,7 +1,6 @@
 from typing_extensions import Self
-from NaturalNumber import NaturalNumber
 from RationalNumber import RationalNumber
-
+from RationalNumber import NaturalNumber
 
 class Polynomial:
     def __init__(self, highest_degree: int, array: list) -> object:
@@ -9,12 +8,56 @@ class Polynomial:
         self.array = array
 
     def add(self, polynomial: Self) -> Self:
-        # P-1
-        pass
+        num = [0] * abs(self.highest_degree - polynomial.highest_degree)   #Creating an array of zeros
+        if self.highest_degree > polynomial.highest_degree:
+            arr = num.extend(polynomial.array)   #Equating arrays
+            i = 0
+            res_arr = [0] * self.highest_degree
+            while i < self.highest_degree:
+                res_arr[i] = self.array[i].add(arr[i])   #Adding arrays
+                res = Polynomial(self.highest_degree, res_arr)   #Creating a class instance
+                i += 1
+        elif self.highest_degree < polynomial.highest_degree:
+            arr = num.extend(self.array)
+            i = 0
+            res_arr = [0] * polynomial.highest_degree
+            while i < polynomial.highest_degree:
+                res_arr[i] = polynomial.array[i].add(arr[i])
+                res = Polynomial(polynomial.highest_degree, res_arr)
+                i += 1
+        else:
+            i = 0
+            res_arr = [0] * self.highest_degree
+            while i < self.highest_degree:
+                res_arr[i] = self.array[i].add(polynomial.array[i])
+                res = Polynomial(self.highest_degree, res_arr)
+                i += 1
+        return res
+        
 
     def subtract(self, polynomial: Self) -> Self:
         # P-2
-        pass
+        """
+        module: SUB_PP_P
+        author: Rakhmatulin Marat
+        arguments:
+            polynomial: an instance of the Polynomial
+        This method subtracts from one polynomial another
+        """
+        if self.highest_degree >= polynomial.highest_degree:
+            degree_difference = self.highest_degree - polynomial.highest_degree
+            absent_degrees = list([0] * degree_difference)
+            polynomial.array = absent_degrees + polynomial.array
+            for i in range(0, self.highest_degree + 1):
+                polynomial_1 = self.array[i].subtract(polynomial.array[i])
+            return polynomial_1
+        else:
+            degree_difference = polynomial.highest_degree - self.highest_degree
+            absent_degrees = list([0] * degree_difference)
+            self.array = absent_degrees + self.array
+            for i in range(0, polynomial.highest_degree + 1):
+                polynomial_1 = self.array[i].subtract(polynomial.array[i])
+            return polynomial_1
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
         # P-3
@@ -90,6 +133,7 @@ class Polynomial:
     def multiple_roots_to_simple(self) -> Self:
         # P-13
         pass
+
 
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_degree == other.highest_degree)
