@@ -44,9 +44,32 @@ class WholeNumber:
         pass
 
 
-    def add(self, number: Self) -> Self:
-        # Z-6
-        pass
+    def add1(self, number: Self) -> Self:
+        """
+        module: ADD_ZZ_Z
+        author: Smirnov Kirill
+
+        arguments:
+            number: an instance of the class NaturalNumber
+            digit: one digit to mutiply with number
+
+        Add up integers
+        """
+        if self.sign == number.sign:
+            number_1 = self.abs()
+            number_2 = number.abs()
+            new_number = number_1.add(number_2)
+            return WholeNumber(self.sign, new_number.highest_position, new_number.array)
+        else:
+            number_1 = self.abs()
+            number_2 = number.abs()
+            comp = number_1.compare(number_2)
+            if comp == 1:
+                t = number_1
+                self = number
+                number_2 = t
+            new_number = number_1.subtract(number_2)
+            return WholeNumber(self.sign, new_number.highest_position, new_number.array)
 
 
     def subtract(self, number: Self) -> Self:

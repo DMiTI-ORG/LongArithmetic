@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from NaturalNumber import NaturalNumber
 from WholeNumber import WholeNumber
+
 class TestWhole(TestCase):
     '''
     Example test
@@ -36,3 +37,26 @@ class TestWhole(TestCase):
         self.assertEqual(str(number_3), str(number_1.quotient(number_2)))
         is_positive.return_value = 0
         self.assertEqual(str('Error'), str(number_1.quotient(number_4)))
+
+    @patch.object(WholeNumber, 'abs')
+    @patch.object(NaturalNumber, 'add')
+    @patch.object(NaturalNumber, 'compare')
+    @patch.object(NaturalNumber, 'subtract')
+    def test_add(self, subtract, compare, add, abs):
+        number_1 = WholeNumber(1, 3, [1, 2, 3])
+        number_2 = WholeNumber(1, 3, [1, 2, 3])
+        number_3 = WholeNumber(1, 3, [2, 4, 6])
+        number_4 = WholeNumber(1, 3, [1, 2, 3])
+        number_5 = WholeNumber(0, 2, [2, 3])
+        number_6 = WholeNumber(1, 3, [1, 0, 0])
+
+        abs.return_value = NaturalNumber(3, [1, 2, 3])
+        abs.return_value = NaturalNumber(3, [1, 2, 3])
+        add.return_value = NaturalNumber(3, [2, 4, 6])
+        self.assertEqual(number_3, number_1.add1(number_2))
+
+        abs.return_value = NaturalNumber(3, [1, 2, 3])
+        abs.return_value = NaturalNumber(2, [2, 3])
+        compare.return_value = 0
+        subtract.return_value = NaturalNumber(3, [1, 0, 0])
+        self.assertEqual(number_6, number_4.add1(number_5))
