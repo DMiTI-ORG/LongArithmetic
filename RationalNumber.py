@@ -9,8 +9,23 @@ class RationalNumber:
 
 
     def reduce(self) -> Self:
-        # Q-1
-        pass
+        """
+        module: TRANS_N_Z
+        author: Shulegin Alexandr
+
+        This method reduce fraction
+        """
+        sign = self.numerator.sign
+        numerator = self.numerator.abs()
+        nod = numerator.gcd(self.denominator)
+        numerator = WholeNumber.natural_to_whole(numerator)
+        denominator = WholeNumber.natural_to_whole(self.denominator)
+        nod = WholeNumber.natural_to_whole(nod)
+        numerator = numerator.quotient(nod)
+        denominator = denominator.quotient(nod)
+        result = RationalNumber((sign, numerator.highest_position, numerator.array), (denominator.highest_position, denominator.array))
+        return result
+	
 
 
     def is_whole(self) -> bool:

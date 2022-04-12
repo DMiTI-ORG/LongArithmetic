@@ -50,9 +50,22 @@ class WholeNumber:
                 new_sign = 1
             return WholeNumber(new_sign, self.highest_position, self.array)
 
-    def natural_to_whole(self) -> Self:
-        # Z-4
-        pass
+    @staticmethod
+    def natural_to_whole(number: NaturalNumber) -> Self:
+        """
+        module: TRANS_N_Z
+        author: Shulegin Alexandr
+
+        arguments:
+            number: one number to transforf it to whole
+
+        This method transform natural number to whole number
+        """
+        sign = 0
+        highest_position = number.highest_position
+        array = number.array
+        result = WholeNumber(sign,highest_position,array)
+        return result
 
 
     def to_natural(self) -> NaturalNumber:
