@@ -64,3 +64,15 @@ class TestNatural(TestCase):
         multiply.return_value = NaturalNumber (2, [4,0])
         subtract_k_by_number.return_value = NaturalNumber (1, [1])
         self.assertEqual(str(number.remainder(number_2)), str(number_3))
+
+    @patch.object(NaturalNumber, 'compare')
+    @patch.object(NaturalNumber, 'subtract')
+    @patch.object(NaturalNumber, 'multiply_by_powered_ten')
+    def test_first_division_digit(self, multiply_by_powered_ten, subtract,  compare):
+        number_1 = NaturalNumber(5, [4, 4, 4, 6, 0])
+        number_2 = NaturalNumber(3, [2, 2, 2])
+
+        compare.side_effect=[2, 2, 2, 1, 1]
+        subtract.side_effect=[NaturalNumber(5, [2, 2, 2, 6, 0]), NaturalNumber(2, [6, 0])]
+        multiply_by_powered_ten.return_value = NaturalNumber(5, [2, 2, 2, 0, 0])
+        self.assertEqual(number_1.first_division_digit(number_2), NaturalNumber(1, [2]))

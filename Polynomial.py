@@ -64,8 +64,18 @@ class Polynomial:
         pass
 
     def multiply_by_monomial(self, k: int) -> Self:
-        # P-4
-        pass
+        '''
+        module: MUL_Pxk_P
+        author: Teryokhina Sofya
+        arguments:
+            k: degree of monomial
+        This method multiplies polynomial and monomial with natural degree
+        '''
+        new_array = self.array
+        for i in range(k):
+            new_array.append(0)
+        new_polynomial = Polynomial(self.highest_degree + k, new_array)
+        return new_polynomial
 
     def highest_coefficient(self) -> RationalNumber:
         # P-5
@@ -131,8 +141,21 @@ class Polynomial:
         pass
 
     def multiple_roots_to_simple(self) -> Self:
-        # P-13
-        pass
+         '''
+        module: NMR_P_P
+        author: Teryokhina Sofya
+
+        arguments: new_polynomial1: result of derivation of polynomial
+                   new_polynomial2: gcd of polynomial and derivated polynomial
+        This method converts multiple roots to simple.
+        '''
+        polynomial_highest = self.highest_degree
+        polynomial_array = self.array
+        polynomial = Polynomial(np_highest, np_array)
+        new_polynomial1 = polynomial.derivative()
+        new_polynomial2 = polynomial.gcd(new_polynomial1)
+        new_polynomial_result = polynomial.quotient(new_polynomial2)
+        return new_polynomial_result
 
 
     def __eq__(self, other: Self) -> bool:
