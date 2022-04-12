@@ -17,8 +17,24 @@ class Polynomial:
         pass
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
-        # P-3
-        pass
+
+        """
+            module: MUL_PQ_P
+            author: Zhulanov Aleksandr
+
+            arguments:
+                number: an instance of the class Rational
+
+            This method multiplies polynomial and rational
+        """
+        result = Polynomial(0, [])
+        array_before = self
+        for i in range(self.highest_degree + 1):
+            num_before = array_before.array[i]
+            num_after = num_before.multiply(number)
+            array_before.array[i] = num_after
+        result = array_before
+        return result
 
     def multiply_by_monomial(self, k: int) -> Self:
         # P-4
