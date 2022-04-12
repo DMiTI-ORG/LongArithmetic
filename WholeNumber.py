@@ -144,7 +144,8 @@ class WholeNumber:
         else: 
             if self.abs().compare(number.abs()) == 1: return number.abs().subtract(self.abs())
             elif self.abs().compare(number.abs()) == 0: return 0 
-            else:                 TemporAbsResult = self.abs().subtract(number.abs())
+            else:
+                TemporAbsResult = self.abs().subtract(number.abs())
                 result = WholeNumber(0, TemporAbsResult.hihgest_position, [TemporAbsResult.array])
                 return result.multiply_by_minus_one()
 
