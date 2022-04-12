@@ -116,8 +116,38 @@ class WholeNumber:
 
 
     def subtract(self, number: Self) -> Self:
-        # Z-7
-        pass
+        '''
+        module: SUB_ZZ_Z
+        author: Bunkevich Gleb
+        argruments:
+            number - integer number
+            self - integer number
+
+        this function does subtraction of two integers by splitting by signs into cases
+        '''
+
+        if (self.is_positive() == 2 and number.is_positive() == 2):   
+            if self.abs().compare(number.abs()) == 2: return self.abs().subtract(number.abs())  
+            elif self.abs().compare(number) == 0: return 0 
+            else: 
+                TemporAbsResult = number.abs().subtract(self.abs())
+                result = WholeNumber(WholeNumber(0, TemporAbsResult.hihgest_position, [TemporAbsResult.array]))
+                return result.multiply_by_minus_one()
+
+        elif (self.is_positive() == 2 and number.is_positive() == 1): 
+            return self.abs().add(number.abs())
+        elif (self.is_positive() == 1 and number.is_positive() == 2):
+            TemporAbsResult = self.abs().add(number.abs())
+            result = WholeNumber(0, TemporAbsResult.hihgest_position, [TemporAbsResult.array])
+            return result.multiply_by_minus_one()
+        elif  (self.is_positive() == 0 and number.is_positive() == 0): return 0 
+        else: 
+            if self.abs().compare(number.abs()) == 1: return number.abs().subtract(self.abs())
+            elif self.abs().compare(number.abs()) == 0: return 0 
+            else:
+                TemporAbsResult = self.abs().subtract(number.abs())
+                result = WholeNumber(0, TemporAbsResult.hihgest_position, [TemporAbsResult.array])
+                return result.multiply_by_minus_one()
 
 
     def multiply(self, number: Self) -> Self:
