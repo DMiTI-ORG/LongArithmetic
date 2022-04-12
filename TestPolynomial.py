@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from Polynomial import Polynomial
 from WholeNumber import WholeNumber
 from NaturalNumber import NaturalNumber
@@ -34,3 +34,15 @@ class TestPolynomial(TestCase):
         quotient.return_value = Polynomial(1, [1, 1])
         subtract.return_value = (0, [1])
         self.assertEqual(pol3.remainder(pol4), reuslt2)
+
+    @patch.object(Polynomial, 'multiply_by_rational')
+    @patch.object(Polynomial, 'add')
+    def test_multiply(self, add, multiply_by_rational):
+        number_1 = Polynomial(1, [1, 1])
+        number_2 = Polynomial(2, [1, -1, 1])
+        number_3 = Polynomial(3, [1, 0, 0, 1])
+
+        number_2.multiply_by_monomial = Mock(side_effect=[Polynomial(3, [1, -1, 1, 0]), Polynomial(2, [1, -1, 1])])
+        multiply_by_rational.return_value = number_2
+        add.return_value = number_3
+        self.assertEqual(str(number_1.multiply(number_2)), str(number_3))
