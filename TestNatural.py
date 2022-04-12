@@ -1,7 +1,5 @@
-import importlib
 from unittest import TestCase
 from unittest.mock import patch
-
 from NaturalNumber import NaturalNumber
 
 
@@ -16,23 +14,41 @@ class TestNatural(TestCase):
         self.assertEqual(self.calc.foo(100, 200), 5)
     '''
 
-    @patch.object(NaturalNumber, 'multiply_digit')
-    @patch.object(NaturalNumber, 'compare')
-    @patch.object(NaturalNumber, 'subtract')
-    def test_subtract_k_by_number(self, subtract, compare, multiply_digit):
+    @patch.object(NaturalNumber, 'gcd')
+    @patch.object(NaturalNumber, 'multiply')
+
+    def test_lcm(self, multiply, gcd):
+
         number_1 = NaturalNumber(2, [4, 1])
         number_2 = NaturalNumber(2, [3, 0])
-        number_3 = NaturalNumber(2, [1, 1])
+        number_3 = NaturalNumber(4, [1, 2, 3, 0])
 
-        compare.return_value = 2
-        subtract.return_value = NaturalNumber(2, [1, 1])
-        multiply_digit.return_value = NaturalNumber(2, [3, 0])
-        self.assertEqual(str(number_3), str(number_1.subtract_k_by_number(number_2, 1)))
+        gcd.return_value = 1
+        multiply.return_value = 1230
+
+        self.assertEqual(str(number_3), str(number_1.lcm(number_2)))
+
+        multiply.return_value = 0
+        gcd.return_value = 1
+        self.assertEqual(number_1.lcm(number_2), 'Error')
 
         multiply_digit.return_value = NaturalNumber(1, [5])
         compare.return_value = 1
         subtract.return_value = NaturalNumber(1, [-1])
         self.assertEqual(number_1.subtract_k_by_number(number_2, 1), 'Error')
+
+    @patch.object(NaturalNumber, 'compare')
+    def test_subtract(self, compare):
+        number_1 = NaturalNumber(2, [4, 1])
+        number_2 = NaturalNumber(2, [3, 0])
+        number_3 = NaturalNumber(2, [1, 1])
+        number_4 = NaturalNumber(2, [1, 2])
+        number_5 = NaturalNumber(2, [1, 1])
+        number_6 = NaturalNumber(1, [1])
+
+        compare.return_value = 2
+        self.assertEqual(number_3, number_1.subtract(number_2))
+        self.assertEqual(number_6, number_4.subtract(number_5))
 
     def test_multiply_by_powered_ten(self):
         number = NaturalNumber(2, [4, 1])
@@ -65,4 +81,14 @@ class TestNatural(TestCase):
         num_1.compare = Mock(side_effect=[1, 1])
         self.assertEqual(num_1.gcd(num_2), res_num)
 
+    @patch.object(NaturalNumber, 'compare')
+    @patch.object(NaturalNumber, 'subtract')
+    @patch.object(NaturalNumber, 'multiply_by_powered_ten')
+    def test_first_division_digit(self, multiply_by_powered_ten, subtract,  compare):
+        number_1 = NaturalNumber(5, [4, 4, 4, 6, 0])
+        number_2 = NaturalNumber(3, [2, 2, 2])
 
+        compare.side_effect=[2, 2, 2, 1, 1]
+        subtract.side_effect=[NaturalNumber(5, [2, 2, 2, 6, 0]), NaturalNumber(2, [6, 0])]
+        multiply_by_powered_ten.return_value = NaturalNumber(5, [2, 2, 2, 0, 0])
+        self.assertEqual(number_1.first_division_digit(number_2), NaturalNumber(1, [2]))
