@@ -19,13 +19,9 @@ class NaturalNumber:
     def add_one(self) -> Self:
         """
         module: SUB_NDN_N
-        author: Smirnov Kirill
+        author: Kirill Smirnov
 
-        arguments:
-            number: an instance of the class NaturalNumber
-            digit: one digit to multiply with number
-
-        This method subtract from self number another number multiplied with digit
+        This method adds to the number 1
         """
         i = 1
         new_highest_position = self.highest_position
