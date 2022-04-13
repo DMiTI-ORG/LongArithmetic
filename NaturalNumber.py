@@ -17,8 +17,32 @@ class NaturalNumber:
         pass
 
     def add_one(self) -> Self:
-        # N-3
-        pass
+        """
+        module: SUB_NDN_N
+        author: Kirill Smirnov
+
+        This method adds to the number 1
+        """
+        i = 1
+        new_highest_position = self.highest_position
+        new_array = [0]*self.highest_position
+        position = self.highest_position
+        while position > -1:
+            position = self.highest_position - i
+            if self.array[position] + 1 <= 9:
+                new_array[position] = self.array[position] + 1
+                position -= 1
+                while position > -1:
+                    new_array[position] = self.array[position]
+                    position -= 1
+            else:
+                if self.highest_position - i < 0:
+                    new_array.insert(0, 1)
+                    new_highest_position += 1
+                else:
+                    new_array[position] = self.array[position] // 10
+                    i += 1
+        return NaturalNumber(new_highest_position, new_array)
 
     def add(self, number: Self) -> Self:
         # N-4

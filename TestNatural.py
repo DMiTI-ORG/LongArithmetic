@@ -7,7 +7,7 @@ from NaturalNumber import NaturalNumber
 class TestNatural(TestCase):
     '''
     Example test
-    @patch.object(Calculator, 'bar')
+    @patch.object(Calculator, 'bar'
     def test_sum(self, bar):
         bar.return_value = 1
         self.assertEqual(self.calc.foo(100, 200), 1)
@@ -37,6 +37,14 @@ class TestNatural(TestCase):
         compare.return_value = 1
         subtract.return_value = NaturalNumber(1, [-1])
         self.assertEqual(number_1.subtract_k_by_number(number_2, 1), 'Error')
+
+    def test_add_one(self):
+        number_1 = NaturalNumber(3, [2, 7, 9])
+        number_2 = NaturalNumber(3, [2, 8, 0])
+        number_3 = NaturalNumber(2, [9, 9])
+        number_4 = NaturalNumber(3, [1, 0, 0])
+        self.assertEqual(number_2, number_1.add_one())
+        self.assertEqual(number_4, number_3.add_one())
 
     @patch.object(NaturalNumber, 'add')
     @patch.object(NaturalNumber, 'multiply_by_powered_ten')
