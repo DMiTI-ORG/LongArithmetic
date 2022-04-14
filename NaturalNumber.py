@@ -25,7 +25,7 @@ class NaturalNumber:
         """
         i = 1
         new_highest_position = self.highest_position
-        new_array = [0]*self.highest_position
+        new_array = [0] * self.highest_position
         position = self.highest_position
         while position > -1:
             position = self.highest_position - i
@@ -166,23 +166,23 @@ class NaturalNumber:
             return 'Error'
 
 
-    def first_division_digit(self, number: Self, digit: int) -> Self:
+    def first_division_digit(self, number: Self) -> Self:
         """
-               module: DIV_NN_Dk
-               author: Teryokhina Sofya
+        module: DIV_NN_Dk
+        author: Teryokhina Sofya
 
-               arguments:
-                   number: an instance of the class NaturalNumber
+        arguments:
+            number: an instance of the class NaturalNumber
 
-               This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
+        This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
         """
         new_array = self.array
         new_highest_position = self.highest_position
-        new_number = NaturalNumber(new_hp, new_ar)
+        new_number = NaturalNumber(new_highest_position, new_array)
         result = 0
         degree = new_highest_position - number.highest_position
         while degree >= 0:
-            number1 = number.multiply_by_powered_ten(k)
+            number1 = number.multiply_by_powered_ten(new_highest_position)
             if new_number.compare(number1) != 1:
                 while new_number.compare(number1) != 1:
                     result += 1
@@ -221,35 +221,15 @@ class NaturalNumber:
 
         This method finds the greatest common divisor of numbers
         """
-
-        arrz = [0] * abs(self.highest_position - number.highest_position)
-        i = 0
-        if self.highest_position >= number.highest_position:
-            res_arr = [0] * self.highest_position
-            arr = arrz.extend(number.array)
-            while i < self.highest_position:
-                while self.array[i].is_zero() == 'yes' and arr[i].is_zero() == 'yes':
-                    if (self.array[i].compare(arr[i]) == 0) or (self.array[i].compare(arr[i]) == 2):
-                        self.array[i] = self.array[i].remainder(arr[i])
-                        res_arr[i] = self.array[i]
-                    else:
-                        arr[i] = arr[i].remainder(self.array[i])
-                        res_arr[i] = arr[i]
-                i += 1
-            res = NaturalNumber(self.highest_position, res_arr)
+        while self.is_zero() == 'yes' and number.is_zero() == 'yes':
+            if (self.compare(number) == 0) or (self.compare(number) == 2):
+                self = self.remainder(number)
+            else:
+                number = number.remainder(self)
+        if self.is_zero() == 'yes':
+            res = NaturalNumber(number.highest_position, number.array)
         else:
-            res_arr = [0] * number.highest_position
-            arr = arrz.extend(self.array)
-            while i < number.highest_position:
-                while arr[i].is_zero() == 'yes' and number.array[i].is_zero() == 'yes':
-                    if (arr[i].compare(number.array[i]) == 0) or (arr[i].compare(number.array[i]) == 2):
-                        arr[i] = arr[i].remainder(number.array[i])
-                        res_arr[i] = arr[i]
-                    else:
-                        number.array[i] = number.array[i].remainder(arr[i])
-                        res_arr[i] = number.array[i]
-                i += 1
-            res = NaturalNumber(number.highest_position, res_arr)
+            res = NaturalNumber(self.highest_position, self.array)
         return res
 
 

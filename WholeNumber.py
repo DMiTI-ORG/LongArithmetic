@@ -8,7 +8,6 @@ class WholeNumber:
         self.highest_position = highest_position
         self.array = array
 
-
     def abs(self) -> NaturalNumber:
         '''
         module: ABS_Z_N
@@ -19,7 +18,6 @@ class WholeNumber:
         number = NaturalNumber(self.highest_position, self.array)
         return number
 
-
     def is_positive(self) -> int:
         '''
         module: POZ_Z_D
@@ -27,28 +25,28 @@ class WholeNumber:
 
         This method determines whether a number is positive|negative or zero
         '''
-        if self.sign == 0 and all(x != 0 for x in self.array):
+        if self.sign == 0 and self.array.count(0) != self.highest_position:
             return 2
-        elif self.sign == 1 and all(x != 0 for x in self.array):
+        elif self.sign == 1 and self.array.count(0) != self.highest_position:
             return 1
         else:
             return 0
 
-
     def multiply_by_minus_one(self) -> Self:
-        # Z-3
-            """
-         module: MUL_ZM_Z
-         author: Rakhmatulin Marat
-         arguments:
-         new_sign: new number sign
-         This method multiplies the number by minus one
-            """
-            if self.sign == 1:
-                new_sign = 0
-            else:
-                new_sign = 1
-            return WholeNumber(new_sign, self.highest_position, self.array)
+        """
+        module: MUL_ZM_Z
+        author: Rakhmatulin Marat
+        
+        arguments:
+            new_sign: new number sign
+
+        This method multiplies the number by minus one
+        """
+        if self.sign == 1:
+            new_sign = 0
+        else:
+            new_sign = 1
+        return WholeNumber(new_sign, self.highest_position, self.array)
 
     @staticmethod
     def natural_to_whole(number: NaturalNumber) -> Self:
@@ -67,9 +65,7 @@ class WholeNumber:
         result = WholeNumber(sign,highest_position,array)
         return result
 
-
     def to_natural(self) -> NaturalNumber:
-
         """
         module: TRANS_Z_N
         author: Fomin Kirill
@@ -79,13 +75,11 @@ class WholeNumber:
 
         Transfers an instance of WholeNumber class into a NaturalNumber class
         """
-
         if self.sign == 0:
             number = NaturalNumber(self.highest_position, self.array)
             return number
         else:
             return 'Error'
-
 
     def add1(self, number: Self) -> Self:
         """
@@ -114,7 +108,6 @@ class WholeNumber:
             new_number = number_1.subtract(number_2)
             return WholeNumber(self.sign, new_number.highest_position, new_number.array)
 
-
     def subtract(self, number: Self) -> Self:
         '''
         module: SUB_ZZ_Z
@@ -125,7 +118,6 @@ class WholeNumber:
 
         this function does subtraction of two integers by splitting by signs into cases
         '''
-
         if (self.is_positive() == 2 and number.is_positive() == 2):   
             if self.abs().compare(number.abs()) == 2: return self.abs().subtract(number.abs())  
             elif self.abs().compare(number) == 0: return 0 
@@ -149,14 +141,12 @@ class WholeNumber:
                 result = WholeNumber(0, TemporAbsResult.hihgest_position, [TemporAbsResult.array])
                 return result.multiply_by_minus_one()
 
-
     def multiply(self, number: Self) -> Self:
         # Z-8
         pass
 
 
     def quotient(self, number: Self) -> Self:
-        # Z-9
         """
         module: DIV_ZZ_Z
         author: Rakhmatulin Marat
@@ -242,9 +232,7 @@ class WholeNumber:
         return result
 
     def __eq__(self, other: Self) -> bool:
-        return (self.array == other.array) and (self.highest_position == other.highest_position) and \
-               (self.sign == other.sign)
-
+        return (self.array == other.array) and (self.highest_position == other.highest_position) and (self.sign == other.sign)
 
     def __str__(self) -> str:
         return ('-' if self.sign else '') + ''.join(map(str, self.array))

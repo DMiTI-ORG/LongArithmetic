@@ -103,7 +103,11 @@ class TestWhole(TestCase):
         num_3 = WholeNumber(1, 2, [0, 0]) #zero
         num_4 = WholeNumber(0, 2, [0, 0]) #zero
 
-        self.assertEquals(res_1, num_1.is_positive())
+        self.assertEqual(res_1, num_1.is_positive())
+        self.assertEqual(res_2, num_2.is_positive())
+        self.assertEqual(res_3, num_3.is_positive())
+        self.assertEqual(res_3, num_4.is_positive())
+
 
     def test_abc(self):
         res = NaturalNumber(3, [1, 2, 3])

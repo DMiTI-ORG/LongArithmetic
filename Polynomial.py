@@ -154,9 +154,8 @@ class Polynomial:
 
         this function return remainder from dividing a polynomial by a polynomial when dividing with a remainder
         '''
-    def remainder(self, polynomial: Self) -> Self:
-	quotient =  self.quotient(polynomial)
-        polynomial_without_remainder=  quotient.multiply(polynomial) 
+	    quotient = self.quotient(polynomial)
+        polynomial_without_remainder = quotient.multiply(polynomial) 
         remainder = self.subtract(polynomial_without_remainder)
         return remainder
 

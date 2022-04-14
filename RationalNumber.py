@@ -7,7 +7,6 @@ class RationalNumber:
         self.numerator = WholeNumber(*numerator)
         self.denominator = NaturalNumber(*denominator)
 
-
     def reduce(self) -> Self:
         """
         module: TRANS_N_Z
@@ -25,13 +24,10 @@ class RationalNumber:
         denominator = denominator.quotient(nod)
         result = RationalNumber((sign, numerator.highest_position, numerator.array), (denominator.highest_position, denominator.array))
         return result
-	
-
 
     def is_whole(self) -> bool:
         # Q-2
         pass
-
 
     def whole_to_rational(self) -> Self:
         """
@@ -40,14 +36,11 @@ class RationalNumber:
 
         this metod converts integer to rational
         """
-
         self.denominator = NaturalNumber(1, [1])
         numerator = WholeNumber(self.sign, self.highest_position, self.array)
         denominator = NaturalNumber(1,[1])
         return RationalNumber(numerator, denominator)
         
-
-
     def to_whole(self) -> WholeNumber:
         """
         module: TRANS_Q_Z
@@ -57,13 +50,11 @@ class RationalNumber:
         """
         if self.denominator == NaturalNumber(1, [1]):
             result = self.numerator
-
         else:
             result = 'ERROR'
         return result
 
     def add(self, number: Self) -> Self:
-
         """
         module: ADD_ZZ_Z
         author: Dolganov Ivan
@@ -73,19 +64,16 @@ class RationalNumber:
 
         This method adds fractional numbers
         """
-
-        denom = lcm(self.denominator, number.denominator)  # функция нока
-        frac1 = multiply(self.numerator, ((denom)))  # фунция умножения целых чисел
-        frac2 = multiply(number.numerator, ((denom)))  # фунция умножения целых чисел
-        numer = add(frac1, frac2)  # функция сложения чисел
-        res = RationalNumber(numer, denom)
+        denom = self.denominator.lcm(number.denominator)  # функция нока
+        frac1 = self.numerator.multiply(denom)  # фунция умножения целых чисел
+        frac2 = number.numerator.multiply(denom)  # фунция умножения целых чисел
+        numer = frac1.add(frac2)  # функция сложения чисел
+        res = RationalNumber((numer.sign, numer.highest_position, numer.array), (denom.highest_position, denom.array))
         return res
-
 
     def subtract(self, number: Self) -> Self:
         # Q-6
         pass
-
 
     def multiply(self, number: Self) -> Self:
         """
@@ -97,7 +85,6 @@ class RationalNumber:
 
         This method multiplies self and number and returns the result
         """
-        
         result = RationalNumber((0, 0, []), (0, []))
         result.numerator = self.numerator.multiply(number.numerator)
         result.denominator = self.denominator.multiply(number.denominator)
@@ -108,14 +95,9 @@ class RationalNumber:
         # Q-8
         pass
 
-    
     def __eq__(self, other: Self) -> bool:
-        return self.numerator == other.numerator
-
+        return self.numerator == other.numerator and self.denominator == other.denominator
 
     def __str__(self) -> str:
         line = f'\n{"-" * max(self.numerator.highest_position, self.denominator.highest_position)}\n'
         return str(self.numerator) + line + str(self.denominator)
-
-
-
