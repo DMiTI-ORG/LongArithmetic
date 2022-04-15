@@ -184,8 +184,19 @@ class Polynomial:
         return result
 
     def derivative(self) -> Self:
-        # P-12
-        pass
+        """
+        module: <DER_P_P>
+        author: <Nickolay>
+        This function calculates the derivative of a polynomial
+        """
+        result_degree = self.highest_degree - 1
+        result = Polynomial(result_degree, [])
+        current_degree = self.highest_degree
+        for coefficient in self.array[:-1]:
+            result.array.append(coefficient.multiply(RationalNumber((0, 1, [current_degree]), (1, [1]))))
+            current_degree -= 1
+            
+        return result
 
     def multiple_roots_to_simple(self) -> Self:
         """

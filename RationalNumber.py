@@ -76,8 +76,26 @@ class RationalNumber:
         return res
 
     def subtract(self, number: Self) -> Self:
-        # Q-6
-        pass
+        """
+        module: <SUB_Q_Q>
+        author: <Nickolay>
+        Arguments:
+            self: число из которого вычитают
+            number: число которое вычитают
+        This function allows you to subtract from one rational number another
+        """
+        common_denominator = self.denominator.lcm(number.denominator)
+        new_numerator1 = self.numerator.multiply(common_denominator.quotient(self.denominator))
+        new_numerator2 = number.numerator.multiply(common_denominator.quotient(number.denominator))
+        result_numerator = new_numerator2.subtract(new_numerator2)
+        result_rational = RationalNumber((result_numerator.sign,
+                                          result_numerator.highest_position,
+                                          result_numerator.array),
+                                         (common_denominator.highest_position,
+                                          common_denominator.array))
+
+        result_rational.reduce()
+        return result_rational
 
     def multiply(self, number: Self) -> Self:
         """

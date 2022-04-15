@@ -130,6 +130,7 @@ class TestPolynomial(TestCase):
         print(type(a))
         print(type(b))
         self.assertEqual(a, b)
+
     @patch.object(RationalNumber, 'subtract')
     def test_subtract(self, subtract):
         polynomial_1 = Polynomial(2, [RationalNumber((0, 2, [8, 1]), (1, [1])),
@@ -213,3 +214,25 @@ class TestPolynomial(TestCase):
                             RationalNumber((0, 1, [-8]), (1, [1]))])
         subtract.side_effect = [c1, c2, c3, c4]
         self.assertEqual(polynomial_1.subtract(polynomial_2), polynomial_3)
+
+    @patch.object(RationalNumber, 'multiply')
+    def test_derivative(self, multiply):
+        # 2x^2+5x-7 = 4x + 5
+        orig = Polynomial(2, [RationalNumber((0, 1, [2]), (1, [1])), RationalNumber((0, 1, [5]), (1, [1])),
+                              RationalNumber((1, 1, [7]), (1, [1]))])
+        c1 = RationalNumber((0, 1, [4]), (1, [1]))
+        c2 = RationalNumber((0, 1, [5]), (1, [1]))
+        multiply.side_effect = [c1, c2]
+        self.assertEqual(orig.derivative().array[0].numerator.array,
+                         Polynomial(1, [c1, c2]).array[0].numerator.array)
+
+        # 3x^3+4x^2+8x-10 = 9x^2+8x+9
+        orig = Polynomial(2, [RationalNumber((0, 1, [2]), (1, [1])), RationalNumber((0, 1, [5]), (1, [1])),
+                              RationalNumber((1, 1, [7]), (1, [1]))])
+        c1 = RationalNumber((0, 1, [9]), (1, [1]))
+        c2 = RationalNumber((0, 1, [8]), (1, [1]))
+        c3 = RationalNumber((0, 1, [9]), (1, [1]))
+        multiply.side_effect = [c1, c2, c3]
+        self.assertEqual(orig.derivative().array[0].numerator.array,
+                         Polynomial(1, [c1, c2, c3]).array[0].numerator.array)
+        
