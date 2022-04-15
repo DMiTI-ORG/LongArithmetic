@@ -9,18 +9,37 @@ class NaturalNumber:
         self.array = array
 
     def compare(self, number: Self) -> int:
-        # N-1
-        pass
+        position = 0
+        answer = 0
+        if self.highest_position > number.highest_position:
+            answer = 2
+        elif self.highest_position < number.highest_position:
+            answer = 1
+        else:
+            while position < self.highest_position:
+                if self.array[position] > number.array[position]:
+                    answer = 2
+                    position = self.highest_position
+                elif self.array[position] < number.array[position]:
+                    answer = 1
+                    position = self.highest_position
+                else:
+                    position += 1
+        return answer
 
     def is_zero(self) -> bool:
-        # N-2
-        pass
+        if self.highest_position == 1:
+            if self.array[0] == 0:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def add_one(self) -> Self:
         """
         module: SUB_NDN_N
         author: Kirill Smirnov
-
         This method adds to the number 1
         """
         i = 1
@@ -45,18 +64,39 @@ class NaturalNumber:
         return NaturalNumber(new_highest_position, new_array)
 
     def add(self, number: Self) -> Self:
-        # N-4
-        pass
+        comparison = self.compare(number)
+        if comparison == 1:
+            x = self
+            self = number
+            number = x
+        array_answer = [0] * self.highest_position
+
+        dozens = 0
+
+        if self.highest_position > number.highest_position:
+            number.array = [0] * (self.highest_position - number.highest_position) + number.array
+        elif self.highest_position < number.highest_position:
+            self.array = [0] * (number.highest_position - self.highest_position) + self.array
+
+        for i in range(self.highest_position - 1, -1, -1):
+            array_answer[i] = self.array[i] + number.array[i] + dozens
+            dozens = 0
+
+            if array_answer[i] > 10:
+                array_answer[i] = array_answer[i] % 10
+                dozens = 1
+        if dozens != 0:
+            array_answer = [dozens] + array_answer
+
+        return array_answer
 
     def subtract(self, number: Self) -> Self:
         """
         module: SUB_NN_N
         author: Smirnov Kirill
-
         arguments:
             number: an instance of the class NaturalNumber
             digit: one digit to muliply with number
-
         subtract one number from another
         """
         comp = self.compare(number)
@@ -92,10 +132,8 @@ class NaturalNumber:
         """
         module: MUL_ND_N
         author: Starodubtsev Maxim
-
         arguments:
             digit: one digit to multiply with number
-
         this method multiplies a number by a digit
         """
         res = NaturalNumber(self.highest_position, [0] * self.highest_position)
@@ -120,10 +158,8 @@ class NaturalNumber:
         """
         module: MUL_Nk_N
         author: Trunov Egor
-
         arguments:
             digit: one digit to multiply with number
-
         This method multiply self number by powered ten digit
         """
         self.array += [0] * digit
@@ -135,9 +171,7 @@ class NaturalNumber:
                 author: Starodubtsev Maxim
                 arguments:
                     number: an instance of the class NaturalNumber
-
                 This method multiplies two natural numbers
-
         """
         res = NaturalNumber(1, [0])
         num = NaturalNumber(1, [0])
@@ -170,10 +204,8 @@ class NaturalNumber:
         """
         module: DIV_NN_Dk
         author: Teryokhina Sofya
-
         arguments:
             number: an instance of the class NaturalNumber
-
         This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
         """
         new_array = self.array
@@ -203,10 +235,8 @@ class NaturalNumber:
         """
         module: MOD_NN_N
         author: Trunov Egor
-
         arguments:
             number: an instance of the class NaturalNumber
-
         This method calculate
         """
         return self.subtract_k_by_number(number.multiply(self.quotient(number)), 1)
@@ -215,10 +245,8 @@ class NaturalNumber:
         """
         module: GCF_NN_N
         author: Dolganov Ivan
-
         arguments:
             number: an instance of the class NaturalNumber
-
         This method finds the greatest common divisor of numbers
         """
         while self.is_zero() == 'yes' and number.is_zero() == 'yes':
@@ -237,10 +265,8 @@ class NaturalNumber:
         """
         module: LCM_NN_N
         author: Zhulanov Aleksandr
-
         arguments:
         number: an instance of the class NaturalNumber
-
         This method passes lcm of the natural numbers
         """
         mult = number.multiply()
