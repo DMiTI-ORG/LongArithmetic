@@ -2,8 +2,6 @@ from typing_extensions import Self
 
 
 class NaturalNumber:
-
-
     def __init__(self, highest_position: int, array: list):
         self.highest_position = highest_position
         self.array = array
@@ -152,8 +150,6 @@ class NaturalNumber:
 
         return res
 
-
-
     def multiply_by_powered_ten(self, digit: int) -> Self:
         """
         module: MUL_Nk_N
@@ -163,7 +159,6 @@ class NaturalNumber:
         This method multiply self number by powered ten digit
         """
         self.array += [0] * digit
-
 
     def multiply(self, number: Self) -> Self:
         """
@@ -198,7 +193,6 @@ class NaturalNumber:
             return self.subtract(new_num)
         else:
             return 'Error'
-
 
     def first_division_digit(self, number: Self) -> Self:
         """
@@ -294,7 +288,6 @@ class NaturalNumber:
         else:
             res = NaturalNumber(self.highest_position, self.array)
         return res
-
 
     def lcm(self, number: Self) -> Self:
         """
