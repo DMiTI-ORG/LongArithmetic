@@ -1,20 +1,36 @@
 from unittest import TestCase
 from unittest.mock import patch
-from NaturalNumber import NaturalNumber
 from RationalNumber import RationalNumber
 from WholeNumber import WholeNumber
+from NaturalNumber import NaturalNumber
 
 
 class TestRational(TestCase):
-    '''
-    Example test
-    @patch.object(Calculator, 'bar')
-    def test_sum(self, bar):
-        bar.return_value = 1
-        self.assertEqual(self.calc.foo(100, 200), 1)
-        bar.return_value = 5
-        self.assertEqual(self.calc.foo(100, 200), 5)'''
+    def test_whole_to_rational(self):
+        number1 = RationalNumber((1, 1, [0]), (1,[1]))
+        number2 = RationalNumber((0, 2, [3,4]), (1,[1]))
+        number3 = RationalNumber((1, 2, [3,4]), (1,[1]))
+        number4 = RationalNumber((0, 1, [0]), (1,[1]))
+        testnum1 = WholeNumber(1, 1, [0])
+        testnum2 = WholeNumber(0, 2, [3,4])
+        testnum3 = WholeNumber(1, 2, [3,4])
+        testnum4 = WholeNumber(0, 1, [0])
+        self.assertEqual(RationalNumber.whole_to_rational(testnum1), number1)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum2), number2)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum3), number3)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum4), number4)
 
+    @patch.object(WholeNumber, 'abs')
+    @patch.object(NaturalNumber, 'gcd')
+    @patch.object(WholeNumber, 'quotient')
+    def test_reduce(self, quotient, gcd, abs):
+        number_1 = RationalNumber((0, 2, [1, 4]), (1, [7])) 
+ 
+        abs.return_value = NaturalNumber(2, [1, 4])
+        gcd.return_value = NaturalNumber(1, [7])
+        quotient.side_effect = [WholeNumber(0, 1, [2]), WholeNumber(0, 1, [1])]
+        self.assertEqual(RationalNumber((0, 1, [2]), (1, [1])), number_1.reduce())
+        
     def test_to_whole(self):
         number_1 = RationalNumber((1, 4, [2, 3, 4, 5]),(1,[1])) #-2345/1
         number_2 = WholeNumber(1, 4, [2, 3, 4, 5]) #-2345
