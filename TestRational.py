@@ -7,9 +7,18 @@ from NaturalNumber import NaturalNumber
 
 class TestRational(TestCase):
     def test_whole_to_rational(self):
-        number1 = WholeNumber(1, 2, [1,2,3])
-        number2 = RationalNumber((1, 2, [1,2,3]), (1,[1]))
-        self.assertEqual(number1.whole_to_rational(), number2)
+        number1 = RationalNumber((1, 1, [0]), (1,[1]))
+        number2 = RationalNumber((0, 2, [3,4]), (1,[1]))
+        number3 = RationalNumber((1, 2, [3,4]), (1,[1]))
+        number4 = RationalNumber((0, 1, [0]), (1,[1]))
+        testnum1 = WholeNumber(1, 1, [0])
+        testnum2 = WholeNumber(0, 2, [3,4])
+        testnum3 = WholeNumber(1, 2, [3,4])
+        testnum4 = WholeNumber(0, 1, [0])
+        self.assertEqual(RationalNumber.whole_to_rational(testnum1), number1)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum2), number2)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum3), number3)
+        self.assertEqual(RationalNumber.whole_to_rational(testnum4), number4)
 
     @patch.object(WholeNumber, 'abs')
     @patch.object(NaturalNumber, 'gcd')

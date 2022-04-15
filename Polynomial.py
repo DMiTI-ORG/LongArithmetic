@@ -8,6 +8,15 @@ class Polynomial:
         self.array = array
 
     def add(self, polynomial: Self) -> Self:
+        '''
+        module: ADD_PP_P
+        author: Banit Maksim
+
+        arguments:
+            polynomial: an istance of the class Polynomial
+            
+        This is the method of adding two polynomials with rational coefficients
+        '''
         num = [0] * abs(self.highest_degree - polynomial.highest_degree)   #Creating an array of zeros
         if self.highest_degree > polynomial.highest_degree:
             arr = num.extend(polynomial.array)   #Equating arrays
@@ -34,9 +43,7 @@ class Polynomial:
                 i += 1
         return res
         
-
     def subtract(self, polynomial: Self) -> Self:
-        # P-2
         """
         module: SUB_PP_P
         author: Rakhmatulin Marat
@@ -60,15 +67,14 @@ class Polynomial:
             return polynomial_1
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
-
         """
-            module: MUL_PQ_P
-            author: Zhulanov Aleksandr
+        module: MUL_PQ_P
+        author: Zhulanov Aleksandr
 
-            arguments:
-                number: an instance of the class Rational
+        arguments:
+            number: an instance of the class Rational
 
-            This method multiplies polynomial and rational
+        This method multiplies polynomial and rational
         """
         result = Polynomial(0, [])
         array_before = self
@@ -80,13 +86,15 @@ class Polynomial:
         return result
 
     def multiply_by_monomial(self, k: int) -> Self:
-        '''
+        """
         module: MUL_Pxk_P
         author: Teryokhina Sofya
+
         arguments:
             k: degree of monomial
+
         This method multiplies polynomial and monomial with natural degree
-        '''
+        """
         new_array = self.array
         for i in range(k):
             new_array.append(0)
@@ -98,8 +106,6 @@ class Polynomial:
         module: LED_P_Q
         author: Dolganov Ivan
 
-        arguments:
-
         This method finds the highest coefficient of the polynomial
         """
         res = self.array[0]
@@ -107,10 +113,10 @@ class Polynomial:
 
     def get_degree(self) -> NaturalNumber:
         """
-            module: MUL_PQ_P
-            author: Zhulanov Aleksandr
+        module: MUL_PQ_P
+        author: Zhulanov Aleksandr
 
-            This method returned polynomial degree
+        This method returned polynomial degree
         """
         result = NaturalNumber(len(str(self.highest_degree)), list(str(self.highest_degree)))
         return result
@@ -154,10 +160,10 @@ class Polynomial:
 
         this function return remainder from dividing a polynomial by a polynomial when dividing with a remainder
         '''
-	    quotient = self.quotient(polynomial)
-        polynomial_without_remainder = quotient.multiply(polynomial) 
-        remainder = self.subtract(polynomial_without_remainder)
-        return remainder
+        quotient = self.quotient(polynomial)
+        polynomial_without_remainder = quotient.multiply(polynomial)
+        result = self.subtract(polynomial_without_remainder)
+        return result
 
     def gcd(self, polynomial: Self) -> Self:
         """
@@ -182,17 +188,17 @@ class Polynomial:
         pass
 
     def multiple_roots_to_simple(self) -> Self:
-         '''
+        """
         module: NMR_P_P
         author: Teryokhina Sofya
 
         arguments: new_polynomial1: result of derivation of polynomial
                    new_polynomial2: gcd of polynomial and derivated polynomial
         This method converts multiple roots to simple.
-        '''
+        """
         polynomial_highest = self.highest_degree
         polynomial_array = self.array
-        polynomial = Polynomial(np_highest, np_array)
+        polynomial = Polynomial(polynomial_highest, polynomial_array)
         new_polynomial1 = polynomial.derivative()
         new_polynomial2 = polynomial.gcd(new_polynomial1)
         new_polynomial_result = polynomial.quotient(new_polynomial2)
@@ -200,7 +206,8 @@ class Polynomial:
 
 
     def __eq__(self, other: Self) -> bool:
-        return (self.array == other.array) and (self.highest_degree == other.highest_degree)
+        return self.highest_degree == other.highest_degree and all(self.array[i] == other.array[i] for i in range(self.highest_degree))
+
 
     def __str__(self) -> str:
         string = ''

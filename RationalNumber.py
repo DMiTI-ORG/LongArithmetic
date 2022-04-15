@@ -29,17 +29,21 @@ class RationalNumber:
         # Q-2
         pass
 
-    def whole_to_rational(self) -> Self:
+    @staticmethod
+    def whole_to_rational(number: WholeNumber) -> Self:
         """
         module TRANS_Z_Q
         author Bunkevich Gleb
-
+ 
         this metod converts integer to rational
         """
-        self.denominator = NaturalNumber(1, [1])
-        numerator = WholeNumber(self.sign, self.highest_position, self.array)
-        denominator = NaturalNumber(1,[1])
-        return RationalNumber(numerator, denominator)
+        num_sign = number.sign
+        num_highest_position = number.highest_position
+        num_array = number.array
+        denom_highest_position = 1
+        denom_array = [1]
+        result = RationalNumber((num_sign, num_highest_position, num_array),(denom_highest_position,denom_array))
+        return result
         
     def to_whole(self) -> WholeNumber:
         """

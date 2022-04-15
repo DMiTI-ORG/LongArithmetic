@@ -6,15 +6,6 @@ from NaturalNumber import NaturalNumber
 from RationalNumber import RationalNumber
 
 class TestPolynomial(TestCase):
-    '''
-    Example test
-    @patch.object(Calculator, 'bar')
-    def test_sum(self, bar):
-        bar.return_value = 1
-        self.assertEqual(self.calc.foo(100, 200), 1)
-        bar.return_value = 5
-        self.assertEqual(self.calc.foo(100, 200), 5)'''
-
     @patch.object(Polynomial, 'subtract')
     @patch.object(Polynomial, 'multiply')
     @patch.object(Polynomial, 'quotient')
@@ -130,13 +121,15 @@ class TestPolynomial(TestCase):
 
     @patch.object(RationalNumber, 'add')
     def test_add(self, add):
-        num_1 = Polynomial(5, [RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(5, 2), RationalNumber(3, 4), RationalNumber(6, 7)])
-        num_2 = Polynomial(3, [RationalNumber(3, 2), RationalNumber(2, 6), RationalNumber(2, 5)])
-        res_num = Polynomial(5, [RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(8, 2), RationalNumber(17, 12), RationalNumber(44, 35)])
-
-        num_1.add = Mock(side_effect=[RationalNumber(2, 3), RationalNumber(4, 6), RationalNumber(8, 2), RationalNumber(17, 12), RationalNumber(44, 35)])
-        self.assertEqual(num_1.add(num_2), res_num)
-        
+        num_1 = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [5]), (1, [2])), RationalNumber((0, 1, [3]), (1, [4])), RationalNumber((0, 1, [6]), (1, [7]))])
+        num_2 = Polynomial(3, [RationalNumber((0, 1, [3]), (1, [2])), RationalNumber((0, 1, [2]), (1, [6])), RationalNumber((0, 1, [2]), (1, [5]))])
+        res_num = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])), RationalNumber((0, 2, [4, 4]), (2, [3, 5]))])
+ 
+        num_1.add = Mock(side_effect=[RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])), RationalNumber((0, 2, [4, 4]), (2, [3, 5]))])
+        a, b = res_num, num_1.add(num_2)
+        print(type(a))
+        print(type(b))
+        self.assertEqual(a, b)
     @patch.object(RationalNumber, 'subtract')
     def test_subtract(self, subtract):
         polynomial_1 = Polynomial(2, [RationalNumber((0, 2, [8, 1]), (1, [1])),
