@@ -228,8 +228,43 @@ class NaturalNumber:
         return NaturalNumber(result_highest_position, result_array)
 
     def quotient(self, number: Self) -> Self:
-        # N-11
-        pass
+        """
+        module: <DIV_NN_N>
+        author: <Nickolay>
+        Arguments:
+            self: the dividend
+            number: the divider
+        This function is doing quotient of two natural numbers is calculated by repeatedly dividing
+        the first number by the second number and taking the remainder of each division
+        and appending it to the end of the quotient.
+        """
+        dividend = self
+        divider = number
+        result = NaturalNumber(0, [])
+        current_position = divider.highest_position
+        current_dividend = NaturalNumber(current_position, dividend.array[:current_position])
+        
+        if current_dividend.compare(divider) == 1:
+            current_dividend.array.append(dividend.array[current_position])
+            current_position += 1
+        
+        while current_position < dividend.highest_position:
+            if current_dividend.compare(divider) == 2:
+                quotient = current_dividend.first_division_digit(divider).array[0]
+            else:
+                quotient = 0
+            result.array.append(quotient)
+            result.highest_position += 1
+            remainder = current_dividend.subtract_k_by_number(divider, quotient)
+            current_dividend = remainder
+            current_dividend.array.append(dividend.array[current_position])
+            current_dividend.highest_position = remainder.highest_position + 1
+            current_position += 1
+            
+        if current_position == dividend.highest_position:
+            result.array.append(current_dividend.first_division_digit(divider).array[0])
+            result.highest_position += 1
+        return result
 
     def remainder(self, number: Self) -> Self:
         """
