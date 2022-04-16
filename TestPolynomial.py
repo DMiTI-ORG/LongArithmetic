@@ -173,7 +173,25 @@ class TestPolynomial(TestCase):
         add.return_value = number_3
         self.assertEqual(str(number_1.multiply(number_2)), str(number_3))
 
-    # TODO: quotient
+    @patch.object(Polynomial, 'multiply_by_monomial')
+    @patch.object(RationalNumber, 'divide')
+    @patch.object(Polynomial, 'multiply_by_rational')
+    @patch.object(Polynomial, 'subtract')
+    def test_quotient(self, subtract, multiply_by_rational, divide, multiply_by_monomial):
+        number_1 = Polynomial(2, [RationalNumber((0, 1, [2]), (1, [1])), RationalNumber(
+            (0, 1, [0]), (1, [1])), RationalNumber((0, 1, [2]), (1, [1]))])
+        number_2 = Polynomial(1, [RationalNumber(
+            (0, 1, [1]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1]))])
+        number_3 = Polynomial(1, [RationalNumber(
+            (0, 1, [2]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1]))])
+
+        multiply_by_monomial.return_value = Polynomial(2, [RationalNumber(
+            (0, 1, [1]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1]))])
+        divide.return_value = RationalNumber((0, 1, [2]), (1, [1]))
+        multiply_by_rational.return_value = Polynomial(2, [RationalNumber(
+            (0, 1, [2]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1])), RationalNumber((0, 1, [0]), (1, [1]))])
+        subtract.return_value = Polynomial(0, [RationalNumber((0, 1, [2]), (1, [1]))])
+        self.assertEqual(number_1.quotient(number_2), number_3)
 
     @patch.object(Polynomial, 'subtract')
     @patch.object(Polynomial, 'multiply')

@@ -149,8 +149,31 @@ class Polynomial:
         return result
 
     def quotient(self, polynomial: Self) -> Self:
-        # P-9
-        pass
+        """
+        module: DIV_PP_P
+        author: Fomin Kirill
+
+        arguments:
+        polynomial: an instance of the class Polynomial
+
+        This method returns quotient of dividing polynomials
+        """
+        result = Polynomial(0, [])
+        self_copy = Polynomial(self.highest_degree, self.array)
+        polynomial_copy = Polynomial(polynomial.highest_degree, polynomial.array)
+        while self_copy.highest_degree >= polynomial_copy.highest_degree:
+            result.array.append((self_copy.array[0].divide(polynomial_copy.array[0])))
+            temp = polynomial_copy
+            temp = temp.multiply_by_monomial(self_copy.highest_degree - polynomial_copy.highest_degree)
+            temp = temp.multiply_by_rational(result.array[-1])
+            self_copy = self_copy.subtract(temp)
+            result.highest_degree += 1
+
+        for i in range(self.highest_degree - polynomial.highest_degree - result.highest_degree + 1):
+            result.array.append(RationalNumber((0, 1, [0]), (1, [1])))
+
+        result.highest_degree = self.highest_degree - polynomial.highest_degree
+        return result
 
     def remainder(self, polynomial: Self) -> Self:
         """
