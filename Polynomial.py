@@ -124,8 +124,25 @@ class Polynomial:
         return result
 
     def take_out_gdc_lcm(self) -> Self:
-        # P-7
-        pass
+        """
+        module: FAC_P_Q
+        author: Shulegin Alexandr
+
+        This method return lcm of numerators and gcd of denominators
+        """
+        length = self.highest_degree + 1
+        numerators = [self.array[i].numerator.abs() for i in range(length)]
+        denominators = [self.array[i].denominator for i in range(length)]
+        while length >= 2:
+            numerators[length - 2] = numerators[length - 2].lcm(numerators[length - 1])
+            denominators[length - 2] = denominators[length - 2].gcd(denominators[length - 1])
+            length -= 1
+        numerator = numerators[0]
+        denominator = denominators[0]
+        result = Polynomial(0, [(0, numerator.highest_position, numerator.array),
+                                (denominator.highest_position, denominator.array)])
+
+        return result
 
     def multiply(self, polynomial: Self) -> Self:
         """

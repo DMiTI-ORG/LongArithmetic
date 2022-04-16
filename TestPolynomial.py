@@ -159,7 +159,16 @@ class TestPolynomial(TestCase):
 
     # TODO: get_degree
 
-    # TODO: take_out_gdc_lcm
+    @patch.object(WholeNumber, 'abs')
+    @patch.object(NaturalNumber, 'lcm')
+    @patch.object(NaturalNumber, 'gcd')
+    def test_take_out_gdc_lcm(self, gcd, lcm, abs):
+        polynom = Polynomial(1, [RationalNumber((0, 1, [1]), (1, [1])), RationalNumber((0, 1, [6]), (1, [1]))])
+
+        abs.side_effect = [NaturalNumber(1, [1]), NaturalNumber(1, [6])]
+        lcm.return_value = NaturalNumber(1, [6])
+        gcd.return_value = NaturalNumber(1, [1])
+        self.assertEqual(polynom.take_out_gdc_lcm(), Polynomial(0, [RationalNumber((0, 1, [6]), (1, [1]))]))
 
     @patch.object(Polynomial, 'multiply_by_rational')
     @patch.object(Polynomial, 'add')
