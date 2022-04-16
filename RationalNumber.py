@@ -34,7 +34,6 @@ class RationalNumber:
         arguments: absent
         This method check the fraction for whole
         """
-
         if self.denominator.highest_position == 1 and self.denominator.array[0] == 0:
             return ArithmeticError
         else:

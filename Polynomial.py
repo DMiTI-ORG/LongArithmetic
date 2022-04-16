@@ -9,6 +9,13 @@ class Polynomial:
         self.array = array
 
     def add(self, polynomial: Self) -> Self:
+        """
+        module: ADD_PP_P
+        author: Banit Maksim
+        arguments:
+        polynomial: an istance of the class Polynomial
+        This is the method of adding two polynomials with rational coefficients
+        """
         num = [0] * abs(self.highest_degree - polynomial.highest_degree)
         res = None
         if self.highest_degree > polynomial.highest_degree:

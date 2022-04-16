@@ -7,6 +7,15 @@ class NaturalNumber:
         self.array = array
 
     def compare(self, number: Self) -> int:
+        """
+        module: COM_NN_D
+        author: Krivenko Vlada
+
+        arguments:
+            number: an instance of the class NaturalNumber
+
+        This method compares natural numbers: 2 - if the first is greater than the second, 0 if equal, 1 otherwise.
+        """
         position = 0
         answer = 0
         if self.highest_position > number.highest_position:
@@ -26,6 +35,14 @@ class NaturalNumber:
         return answer
 
     def is_zero(self) -> bool:
+        """
+        module: NZER_N_B
+        author: Krivenko Vlada
+
+        arguments:
+
+        This method checks a number for zero: if the number is not zero, then "yes" otherwise "no"
+        """
         if self.highest_position == 1:
             if self.array[0] == 0:
                 return True
@@ -62,6 +79,15 @@ class NaturalNumber:
         return NaturalNumber(new_highest_position, new_array)
 
     def add(self, number: Self) -> Self:
+        """
+        module: ADD_NN_N
+        author: Krivenko Vlada
+
+        arguments:
+            number: an instance of the class NaturalNumber
+
+        This method add natural numbers.
+        """
         comparison = self.compare(number)
         if comparison == 1:
             x = self
@@ -187,7 +213,6 @@ class NaturalNumber:
             digit: one digit to multiply with number
         This method subtract from self number another number multiplied with digit
         """
-
         new_num = number.multiply_digit(digit)
         if self.compare(new_num) != 1:
             return self.subtract(new_num)
