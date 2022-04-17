@@ -98,8 +98,9 @@ class Polynomial:
         This method multiplies polynomial and monomial with natural degree
         """
         new_array = self.array
+        zero = RationalNumber((0, 1, [0]), (1, [1]))
         for i in range(k):
-            new_array.append(0)
+            new_array.append(zero)
         new_polynomial = Polynomial(self.highest_degree + k, new_array)
         return new_polynomial
 
