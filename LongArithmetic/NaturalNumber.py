@@ -139,15 +139,15 @@ class NaturalNumber:
                 new_array[posittion] = self.array[posittion] - number.array[posittion]
             else:
                 temporary_position = posittion - 1
-                while new_array[temporary_position] != 0:
+                while new_array[temporary_position] == 0:
                     temporary_position -= 1
-                new_array[temporary_position] - 1
+                new_array[temporary_position] -= 1
                 temporary_position += 1
                 while temporary_position < posittion:
                     new_array[temporary_position] += 9
                     temporary_position += 1
                 new_array[temporary_position] += 10
-                new_array = self.array[posittion] - number.array[posittion]
+                new_array[posittion] = self.array[posittion] - number.array[posittion]
             posittion -= 1
         posittion += 1
         while posittion < self.highest_position - 1 and new_array[0] == 0:

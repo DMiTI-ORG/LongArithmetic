@@ -133,14 +133,15 @@ class App(QtWidgets.QMainWindow):
                 text_2 = list(map(int, screen.ui.number_2.text()))
                 num_1 = NaturalNumber(len(text_1), text_1)
                 num_2 = NaturalNumber(len(text_2), text_2)
-                res = str(num_1.subtract(num_2))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.subtract(num_2))
+                self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 5:
                 text_1 = list(map(int, screen.ui.number_1.text()))
                 digit_1 = screen.ui.digit_1.value()
                 num_1 = NaturalNumber(len(text_1), text_1)
-                res = str(num_1.multiply_digit(digit_1))
+                res = (num_1.multiply_digit(digit_1))
+                res = str(res)
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 6:
@@ -155,8 +156,8 @@ class App(QtWidgets.QMainWindow):
                 text_2 = list(map(int, screen.ui.number_2.text()))
                 num_1 = NaturalNumber(len(text_1), text_1)
                 num_2 = NaturalNumber(len(text_2), text_2)
-                res = str(num_1.multiply(num_2))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.multiply(num_2))
+                self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 8:
                 text_1 = list(map(int, screen.ui.number_1.text()))
@@ -254,16 +255,17 @@ class App(QtWidgets.QMainWindow):
                 sign_2, text_2 = self.get_whole(screen.ui.number_2)
                 num_1 = WholeNumber(sign_1, len(text_1), text_1)
                 num_2 = WholeNumber(sign_2, len(text_2), text_2)
-                res = str(num_1.subtract(num_2))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.subtract(num_2))
+                print(res.sign, res.highest_position, res.array)
+                self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 7:
                 sign_1, text_1 = self.get_whole(screen.ui.number_1)
                 sign_2, text_2 = self.get_whole(screen.ui.number_2)
                 num_1 = WholeNumber(sign_1, len(text_1), text_1)
                 num_2 = WholeNumber(sign_2, len(text_2), text_2)
-                res = str(num_1.multiply(num_2))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.multiply(num_2))
+                self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 8:
                 sign_1, text_1 = self.get_whole(screen.ui.number_1)
