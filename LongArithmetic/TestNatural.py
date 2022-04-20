@@ -54,12 +54,14 @@ class TestNatural(TestCase):
         number_11 = NaturalNumber(3, [9, 9, 9])
         number_12 = NaturalNumber(3, [9, 9, 9])
 
-        self.assertEqual([7, 1, 5], number_1.add(number_2))
-        self.assertEqual([8, 2, 5], number_3.add(number_4))
-        self.assertEqual([6, 2], number_5.add(number_6))
-        self.assertEqual([5, 3, 6, 5, 3], number_7.add(number_8))
-        self.assertEqual([1, 1, 6, 7], number_9.add(number_10))
-        self.assertEqual([1, 9, 9, 8], number_11.add(number_12))
+        self.assertEqual(NaturalNumber(3, [7, 1, 5]), number_1.add(number_2))
+        self.assertEqual(NaturalNumber(3, [8, 2, 5]), number_3.add(number_4))
+        self.assertEqual(NaturalNumber(2, [6, 2]), number_5.add(number_6))
+        self.assertEqual(NaturalNumber(5, [5, 3, 6, 5, 3]), number_7.add(number_8))
+        self.assertEqual(NaturalNumber(4, [1, 1, 6, 7]), number_9.add(number_10))
+        self.assertEqual(NaturalNumber(4, [1, 9, 9, 8]), number_11.add(number_12))
+        self.assertEqual(NaturalNumber(4, [1, 9, 9, 8]), number_11.add(number_12))
+
 
     @patch.object(NaturalNumber, 'compare')
     def test_subtract(self, compare):
@@ -70,9 +72,14 @@ class TestNatural(TestCase):
         number_5 = NaturalNumber(2, [1, 1])
         number_6 = NaturalNumber(1, [1])
 
+        n1 = NaturalNumber(2, [1, 2])
+        n2 = NaturalNumber(1, [4])
+        n3 = NaturalNumber(1, [8])
+
         compare.return_value = 2
         self.assertEqual(number_3, number_1.subtract(number_2))
         self.assertEqual(number_6, number_4.subtract(number_5))
+        self.assertEqual(n1.subtract(n2), n3)
 
     def test_multiply_digit(self):
         number_1 = NaturalNumber(3, [1, 1, 1])
@@ -81,8 +88,8 @@ class TestNatural(TestCase):
     def test_multiply_by_powered_ten(self):
         number = NaturalNumber(2, [4, 1])
         number_2 = NaturalNumber(4,[4,1,0,0])
-        number.multiply_by_powered_ten(2)
-        self.assertEqual(str(number), str(number_2))
+        number_3 = number.multiply_by_powered_ten(2)
+        self.assertEqual(str(number_3), str(number_2))
 
     @patch.object(NaturalNumber, 'add')
     @patch.object(NaturalNumber, 'multiply_by_powered_ten')
