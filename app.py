@@ -125,8 +125,10 @@ class App(QtWidgets.QMainWindow):
                 text_2 = list(map(int, screen.ui.number_2.text()))
                 num_1 = NaturalNumber(len(text_1), text_1)
                 num_2 = NaturalNumber(len(text_2), text_2)
-                res = str(num_1.add(num_2))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.add(num_2))
+                print(res.highest_position, res.array)
+                self.second_choice.ui.result.setText(str(res))
+                
 
             elif self.secondary_module == 4:
                 text_1 = list(map(int, screen.ui.number_1.text()))
@@ -141,6 +143,7 @@ class App(QtWidgets.QMainWindow):
                 digit_1 = screen.ui.digit_1.value()
                 num_1 = NaturalNumber(len(text_1), text_1)
                 res = (num_1.multiply_digit(digit_1))
+                print(res.highest_position, res.array)
                 res = str(res)
                 self.second_choice.ui.result.setText(res)
 
@@ -148,8 +151,9 @@ class App(QtWidgets.QMainWindow):
                 text_1 = list(map(int, screen.ui.number_1.text()))
                 digit_1 = screen.ui.digit_1.value()
                 num_1 = NaturalNumber(len(text_1), text_1)
-                res = str(num_1.multiply_by_powered_ten(digit_1))
-                self.second_choice.ui.result.setText(res)
+                res = (num_1.multiply_by_powered_ten(digit_1))
+                print(res.highest_position, res.array)
+                self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 7:
                 text_1 = list(map(int, screen.ui.number_1.text()))

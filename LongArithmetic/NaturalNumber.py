@@ -177,6 +177,7 @@ class NaturalNumber:
             res.array[i] = n
         if discharge > 0:
             res.array.insert(0, discharge)
+        res.highest_position = len(res.array)
 
         return res
 
@@ -200,13 +201,15 @@ class NaturalNumber:
         This method multiplies two natural numbers
         """
         res = NaturalNumber(1, [0])
-        num = NaturalNumber(1, [0])
+        num = NaturalNumber(1, [1])
         k = 0
         for i in reversed(range(self.highest_position)):
             num = number.multiply_digit(self.array[i])
             num = num.multiply_by_powered_ten(k)
+            print(num.highest_position, num.array)
             k = k + 1
             res = res.add(num)
+            print(res.highest_position, num.array)
         return res
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:

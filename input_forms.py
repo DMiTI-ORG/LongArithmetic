@@ -110,6 +110,8 @@ class InputForm6(object):
         Form.resize(400, 300)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
+
+        #rational_1 = Qt
         self.numerator_1 = QtWidgets.QLineEdit(Form)
         self.denominator_1 = QtWidgets.QLineEdit(Form)
         self.verticalLayout.addWidget(self.numerator_1)
