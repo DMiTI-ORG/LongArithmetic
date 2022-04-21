@@ -138,7 +138,7 @@
         {
             "system_name":"TRANS_Z_Q" ,
             "human_name": "Преобразование целого в дробное",
-            "input_type": 5
+            "input_type": 2
         },    
         {
             "system_name":"TRANS_Q_Z" ,

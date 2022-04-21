@@ -206,10 +206,8 @@ class NaturalNumber:
         for i in reversed(range(self.highest_position)):
             num = number.multiply_digit(self.array[i])
             num = num.multiply_by_powered_ten(k)
-            print(num.highest_position, num.array)
             k = k + 1
             res = res.add(num)
-            print(res.highest_position, num.array)
         return res
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:
@@ -235,13 +233,12 @@ class NaturalNumber:
             number: an instance of the class NaturalNumber
         This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
         """
-        new_array = self.array
-        new_highest_position = self.highest_position
-        new_number = NaturalNumber(new_highest_position, new_array)
+
+        new_number = NaturalNumber(self.highest_position, self.array)
         result = 0
-        degree = new_highest_position - number.highest_position
+        degree = self.highest_position
         while degree >= 0:
-            number1 = number.multiply_by_powered_ten(new_highest_position)
+            number1 = number.multiply_by_powered_ten(self.highest_position)
             if new_number.compare(number1) != 1:
                 while new_number.compare(number1) != 1:
                     result += 1

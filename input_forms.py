@@ -108,18 +108,27 @@ class InputForm6(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 300)
-        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
+        self.horizontalLayout.setObjectName("horizontalLayout")
 
-        #rational_1 = Qt
+        self.verticalLayout1 = QtWidgets.QVBoxLayout()
+        self.verticalLayout1.setObjectName("verticalLayout1")
+
+        self.verticalLayout2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout2.setObjectName("verticalLayout")
+
         self.numerator_1 = QtWidgets.QLineEdit(Form)
         self.denominator_1 = QtWidgets.QLineEdit(Form)
-        self.verticalLayout.addWidget(self.numerator_1)
-        self.verticalLayout.addWidget(self.denominator_1)
+        self.verticalLayout1.addWidget(self.numerator_1)
+        self.verticalLayout1.addWidget(self.denominator_1)
         self.numerator_2 = QtWidgets.QLineEdit(Form)
         self.denominator_2 = QtWidgets.QLineEdit(Form)
-        self.verticalLayout.addWidget(self.numerator_2)
-        self.verticalLayout.addWidget(self.denominator_2)
+        self.verticalLayout2.addWidget(self.numerator_2)
+        self.verticalLayout2.addWidget(self.denominator_2)
+
+        self.horizontalLayout.addLayout(self.verticalLayout1)
+        self.horizontalLayout.addLayout(self.verticalLayout2)
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 

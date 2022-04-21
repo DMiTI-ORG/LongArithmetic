@@ -1,5 +1,5 @@
 from typing_extensions import Self
-from . import NaturalNumber
+from .NaturalNumber import NaturalNumber
 
 
 class WholeNumber:
@@ -15,7 +15,7 @@ class WholeNumber:
         
         This method returns an instance of the class NaturalNumber
         """
-        number = NaturalNumber.NaturalNumber(self.highest_position, self.array)
+        number = NaturalNumber(self.highest_position, self.array)
         return number
 
     def is_positive(self) -> int:
@@ -76,7 +76,7 @@ class WholeNumber:
         Transfers an instance of WholeNumber class into a NaturalNumber class
         """
         if self.sign == 0:
-            number = NaturalNumber.NaturalNumber(self.highest_position, self.array)
+            number = NaturalNumber(self.highest_position, self.array)
             return number
         else:
             return 'Error'
@@ -109,7 +109,7 @@ class WholeNumber:
             return WholeNumber(self.sign, new_number.highest_position, new_number.array)
 
     def subtract(self, number: Self) -> Self:
-        '''
+        """
         module: SUB_ZZ_Z
         author: Bunkevich Gleb
         argruments:
@@ -117,8 +117,7 @@ class WholeNumber:
             self - integer number
  
         this function does subtraction of two integers by splitting by signs into cases
-        '''
- 
+        """
         if (self.is_positive() == 2 and number.is_positive() == 2):   
             if self.abs().compare(number.abs()) == 2: return WholeNumber(0, self.abs().subtract(number.abs()).highest_position, self.abs().subtract(number.abs()).array )
             elif self.abs().compare(number) == 0: return WholeNumber(0,1,[0])
@@ -151,9 +150,9 @@ class WholeNumber:
         This method multiply two whole numbers
         """
         result = WholeNumber((self.sign + number.sign) % 2, 0, [])
-        self_copy = NaturalNumber.NaturalNumber(self.highest_position, self.array)
-        number_copy = NaturalNumber.NaturalNumber(number.highest_position, number.array)
-        result_natural = NaturalNumber.NaturalNumber.multiply(self_copy, number_copy)  # multiply two natural numbers
+        self_copy = NaturalNumber(self.highest_position, self.array)
+        number_copy = NaturalNumber(number.highest_position, number.array)
+        result_natural = NaturalNumber.multiply(self_copy, number_copy)  # multiply two natural numbers
         result.highest_position = result_natural.highest_position
         result.array = result_natural.array
         return result

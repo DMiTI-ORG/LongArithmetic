@@ -16,32 +16,31 @@ class Polynomial:
         polynomial: an istance of the class Polynomial
         This is the method of adding two polynomials with rational coefficients
         """
-        num = [0] * abs(self.highest_degree - polynomial.highest_degree)
-        res = None
+        num = [0] * abs(self.highest_degree - polynomial.highest_degree)   #Creating an array of zeros
         if self.highest_degree > polynomial.highest_degree:
-            arr = num.extend(polynomial.array)
+            arr = num.extend(polynomial.array)   #Equating arrays
             i = 0
-            res_arr = [0] * self.highest_degree
+            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * self.highest_degree
             while i <= self.highest_degree:
-                res_arr[i] = self.array[i].add(arr[i])
+                print(self.array[i])
+                res_arr[i] = self.array[i].add(arr[i])   #Adding arrays
                 i += 1
             res = Polynomial(self.highest_degree, res_arr)
         elif self.highest_degree < polynomial.highest_degree:
             arr = num.extend(self.array)
             i = 0
-            res_arr = [0] * polynomial.highest_degree
+            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * polynomial.highest_degree
             while i <= polynomial.highest_degree:
                 res_arr[i] = polynomial.array[i].add(arr[i])
                 i += 1
-            res = Polynomial(self.highest_degree, res_arr)
+            res = Polynomial(polynomial.highest_degree, res_arr)
         else:
             i = 0
-            res_arr = [0] * self.highest_degree
-            while i < self.highest_degree:
+            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * self.highest_degree
+            while i <= self.highest_degree:
                 res_arr[i] = self.array[i].add(polynomial.array[i])
-                res = Polynomial(self.highest_degree, res_arr)
                 i += 1
-
+            res = Polynomial(self.highest_degree, res_arr)
         return res
         
     def subtract(self, polynomial: Self) -> Self:

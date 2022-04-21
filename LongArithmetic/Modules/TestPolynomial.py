@@ -9,18 +9,11 @@ from RationalNumber import RationalNumber
 class TestPolynomial(TestCase):
     @patch.object(RationalNumber, 'add')
     def test_add(self, add):
-        num_1 = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])),
-                               RationalNumber((0, 1, [5]), (1, [2])), RationalNumber((0, 1, [3]), (1, [4])),
-                               RationalNumber((0, 1, [6]), (1, [7])), RationalNumber((0, 1, [2]), (1, [5]))])
-        num_2 = Polynomial(3, [RationalNumber((0, 1, [3]), (1, [2])), RationalNumber((0, 1, [2]), (1, [6])),
-                               RationalNumber((0, 1, [2]), (1, [5])), RationalNumber((0, 1, [2]), (1, [5]))])
-        res_num = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])),
-                                 RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])),
-                                 RationalNumber((0, 2, [4, 4]), (2, [3, 5])), RationalNumber((0, 1, [4]), (1, [5]))])
-
-        add.side_effect = [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])),
-                           RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])),
-                           RationalNumber((0, 2, [4, 4]), (2, [3, 5])), RationalNumber((0, 1, [4]), (1, [5]))]
+        num_1 = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [5]), (1, [2])), RationalNumber((0, 1, [3]), (1, [4])), RationalNumber((0, 1, [6]), (1, [7])), RationalNumber((0, 1, [2]), (1, [5]))])
+        num_2 = Polynomial(3, [RationalNumber((0, 1, [3]), (1, [2])), RationalNumber((0, 1, [2]), (1, [6])), RationalNumber((0, 1, [2]), (1, [5])), RationalNumber((0, 1, [2]), (1, [5]))])
+        res_num = Polynomial(5, [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])), RationalNumber((0, 2, [4, 4]), (2, [3, 5])), RationalNumber((0, 1, [4]), (1, [5]))])
+ 
+        add.side_effect = [RationalNumber((0, 1, [2]), (1, [3])), RationalNumber((0, 1, [4]), (1, [6])), RationalNumber((0, 1, [8]), (1, [2])), RationalNumber((0, 2, [1, 7]), (2, [1, 2])), RationalNumber((0, 2, [4, 4]), (2, [3, 5])), RationalNumber((0, 1, [4]), (1, [5]))]
         self.assertEqual(num_1.add(num_2), res_num)
 
     @patch.object(RationalNumber, 'subtract')
