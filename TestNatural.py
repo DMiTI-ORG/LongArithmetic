@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 from unittest.mock import Mock
-from NaturalNumber import NaturalNumber
+from LongArithmetic.Modules.NaturalNumber import NaturalNumber
 
 
 class TestNatural(TestCase):

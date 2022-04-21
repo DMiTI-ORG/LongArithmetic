@@ -1,8 +1,8 @@
 from unittest import TestCase
 from unittest.mock import patch
-from RationalNumber import RationalNumber
-from WholeNumber import WholeNumber
-from NaturalNumber import NaturalNumber
+from LongArithmetic.Modules.RationalNumber import RationalNumber
+from LongArithmetic.Modules.WholeNumber import WholeNumber
+from LongArithmetic.Modules.NaturalNumber import NaturalNumber
 
 
 class TestRational(TestCase):

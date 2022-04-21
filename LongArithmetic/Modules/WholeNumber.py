@@ -181,7 +181,7 @@ class WholeNumber:
             number_1 = self.abs()
             number_2 = number.abs()
             number_3 = number_1.quotient(number_2)
-            return number_3
+            return WholeNumber((self.sign + number.sign) % 2, number_3.highest_position, number_3.array)
         else:
             return 'Error'
 
