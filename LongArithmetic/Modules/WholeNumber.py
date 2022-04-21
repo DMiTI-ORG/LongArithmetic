@@ -118,28 +118,38 @@ class WholeNumber:
  
         this function does subtraction of two integers by splitting by signs into cases
         """
-        if (self.is_positive() == 2 and number.is_positive() == 2):   
-            if self.abs().compare(number.abs()) == 2: return WholeNumber(0, self.abs().subtract(number.abs()).highest_position, self.abs().subtract(number.abs()).array )
-            elif self.abs().compare(number) == 0: return WholeNumber(0,1,[0])
-            else: 
-                TemporAbsResult = number.abs().subtract(self.abs())
-                result = WholeNumber(1, TemporAbsResult.highest_position, TemporAbsResult.array)
-                return result
  
-        elif (self.is_positive() == 2 and number.is_positive() == 1): 
-            return WholeNumber(0, self.abs().subtract(number.abs()).highest_position, self.abs().subtract(number.abs()).array )
+        if (self.is_positive() == 2 and number.is_positive() == 2):
+            if self.abs().compare(number.abs()) == 2:
+                temp = self.abs().subtract(number.abs())
+                return WholeNumber(0, temp.highest_position, temp.array)
+            elif self.abs().compare(number) == 0:
+                return WholeNumber(0,1,[0])
+            else: 
+                temp = number.abs().subtract(self.abs())
+                return WholeNumber(1, temp.highest_position, temp.array)
+ 
+        elif (self.is_positive() == 2 and number.is_positive() == 1):
+            temp = self.abs().add(number.abs())
+            return WholeNumber(0, temp.highest_position, temp.array)
+
         elif (self.is_positive() == 1 and number.is_positive() == 2):
-            TemporAbsResult = self.abs().add(number.abs())
-            result = WholeNumber(1, TemporAbsResult.highest_position, TemporAbsResult.array)
-            return result
-        elif  (self.is_positive() == 0 and number.is_positive() == 0): return WholeNumber(0,1,[0])
-        else: 
-            if self.abs().compare(number.abs()) == 1: return WholeNumber(1, number.abs().subtract(self.abs()).highest_position, number.abs().subtract(self.abs()).array)
-            elif self.abs().compare(number.abs()) == 0: return WholeNumber(0,1,[0])
+            temp = self.abs().add(number.abs())
+            return WholeNumber(1, temp.highest_position, temp.array)
+
+        elif (self.is_positive() == 0 and number.is_positive() == 0):
+            return WholeNumber(0,1,[0])
+
+        else:
+            comp = self.abs().compare(number.abs())
+            if comp == 1:
+                temp = number.abs().subtract(self.abs())
+                return WholeNumber(0, temp.highest_position, temp.array)
+            elif comp == 0:
+                return WholeNumber(0,1,[0])
             else:
-                TemporAbsResult = self.abs().subtract(number.abs())
-                result = WholeNumber(1, TemporAbsResult.highest_position, TemporAbsResult.array)
-                return result
+                temp = self.abs().subtract(number.abs())
+                return WholeNumber(1, temp.highest_position, temp.array)
 
     def multiply(self, number: Self) -> Self:
         """

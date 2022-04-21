@@ -200,37 +200,37 @@
         {
             "system_name":"FAC_P_Q" ,
             "human_name": "Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей",
-            "input_type": ""
+            "input_type": 10
         },
         {
             "system_name":"MUL_PP_P" ,
             "human_name": "Умножение многочленов",
-            "input_type": ""
+            "input_type": 7
         },
         {
             "system_name":"DIV_PP_P" ,
             "human_name": "Частное от деления многочлена на многочлен при делении с остатком",
-            "input_type": ""
+            "input_type": 7
         },
         {
             "system_name":"MOD_PP_P" ,
             "human_name": "Остаток от деления многочлена на многочлен при делении с остатком",
-            "input_type": ""
+            "input_type": 7
         },
         {
             "system_name":"GCF_PP_P" ,
             "human_name": "НОД многочленов",
-            "input_type": ""
+            "input_type": 7
         },
         {
             "system_name":"DER_P_P" ,
             "human_name": "Производная многочлена",
-            "input_type": ""
+            "input_type": 10
         },
         {
             "system_name":"NMR_P_P" ,
             "human_name": "Преобразование многочлена — кратные корни в простые",
-            "input_type": ""
+            "input_type": 10
         } 
     ]   
 }

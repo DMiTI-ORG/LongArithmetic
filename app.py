@@ -68,7 +68,12 @@ class App(QtWidgets.QMainWindow):
                             Screen(input_forms.InputForm3()),
                             Screen(input_forms.InputForm4()),
                             Screen(input_forms.InputForm5()),
-                            Screen(input_forms.InputForm6())]
+                            Screen(input_forms.InputForm6()),
+                            Screen(input_forms.InputForm7()),
+                            Screen(input_forms.InputForm8()),
+                            Screen(input_forms.InputForm9()),
+                            Screen(input_forms.InputForm10())]
+                            
         for screen in self.input_array:
             self.second_choice.ui.stackedWidget.addWidget(screen)
         index = self.data[self.main_module][self.second_choice.ui.select_module.currentIndex()]['input_type']

@@ -135,6 +135,7 @@ class NaturalNumber:
                 number.array.insert(0, 0)
                 number.highest_position += 1
         while posittion >= 0:
+            print(self.highest_position, self.array, '|', number.highest_position, number.array)
             if self.array[posittion] - number.array[posittion] >= 0:
                 new_array[posittion] = self.array[posittion] - number.array[posittion]
             else:
@@ -150,11 +151,21 @@ class NaturalNumber:
                 new_array[posittion] = self.array[posittion] - number.array[posittion]
             posittion -= 1
         posittion += 1
-        while posittion < self.highest_position - 1 and new_array[0] == 0:
-            new_array.pop(0)
-            posittion += 1
- 
-        return NaturalNumber(self.highest_position - posittion, new_array)
+        if comp == 1:
+            t = self
+            self = number
+            number = t
+        # while posittion < self.highest_position - 1 and new_array[0] == 0:
+        #     new_array.pop(0)
+        #     posittion += 1
+        for i in range(0, len(new_array)):
+            if new_array[i] != 0:
+                new_array = new_array[i:]
+                break
+        if not any(new_array): new_array = [0]
+
+        print('>>>>', len(new_array), new_array)
+        return NaturalNumber(len(new_array), new_array)
 
     def multiply_digit(self, digit: int) -> Self:
         """
@@ -238,7 +249,7 @@ class NaturalNumber:
         result = 0
         degree = self.highest_position
         while degree >= 0:
-            number1 = number.multiply_by_powered_ten(self.highest_position)
+            number1 = number.multiply_by_powered_ten(degree)
             if new_number.compare(number1) != 1:
                 while new_number.compare(number1) != 1:
                     result += 1
