@@ -99,14 +99,16 @@ class WholeNumber:
             return WholeNumber(self.sign, new_number.highest_position, new_number.array)
         else:
             number_1 = self.abs()
-            number_2 = number.abs()
-            comp = number_1.compare(number_2)
-            if comp == 1:
-                t = number_1
-                self = number
-                number_2 = t
-            new_number = number_1.subtract(number_2)
-            return WholeNumber(self.sign, new_number.highest_position, new_number.array)
+            number_2 = number.abs()           
+            if number_1.compare(number_2) == 2:
+                new_number = number_1.subtract(number_2)
+                return WholeNumber(self.sign, new_number.highest_position, new_number.array)
+            elif number_1.compare(number_2) == 0:
+                return WholeNumber(0, 1, [0])
+            else: 
+                new_number = number_1.subtract(number_2)
+                return WholeNumber(number.sign, new_number.highest_position, new_number.array)
+
 
     def subtract(self, number: Self) -> Self:
         """
