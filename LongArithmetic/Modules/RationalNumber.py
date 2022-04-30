@@ -1,11 +1,11 @@
 from .NaturalNumber import NaturalNumber
-from .WholeNumber import WholeNumber
+from .IntegerNumber import IntegerNumber
 from typing_extensions import Self
 
 
 class RationalNumber:
     def __init__(self, numerator: tuple, denominator: tuple):
-        self.numerator = WholeNumber(*numerator)
+        self.numerator = IntegerNumber(*numerator)
         self.denominator = NaturalNumber(*denominator)
 
     def reduce(self) -> Self:
@@ -18,9 +18,9 @@ class RationalNumber:
         sign = self.numerator.sign
         numerator = self.numerator.abs()
         nod = numerator.gcd(self.denominator)
-        numerator = WholeNumber.natural_to_whole(numerator)
-        denominator = WholeNumber.natural_to_whole(self.denominator)
-        nod = WholeNumber.natural_to_whole(nod)
+        numerator = IntegerNumber.natural_to_integer(numerator)
+        denominator = IntegerNumber.natural_to_integer(self.denominator)
+        nod = IntegerNumber.natural_to_integer(nod)
         numerator = numerator.quotient(nod)
         denominator = denominator.quotient(nod)
         print(numerator, denominator)
@@ -28,12 +28,12 @@ class RationalNumber:
 
         return result
 
-    def is_whole(self) -> bool:
+    def is_integer(self) -> bool:
         """
         module: INT_Q_B
         author: Chadina Alena
         arguments: absent
-        This method check the fraction for whole
+        This method check the fraction for integer
         """
         if self.denominator.highest_position == 1 and self.denominator.array[0] == 0:
             return "Error"
@@ -70,7 +70,7 @@ class RationalNumber:
             return result
 
     @staticmethod
-    def whole_to_rational(number: WholeNumber) -> Self:
+    def integer_to_rational(number: IntegerNumber) -> Self:
         """
         module TRANS_Z_Q
         author Bunkevich Gleb
@@ -86,7 +86,7 @@ class RationalNumber:
 
         return result
         
-    def to_whole(self) -> WholeNumber:
+    def to_integer(self) -> IntegerNumber:
         """
         module: TRANS_Q_Z
         author: Azamatova Altana
@@ -166,10 +166,10 @@ class RationalNumber:
         This method divide self number on another number
         """
         result = RationalNumber((0, 0, []), (0, []))
-        result.numerator = WholeNumber((self.numerator.sign + number.numerator.sign) % 2, 0, [])
+        result.numerator = IntegerNumber((self.numerator.sign + number.numerator.sign) % 2, 0, [])
         result.denominator = NaturalNumber(0, [])
-        denominator_1 = WholeNumber(0, self.denominator.highest_position, self.denominator.array)
-        denominator_2 = WholeNumber(0, number.denominator.highest_position, number.denominator.array)
+        denominator_1 = IntegerNumber(0, self.denominator.highest_position, self.denominator.array)
+        denominator_2 = IntegerNumber(0, number.denominator.highest_position, number.denominator.array)
         new_numerator = self.numerator.multiply(denominator_2)
         new_denominator = denominator_1.multiply(number.numerator)
         result.numerator.highest_position = new_numerator.highest_position

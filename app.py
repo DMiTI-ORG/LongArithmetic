@@ -6,7 +6,7 @@ import json
 from qt_for_python.uic import main_app, first_choice, second_choice
 import input_forms
 from LongArithmetic.Modules.NaturalNumber import NaturalNumber
-from LongArithmetic.Modules.WholeNumber import WholeNumber
+from LongArithmetic.Modules.IntegerNumber import IntegerNumber
 from LongArithmetic.Modules.RationalNumber import RationalNumber
 #from LongArithmetic.Modules.Polynomial import Polynomial
 
@@ -86,7 +86,7 @@ class App(QtWidgets.QMainWindow):
         else:
             return [0]
 
-    def get_whole(self, source):
+    def get_integer(self, source):
         text = source.text()
         if text[0] == '-':
             text = list(map(int, source.text()[1:]))
@@ -97,7 +97,7 @@ class App(QtWidgets.QMainWindow):
         return sign, text
 
     def get_rational(self, source_1, source_2):
-        sign, numenator = self.get_whole(source_1)
+        sign, numenator = self.get_integer(source_1)
         denominator = self.get_natural(source_2)
         return sign, numenator, denominator
 
@@ -220,75 +220,75 @@ class App(QtWidgets.QMainWindow):
         if self.main_module == 'Целые числа':
             screen = self.second_choice.ui.stackedWidget.currentWidget()
             if self.secondary_module == 0:
-                sign, text_1 = self.get_whole(screen.ui.number_1)
-                num_1 = WholeNumber(sign, len(text_1), text_1)
+                sign, text_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(text_1), text_1)
                 res = str(num_1.abs())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 1:
-                sign, text_1 = self.get_whole(screen.ui.number_1)
-                num_1 = WholeNumber(sign, len(text_1), text_1)
+                sign, text_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(text_1), text_1)
                 res = str(num_1.is_positive())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 2:
-                sign, text_1 = self.get_whole(screen.ui.number_1)
-                num_1 = WholeNumber(sign, len(text_1), text_1)
+                sign, text_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(text_1), text_1)
                 res = str(num_1.multiply_by_minus_one())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 3:
                 text_1 = self.get_natural(screen.ui.number_1)
-                num_1 = WholeNumber(0, len(text_1), text_1)
-                res = (WholeNumber.natural_to_whole(num_1))
+                num_1 = IntegerNumber(0, len(text_1), text_1)
+                res = (IntegerNumber.natural_to_integer(num_1))
                 print(type(res))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 4:
-                sign, text_1 = self.get_whole(screen.ui.number_1)
-                num_1 = WholeNumber(sign, len(text_1), text_1)
+                sign, text_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(text_1), text_1)
                 res = num_1.to_natural()
                 print(type(res))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 5:
-                sign_1, text_1 = self.get_whole(screen.ui.number_1)
-                sign_2, text_2 = self.get_whole(screen.ui.number_2)
-                num_1 = WholeNumber(sign_1, len(text_1), text_1)
-                num_2 = WholeNumber(sign_2, len(text_2), text_2)
+                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_2, text_2 = self.get_integer(screen.ui.number_2)
+                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.add(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 6:
-                sign_1, text_1 = self.get_whole(screen.ui.number_1)
-                sign_2, text_2 = self.get_whole(screen.ui.number_2)
-                num_1 = WholeNumber(sign_1, len(text_1), text_1)
-                num_2 = WholeNumber(sign_2, len(text_2), text_2)
+                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_2, text_2 = self.get_integer(screen.ui.number_2)
+                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = (num_1.subtract(num_2))
                 print(res.sign, res.highest_position, res.array)
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 7:
-                sign_1, text_1 = self.get_whole(screen.ui.number_1)
-                sign_2, text_2 = self.get_whole(screen.ui.number_2)
-                num_1 = WholeNumber(sign_1, len(text_1), text_1)
-                num_2 = WholeNumber(sign_2, len(text_2), text_2)
+                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_2, text_2 = self.get_integer(screen.ui.number_2)
+                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = (num_1.multiply(num_2))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 8:
-                sign_1, text_1 = self.get_whole(screen.ui.number_1)
-                sign_2, text_2 = self.get_whole(screen.ui.number_2)
-                num_1 = WholeNumber(sign_1, len(text_1), text_1)
-                num_2 = WholeNumber(sign_2, len(text_2), text_2)
+                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_2, text_2 = self.get_integer(screen.ui.number_2)
+                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.quotient(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 9:
-                sign_1, text_1 = self.get_whole(screen.ui.number_1)
-                sign_2, text_2 = self.get_whole(screen.ui.number_2)
-                num_1 = WholeNumber(sign_1, len(text_1), text_1)
-                num_2 = WholeNumber(sign_2, len(text_2), text_2)
+                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_2, text_2 = self.get_integer(screen.ui.number_2)
+                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.remainder(num_2))
                 self.second_choice.ui.result.setText(res)
 
@@ -303,19 +303,19 @@ class App(QtWidgets.QMainWindow):
             elif self.secondary_module == 1:
                 sign, num, denom = self.get_rational(screen.ui.numerator_1, screen.ui.denominator_1)
                 num_1 = RationalNumber((sign, len(num), num), (len(denom), denom))
-                res = str(num_1.is_whole())
+                res = str(num_1.is_integer())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 2:
-                sign, text_1 = self.get_whole(screen.ui.number_1)
-                num_1 = WholeNumber(sign, len(text_1), text_1)
-                res = RationalNumber.whole_to_rational(num_1)
+                sign, text_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                res = RationalNumber.integer_to_rational(num_1)
                 self.second_choice.ui.result.setText(str(res) + ' ' + str(type(res)))
 
             elif self.secondary_module == 3:
                 sign, num, denom = self.get_rational(screen.ui.numerator_1, screen.ui.denominator_1)
                 num_1 = RationalNumber((sign, len(num), num), (len(denom), denom))
-                res = str(num_1.to_whole())
+                res = str(num_1.to_integer())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 4:

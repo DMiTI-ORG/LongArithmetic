@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock
 from LongArithmetic.Modules.Polynomial import Polynomial
-from LongArithmetic.Modules.WholeNumber import WholeNumber
+from LongArithmetic.Modules.IntegerNumber import IntegerNumber
 from LongArithmetic.Modules.NaturalNumber import NaturalNumber
 from LongArithmetic.Modules.RationalNumber import RationalNumber
 
@@ -164,7 +164,7 @@ class TestPolynomial(TestCase):
 
     # TODO: get_degree
 
-    @patch.object(WholeNumber, 'abs')
+    @patch.object(IntegerNumber, 'abs')
     @patch.object(NaturalNumber, 'lcm')
     @patch.object(NaturalNumber, 'gcd')
     def test_take_out_gdc_lcm(self, gcd, lcm, abs):
