@@ -6,6 +6,12 @@ class NaturalNumber:
         self.highest_position = highest_position
         self.array = array
 
+
+    @staticmethod
+    def str_to_num(string):
+        return NaturalNumber(len(str), list(map(int, string)))
+
+
     def compare(self, number: Self) -> int:
         """
         module: COM_NN_D

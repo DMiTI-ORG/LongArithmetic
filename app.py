@@ -92,202 +92,174 @@ class App(QtWidgets.QMainWindow):
             text = list(map(int, source.text()[1:]))
             sign = 1
         else:
-            text = self.get_natural(source)
+            text = NaturalNumber.str_to_num(source)
             sign = 0
         return sign, text
 
     def get_rational(self, source_1, source_2):
         sign, numenator = self.get_integer(source_1)
-        denominator = self.get_natural(source_2)
+        denominator = NaturalNumber.str_to_num(source_2)
         return sign, numenator, denominator
 
     def run(self):
         if self.main_module == 'Натуральные числа':
             screen = self.second_choice.ui.stackedWidget.currentWidget()
             if self.secondary_module == 0:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = str(num_1.compare(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 1:
-                text_1 = self.get_natural(screen.ui.number_1)
-                num_1 = NaturalNumber(len(text_1), text_1)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
                 res = str(num_1.is_zero())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 2:
-                text_1 = self.get_natural(screen.ui.number_1)
-                num_1 = NaturalNumber(len(text_1), text_1)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
                 res = str(num_1.add_one())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 3:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = (num_1.add(num_2))
-                print(res.highest_position, res.array)
                 self.second_choice.ui.result.setText(str(res))
                 
             elif self.secondary_module == 4:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = (num_1.subtract(num_2))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 5:
-                text_1 = self.get_natural(screen.ui.number_1)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
                 digit_1 = screen.ui.digit_1.value()
-                num_1 = NaturalNumber(len(text_1), text_1)
                 res = (num_1.multiply_digit(digit_1))
-                print(res.highest_position, res.array)
                 res = str(res)
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 6:
-                text_1 = self.get_natural(screen.ui.number_1)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
                 digit_1 = screen.ui.digit_1.value()
-                num_1 = NaturalNumber(len(text_1), text_1)
-                res = (num_1.multiply_by_powered_ten(digit_1))
                 print(res.highest_position, res.array)
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 7:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = (num_1.multiply(num_2))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 8:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 digit_2 = screen.ui.digit_2.value()
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
-                digit_1 = screen.ui.digit_2.value()
                 res = str(num_1.subtract_k_by_number(num_2, digit_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 9:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 digit_2 = screen.ui.digit_2.value()
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
                 res = str(num_1.first_division_digit(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 10:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = str(num_1.quotient(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 11:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = str(num_1.remainder(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 12:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = str(num_1.gcd(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 13:
-                text_1 = self.get_natural(screen.ui.number_1)
-                text_2 = self.get_natural(screen.ui.number_2)
-                num_1 = NaturalNumber(len(text_1), text_1)
-                num_2 = NaturalNumber(len(text_2), text_2)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1.text())
+                num_2 = NaturalNumber.str_to_num(screen.ui.number_2.text())
                 res = str(num_1.lcm(num_2))
                 self.second_choice.ui.result.setText(res)
         
         if self.main_module == 'Целые числа':
             screen = self.second_choice.ui.stackedWidget.currentWidget()
             if self.secondary_module == 0:
-                sign, text_1 = self.get_integer(screen.ui.number_1)
-                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                sign, num_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(num_1), num_1)
                 res = str(num_1.abs())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 1:
-                sign, text_1 = self.get_integer(screen.ui.number_1)
-                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                sign, num_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(num_1), num_1)
                 res = str(num_1.is_positive())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 2:
-                sign, text_1 = self.get_integer(screen.ui.number_1)
-                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                sign, num_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(num_1), num_1)
                 res = str(num_1.multiply_by_minus_one())
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 3:
-                text_1 = self.get_natural(screen.ui.number_1)
-                num_1 = IntegerNumber(0, len(text_1), text_1)
+                num_1 = NaturalNumber.str_to_num(screen.ui.number_1)
+                num_1 = IntegerNumber(0, len(num_1), num_1)
                 res = (IntegerNumber.natural_to_integer(num_1))
                 print(type(res))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 4:
-                sign, text_1 = self.get_integer(screen.ui.number_1)
-                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                sign, num_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(num_1), num_1)
                 res = num_1.to_natural()
                 print(type(res))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 5:
-                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_1, num_1 = self.get_integer(screen.ui.number_1)
                 sign_2, text_2 = self.get_integer(screen.ui.number_2)
-                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_1 = IntegerNumber(sign_1, len(num_1), num_1)
                 num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.add(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 6:
-                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_1, num_1 = self.get_integer(screen.ui.number_1)
                 sign_2, text_2 = self.get_integer(screen.ui.number_2)
-                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_1 = IntegerNumber(sign_1, len(num_1), num_1)
                 num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = (num_1.subtract(num_2))
                 print(res.sign, res.highest_position, res.array)
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 7:
-                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_1, num_1 = self.get_integer(screen.ui.number_1)
                 sign_2, text_2 = self.get_integer(screen.ui.number_2)
-                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_1 = IntegerNumber(sign_1, len(num_1), num_1)
                 num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = (num_1.multiply(num_2))
                 self.second_choice.ui.result.setText(str(res))
 
             elif self.secondary_module == 8:
-                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_1, num_1 = self.get_integer(screen.ui.number_1)
                 sign_2, text_2 = self.get_integer(screen.ui.number_2)
-                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_1 = IntegerNumber(sign_1, len(num_1), num_1)
                 num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.quotient(num_2))
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 9:
-                sign_1, text_1 = self.get_integer(screen.ui.number_1)
+                sign_1, num_1 = self.get_integer(screen.ui.number_1)
                 sign_2, text_2 = self.get_integer(screen.ui.number_2)
-                num_1 = IntegerNumber(sign_1, len(text_1), text_1)
+                num_1 = IntegerNumber(sign_1, len(num_1), num_1)
                 num_2 = IntegerNumber(sign_2, len(text_2), text_2)
                 res = str(num_1.remainder(num_2))
                 self.second_choice.ui.result.setText(res)
@@ -307,8 +279,8 @@ class App(QtWidgets.QMainWindow):
                 self.second_choice.ui.result.setText(res)
 
             elif self.secondary_module == 2:
-                sign, text_1 = self.get_integer(screen.ui.number_1)
-                num_1 = IntegerNumber(sign, len(text_1), text_1)
+                sign, num_1 = self.get_integer(screen.ui.number_1)
+                num_1 = IntegerNumber(sign, len(num_1), num_1)
                 res = RationalNumber.integer_to_rational(num_1)
                 self.second_choice.ui.result.setText(str(res) + ' ' + str(type(res)))
 

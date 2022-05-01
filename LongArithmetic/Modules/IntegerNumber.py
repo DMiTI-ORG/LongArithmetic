@@ -8,6 +8,18 @@ class IntegerNumber:
         self.highest_position = highest_position
         self.array = array
 
+
+    @staticmethod
+    def str_to_num(string):
+        sign = 0
+        if string[0] == '-':
+            sign = 1
+            string = string[1:]
+        elif string[0] == '+':
+            string = string[1:]
+        return IntegerNumber(sign, len(string), list(map(int, string)))
+
+
     def abs(self) -> NaturalNumber:
         """
         module: ABS_Z_N
