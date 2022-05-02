@@ -16,13 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QStackedWidget" name="menu">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
+     <widget class="QStackedWidget" name="menu"/>
     </item>
    </layout>
   </widget>

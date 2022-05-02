@@ -127,13 +127,13 @@
         {
             "system_name":"RED_Q_Q" ,
             "human_name": "Сокращение дроби",
-            "input_type": 5
+            "input_type": 2
         },
             
         {
             "system_name":"INT_Q_B" ,
             "human_name": "Проверка на целое",
-            "input_type": 5
+            "input_type": 2
         },    
         {
             "system_name":"TRANS_Z_Q" ,
@@ -143,94 +143,94 @@
         {
             "system_name":"TRANS_Q_Z" ,
             "human_name": "Преобразование дробного в целое",
-            "input_type": 5
+            "input_type": 2
         },    
         {
             "system_name":"ADD_QQ_Q" ,
             "human_name": "Сложение дробей",
-            "input_type": 6
+            "input_type": 1
         },    
         {
             "system_name":"SUB_QQ_Q" ,
             "human_name": "Вычитание дробей",
-            "input_type": 6
+            "input_type": 1
         },    
         {
             "system_name":"MUL_QQ_Q" ,
             "human_name": "Умножение дробей",
-            "input_type": 6
+            "input_type": 1
         },    
         {
             "system_name":"DIV_QQ_Q" ,
             "human_name": "Деление дробей",
-            "input_type": 6
+            "input_type": 1
         }
     ],
     "Многочлены": [
         {
             "system_name":"ADD_PP_P" ,
             "human_name": "Сложение многочленов",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"SUB_PP_P" ,
             "human_name": "Вычитание многочленов",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"MUL_PQ_P" ,
             "human_name": "Умножение многочлена на рациональное число",
-            "input_type": 8
+            "input_type": 1
         },
         {
             "system_name":"MUL_Pxk_P",
             "human_name": "Умножение многочлена на x^k",
-            "input_type": 9
+            "input_type": 3
         },
         {
             "system_name":"LED_P_Q" ,
             "human_name": "Старший коэффициент многочлена",
-            "input_type": 10
+            "input_type": 2
         },
         {
             "system_name":"DEG_P_N" ,
             "human_name": "Степень многочлена",
-            "input_type": 1
+            "input_type": 2
         },
         {
             "system_name":"FAC_P_Q" ,
             "human_name": "Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей",
-            "input_type": 10
+            "input_type": 2
         },
         {
             "system_name":"MUL_PP_P" ,
             "human_name": "Умножение многочленов",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"DIV_PP_P" ,
             "human_name": "Частное от деления многочлена на многочлен при делении с остатком",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"MOD_PP_P" ,
             "human_name": "Остаток от деления многочлена на многочлен при делении с остатком",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"GCF_PP_P" ,
             "human_name": "НОД многочленов",
-            "input_type": 7
+            "input_type": 1
         },
         {
             "system_name":"DER_P_P" ,
             "human_name": "Производная многочлена",
-            "input_type": 10
+            "input_type": 2
         },
         {
             "system_name":"NMR_P_P" ,
             "human_name": "Преобразование многочлена — кратные корни в простые",
-            "input_type": 10
+            "input_type": 2
         } 
     ]   
 }

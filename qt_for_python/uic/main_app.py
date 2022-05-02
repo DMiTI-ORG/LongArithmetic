@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Dimitry\ДМиТИ\long_arithmetic\UI\main_app.ui'
+# Form implementation generated from reading ui file 'c:\Users\Dimitry\DiscreteMath\long_arithmetic\LongArithmetic\UI\main_app.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -19,12 +19,6 @@ class Ui_MainWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.menu = QtWidgets.QStackedWidget(self.centralwidget)
         self.menu.setObjectName("menu")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.menu.addWidget(self.page)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.menu.addWidget(self.page_2)
         self.gridLayout.addWidget(self.menu, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -36,7 +30,6 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.about.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.menu.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

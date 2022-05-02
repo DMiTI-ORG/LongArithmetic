@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'c:\Users\Dimitry\DiscreteMath\long_arithmetic\UI\second_choice.ui'
+# Form implementation generated from reading ui file 'c:\Users\Dimitry\DiscreteMath\long_arithmetic\LongArithmetic\UI\local_module.ui'
 #
 # Created by: PyQt6 UI code generator 6.1.0
 #
@@ -27,12 +27,6 @@ class Ui_Form(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.stackedWidget = QtWidgets.QStackedWidget(Form)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.stackedWidget.addWidget(self.page)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.stackedWidget.addWidget(self.page_2)
         self.verticalLayout.addWidget(self.stackedWidget)
         self.run = QtWidgets.QPushButton(Form)
         self.run.setObjectName("run")

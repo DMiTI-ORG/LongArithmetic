@@ -9,7 +9,7 @@ class NaturalNumber:
 
     @staticmethod
     def str_to_num(string):
-        return NaturalNumber(len(str), list(map(int, string)))
+        return NaturalNumber(len(string), list(map(int, string)))
 
 
     def compare(self, number: Self) -> int:

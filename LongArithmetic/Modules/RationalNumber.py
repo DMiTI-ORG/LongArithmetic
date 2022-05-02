@@ -1,12 +1,26 @@
+from os import stat_result
 from .NaturalNumber import NaturalNumber
 from .IntegerNumber import IntegerNumber
 from typing_extensions import Self
 
 
 class RationalNumber:
-    def __init__(self, numerator: tuple, denominator: tuple):
-        self.numerator = IntegerNumber(*numerator)
-        self.denominator = NaturalNumber(*denominator)
+    def __init__(self, numerator = (), denominator = ()):
+        if numerator and denominator:
+            self.numerator = IntegerNumber(*numerator)
+            self.denominator = NaturalNumber(*denominator)
+        else:
+            self.numerator = IntegerNumber(0, 1, [1])
+            self.denominator = NaturalNumber(1, [1])
+
+    @staticmethod
+    def str_to_num(string: str) -> Self:
+        numerator, denominator = string.split('/')
+        num = RationalNumber()
+        num.numerator = IntegerNumber.str_to_num(numerator)
+        num.denominator = NaturalNumber.str_to_num(denominator)
+        return num
+
 
     def reduce(self) -> Self:
         """

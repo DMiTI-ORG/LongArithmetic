@@ -1,12 +1,37 @@
 from typing_extensions import Self
-from RationalNumber import RationalNumber
-from RationalNumber import NaturalNumber
-
+from .RationalNumber import RationalNumber
+from .NaturalNumber import NaturalNumber
 
 class Polynomial:
     def __init__(self, highest_degree: int, array: list):
         self.highest_degree = highest_degree
         self.array = array
+
+    @staticmethod
+    def str_to_num(string: str) -> Self:
+        #(-12/3)x^3 - (12/23)x^2 + (4/5)x
+        # [(-12/3)x^3, -, (12/23)x^2, +, (4/5)x]
+        polynomial = string.replace('-(', ' - (').replace('+(', ' - (').split()
+        highest_degree = int(polynomial[0].split('^')[-1]) + 1
+        polynomial_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(highest_degree)]
+        minus_one = False
+        for i in range(len(polynomial)):
+            if polynomial[i] != '-' and polynomial[i] != '+':
+                current_degree = int(polynomial[i].split('^')[-1])
+                if '/' in polynomial[i]:
+                    num = RationalNumber.str_to_num(polynomial[i].replace('(', '').split(')')[0])
+                else:
+                    num = RationalNumber.str_to_num(polynomial[i].replace(')', '/1)').replace('(', '').split(')')[0])
+                if minus_one:
+                    num.numerator = num.numerator.multiply_by_minus_one()
+                    minus_one = False
+                polynomial_array[highest_degree - 1- current_degree] = num
+            elif polynomial[i] == '-':
+                minus_one = True
+        [print(f'{polynomial_array[i]}x^{highest_degree - i - 1}') for i in range(highest_degree)]
+        return Polynomial(highest_degree, polynomial_array)
+                
+
 
     def add(self, polynomial: Self) -> Self:
         """
