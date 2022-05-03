@@ -323,18 +323,21 @@ class NaturalNumber:
         arguments:
             number: an instance of the class NaturalNumber
         This method finds the greatest common divisor of numbers
+ 
         """
-        while self.is_zero() == 'yes' and number.is_zero() == 'yes':
-            if (self.compare(number) == 0) or (self.compare(number) == 2):
+        if self.is_zero() == False and number.is_zero() == True: return number
+        if self.is_zero() == True and number.is_zero() == False: return self
+        if self.is_zero() == True and number.is_zero() == True: return NaturalNumber(1,[0])
+        if self.compare(number)==0: return self
+        while self.is_zero() == False and number.is_zero() == False:
+            if (self.compare(number) == 2):
                 self = self.remainder(number)
-            else:
+            elif (self.compare(number) == 1):
                 number = number.remainder(self)
-        if self.is_zero() == 'yes':
-            res = NaturalNumber(number.highest_position, number.array)
-        else:
-            res = NaturalNumber(self.highest_position, self.array)
-        return res
+        if number.is_zero() == True: return self
+        if self.is_zero() == True: return number
 
+        
     def lcm(self, number: Self) -> Self:
         """
         module: LCM_NN_N

@@ -273,14 +273,81 @@ class App(QtWidgets.QMainWindow):
                 self.local_module.ui.result.setText(res)
        
         if self.main_module == 'Многочлены':
-                if module == 0:
-                    num_1 = Polynomial.str_to_num(screen.number_1.text())
+            if module == 0:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.add(num_2))
+                self.local_module.ui.result.setText(res)
 
+            elif module == 1:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.subtruct(num_2))
+                self.local_module.ui.result.setText(res)
+            
+            elif module == 2:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = RationalNumber.str_to_num(screen.number_2.text())
+                res = str(num_1.multiply_by_rational(num_2))
+                self.local_module.ui.result.setText(res)
+        
+            elif module == 3:
+                num_1 = NaturalNumber.str_to_num(screen.number_1.text())
+                digit_2 = screen.digit_2.value()
+                res = str(num_1.multiply_by_monomial(digit_2))
+                self.local_module.ui.result.setText(res)
 
+            elif module == 4:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                res = str(num_1.highest_coefficient())
+                self.local_module.ui.result.setText(res)
 
+            elif module == 5:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                res = str(num_1.get_degree())
+                self.local_module.ui.result.setText(res)
 
+            elif module == 6:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                res = str(num_1.take_out_gdc_lcm())
+                self.local_module.ui.result.setText(res)
 
+            elif module == 7:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.multiply(num_2))
+                self.local_module.ui.result.setText(res)
 
+            elif module == 8:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.quotient(num_2))
+                self.local_module.ui.result.setText(res)
+
+            elif module == 9:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.remainder(num_2))
+                self.local_module.ui.result.setText(res)
+
+            elif module == 10:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.gcd(num_2))
+                self.local_module.ui.result.setText(res)
+
+            elif module == 11:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                num_2 = Polynomial.str_to_num(screen.number_2.text())
+                res = str(num_1.derivative(num_2))
+                self.local_module.ui.result.setText(res)
+
+            elif module == 12:
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                res = str(num_1.multiple_roots_to_simple(num_2))
+                self.local_module.ui.result.setText(res)
+
+            
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     application = App()
