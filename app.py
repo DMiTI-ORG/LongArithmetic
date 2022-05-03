@@ -44,7 +44,7 @@ class App(QtWidgets.QMainWindow):
 
         self.global_modules = ('Натуральные числа', 'Целые числа', 'Рациональные числа', 'Многочлены')
         human_module_name = lambda module: module['system_name'] + ' : '+ module['human_name']
-        self.local_modules = [map(human_module_name, self.data[module]) for module in self.global_modules]
+        self.local_modules = [tuple(map(human_module_name, self.data[module])) for module in self.global_modules]
 
     def screen_loader(self):
         """
@@ -71,7 +71,7 @@ class App(QtWidgets.QMainWindow):
         self.ui.menu.setCurrentWidget(self.local_module)
         self.local_module.ui.select_module.clear()
         index = self.global_modules.index(self.main_module)
-        self.local_module.ui.select_module.addItems(self.local_modules[index])
+        self.local_module.ui.select_module.addItems((self.local_modules[index]))
 
     def select_local_module(self):
         """
@@ -239,9 +239,9 @@ class App(QtWidgets.QMainWindow):
                 self.local_module.ui.result.setText(res)
 
             elif module == 2:
-                num_1 = RationalNumber.str_to_num(screen.number_1.text())
+                num_1 = IntegerNumber.str_to_num(screen.number_1.text())
                 res = str(RationalNumber.integer_to_rational(num_1))
-                self.local_module.ui.result.setText(f'{res} {type(res)}')
+                self.local_module.ui.result.setText(res)
 
             elif module == 3:
                 num_1 = RationalNumber.str_to_num(screen.number_1.text())

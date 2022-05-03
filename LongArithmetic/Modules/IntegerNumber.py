@@ -201,10 +201,10 @@ class IntegerNumber:
         """
         module: MOD_ZZ_Z
         author: Azamatova Altana
-
+ 
         arguments:
             number: an instance of the class IntegerNumber
-
+ 
         this method finds the remainder of the division of integers
         """
         result = IntegerNumber(0, 0, [])
@@ -229,6 +229,7 @@ class IntegerNumber:
             elif first_z == second_z:
                 result = IntegerNumber(1, 1, [0])
             elif (self.highest_position > number.highest_position) or(first_z > second_z):
+                print("ok")
                 div = self.quotient(number)
                 div.sign = 1
                 sub = div.subtract(one)
@@ -236,8 +237,11 @@ class IntegerNumber:
                 self.multiply_by_minus_one()
                 result = self.subtract(mul)
             elif (self.highest_position < number.highest_position) or (first_z < second_z):
-                result = self.subtract(number)
-
+                if first_z < second_z:
+                    result = self.abs()
+                else:
+                    result = self.subtract(number)
+ 
         elif self.sign == 0 and number.sign == 1:
             number.multiply_by_minus_one()
             if second_z == 0:
@@ -250,7 +254,7 @@ class IntegerNumber:
                 result = self.subtract(mul)
             elif (self.highest_position < number.highest_position) or (first_z < second_z):
                 result = self
-
+ 
         if self.sign == 1 and number.sign == 1:
             if second_z == 0:
                 return 'ERROR'
@@ -260,9 +264,9 @@ class IntegerNumber:
                 result = self
             elif (self.highest_position > number.highest_position) or (first_z > second_z):
                 div = self.quotient(number)
+                div = div.add(one)
                 mul = number.multiply(div)
-                result = self.subtract(mul)
-
+                result = self.abs().subtract(mul)
         return result
 
     def __eq__(self, other: Self) -> bool:

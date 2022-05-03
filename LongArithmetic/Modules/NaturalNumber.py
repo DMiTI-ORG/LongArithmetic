@@ -249,17 +249,17 @@ class NaturalNumber:
             return 'Error'
 
     def first_division_digit(self, number: Self) -> Self:
-        """
+        """first_division_digit
         module: DIV_NN_Dk
         author: Teryokhina Sofya
         arguments:
             number: an instance of the class NaturalNumber
         This method returns the first digit of division of one NaturalNumber and a smaller NaturalNumber
         """
- 
-        new_number = NaturalNumber(self.highest_position, self.array)
+        num = deepcopy(self)
+        new_number = NaturalNumber(num.highest_position, num.array)
         result = 0
-        degree = self.highest_position
+        degree = num.highest_position
         while degree >= 0:
             number1 = number.multiply_by_powered_ten(degree)
             if new_number.compare(number1) != 1:
@@ -273,8 +273,8 @@ class NaturalNumber:
         result_array = [1]
         result_array[0] = result
         return NaturalNumber(result_highest_position, result_array)
-
-        
+ 
+ 
     def quotient(self, number: Self) -> Self:
         """
         module: <DIV_NN_N>
@@ -286,50 +286,24 @@ class NaturalNumber:
         the first number by the second number and taking the remainder of each division
         and appending it to the end of the quotient.
         """
-        dividend = self
-        divider = number
+        dividend = deepcopy(self)
+        divider = deepcopy(number)
         result = NaturalNumber(0, [])
-        current_position = divider.highest_position
-        current_dividend = NaturalNumber(current_position, dividend.array[:current_position])
- 
-        if current_dividend.compare(divider) == 1:
-            current_dividend.array.append(dividend.array[current_position])
-            current_dividend.highest_position += 1
-            current_position += 1
-        current_dividend.highest_position = len(current_dividend.array)
- 
-        while current_position < dividend.highest_position:
-            if current_dividend.compare(divider) != 1:
-                tmp =  deepcopy(current_dividend)
-                quotient = tmp.first_division_digit(divider).array[0]
+        difference = dividend.highest_position - divider.highest_position + 1
+        while difference > 0:
+            difference -= 1
+            if dividend.array[0] == 0:
+                result.highest_position += 1
+                result.array.append(0)
             else:
-                quotient = 0
-            current_dividend.highest_position = len(current_dividend.array)
- 
-            result.array.append(quotient)
-            result.highest_position += 1
-            tmp = deepcopy(current_dividend)
-            if quotient == 0:
-                remainder = NaturalNumber(1, [0])
-            else:
-                remainder = tmp.subtract_k_by_number(divider, quotient)
-            if remainder.array == [0]:
-                current_dividend = NaturalNumber(0, [])
-            else:
-                current_dividend = remainder
-            current_dividend.array.append(dividend.array[current_position])
-            current_dividend.highest_position = remainder.highest_position + 1
-            current_position += 1
-        if current_dividend.array[0] == 0:
-            current_dividend.array = current_dividend.array[1:]
-        current_dividend.highest_position = len(current_dividend.array)
-        if current_position == dividend.highest_position:
-            if current_dividend.compare(divider) != 1:
-                digit = current_dividend.first_division_digit(divider).array[0]
-            else:
-                digit = 0
-            result.array.append(digit)
-            result.highest_position += 1
+                current_divider = divider.multiply_by_powered_ten(difference)
+                digit = (dividend.first_division_digit(current_divider)).array[0]
+                result.highest_position += 1
+                result.array.append(digit)
+                dividend = dividend.subtract_k_by_number(current_divider, digit)
+        if result.array[0] == 0:
+            result.array = result.array[1:]
+            result.highest_position -= 1
         return result
 
     def remainder(self, number: Self) -> Self:
@@ -365,19 +339,33 @@ class NaturalNumber:
         """
         module: LCM_NN_N
         author: Zhulanov Aleksandr
+ 
         arguments:
         number: an instance of the class NaturalNumber
+ 
         This method passes lcm of the natural numbers
         """
-        mult = number.multiply()
-        nod = number.gcd()
+        mult = self.multiply(number)
+        nod = self.gcd(number)
         nok = 0
         new_number = 0
-        if mult > 0 and nod != 0:
-            while new_number < mult:
-                new_number += nod
+        mult_number = ''
+        nod_number = ''
+        result = NaturalNumber(0, [])
+        for i in range(mult.highest_position):
+            mult_number += str(mult.array[i])
+        for i in range(nod.highest_position):
+            nod_number += str(nod.array[i])
+        mult_number = int(mult_number)
+        nod_number = int(nod_number)
+        if mult_number > 0 and nod_number != 0:
+            while new_number < mult_number:
+                new_number += nod_number
                 nok += 1
-            return nok
+            result = NaturalNumber(len(str(nok)), list(str(nok)))
+            for i in range(len(str(nok))):
+                result.array[i] = int(result.array[i])
+            return result
         else:
             return 'Error'
 
