@@ -329,13 +329,15 @@ class NaturalNumber:
         if self.is_zero() == True and number.is_zero() == False: return self
         if self.is_zero() == True and number.is_zero() == True: return NaturalNumber(1,[0])
         if self.compare(number)==0: return self
-        while self.is_zero() == False and number.is_zero() == False:
-            if (self.compare(number) == 2):
-                self = self.remainder(number)
-            elif (self.compare(number) == 1):
-                number = number.remainder(self)
-        if number.is_zero() == True: return self
-        if self.is_zero() == True: return number
+        self_copy = deepcopy(self)
+        number_copy = deepcopy(number)
+        while self_copy.is_zero() == False and number_copy.is_zero() == False:
+            if (self_copy.compare(number_copy) == 2):
+                self_copy = self_copy.remainder(number_copy)
+            elif (self_copy.compare(number_copy) == 1):
+                number_copy = number_copy.remainder(self_copy)
+        if number_copy.is_zero() == True: return self_copy
+        if self_copy.is_zero() == True: return number_copy
 
         
     def lcm(self, number: Self) -> Self:
