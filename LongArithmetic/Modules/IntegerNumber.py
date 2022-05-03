@@ -132,8 +132,10 @@ class IntegerNumber:
  
         this function does subtraction of two integers by splitting by signs into cases
         """
- 
-        if (self.is_positive() == 2 and number.is_positive() == 2):
+        if (self.is_positive() != 0 and number.is_positive() == 0):
+            return IntegerNumber(self.sign, self.highest_position, self.array)
+        elif (self.is_positive() == 0 and number.is_positive() == 2): return IntegerNumber(1, number.highest_position, number.array)
+        elif (self.is_positive() == 2 and number.is_positive() == 2):
             if self.abs().compare(number.abs()) == 2:
                 temp = self.abs().subtract(number.abs())
                 return IntegerNumber(0, temp.highest_position, temp.array)
@@ -146,14 +148,14 @@ class IntegerNumber:
         elif (self.is_positive() == 2 and number.is_positive() == 1):
             temp = self.abs().add(number.abs())
             return IntegerNumber(0, temp.highest_position, temp.array)
-
+ 
         elif (self.is_positive() == 1 and number.is_positive() == 2):
             temp = self.abs().add(number.abs())
             return IntegerNumber(1, temp.highest_position, temp.array)
-
+ 
         elif (self.is_positive() == 0 and number.is_positive() == 0):
             return IntegerNumber(0,1,[0])
-
+ 
         else:
             comp = self.abs().compare(number.abs())
             if comp == 1:
