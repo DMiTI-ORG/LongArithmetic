@@ -137,23 +137,26 @@ class RationalNumber:
         """
         module: <SUB_Q_Q>
         author: <Nickolay>
-
         Arguments:
         self: число из которого вычитают
         number: число которое вычитают
-
         This function allows you to subtract from one rational number another
         """
         common_denominator = self.denominator.lcm(number.denominator)
-        new_numerator1 = self.numerator.multiply(common_denominator.quotient(self.denominator))
-        new_numerator2 = number.numerator.multiply(common_denominator.quotient(number.denominator))
-        result_numerator = new_numerator2.subtract(new_numerator2)
+        fac1 = common_denominator.quotient(self.denominator)
+        fac1 = IntegerNumber(0, fac1.highest_position, fac1.array)
+        new_numerator1 = self.numerator.multiply(fac1)
+        fac2 = common_denominator.quotient(number.denominator)
+        fac2 = IntegerNumber(0, fac2.highest_position, fac2.array)
+        new_numerator2 = number.numerator.multiply(fac2)
+        result_numerator = new_numerator1.subtract(new_numerator2)
         result_rational = RationalNumber((result_numerator.sign,
                                           result_numerator.highest_position,
                                           result_numerator.array),
                                          (common_denominator.highest_position,
                                           common_denominator.array))
-
+        if result_rational.numerator.array[0] != 0:
+            result_rational = result_rational.reduce()
         return result_rational
 
     def multiply(self, number: Self) -> Self:
