@@ -121,9 +121,9 @@ class Polynomial:
         """
         new_array = self.array
         zero = RationalNumber((0, 1, [0]), (1, [1]))
-        for i in range(k - 1):
+        for i in range(k):
             new_array.append(zero)
-        new_polynomial = Polynomial(self.highest_degree + k - 1, new_array)
+        new_polynomial = Polynomial(self.highest_degree + k, new_array)
         return new_polynomial
 
     def highest_coefficient(self) -> RationalNumber:
@@ -254,7 +254,7 @@ class Polynomial:
         author: <Nickolay>
         This function calculates the derivative of a polynomial
         """
-        result_degree = self.highest_degree - 2
+        result_degree = self.highest_degree - 1
         result = Polynomial(result_degree, [])
         current_degree = self.highest_degree
         for coefficient in self.array[:-1]:
@@ -287,5 +287,5 @@ class Polynomial:
         string = ''
         for i in range(self.highest_degree):
             if self.array[i].numerator.is_positive() != 0:
-                string += str(self.array[i]) + f'x^{self.highest_degree - i} '
+                string += str(self.array[i]) + f'x^{self.highest_degree -1 - i} '
         return string
