@@ -44,18 +44,15 @@ class NaturalNumber:
         """
         module: NZER_N_B
         author: Krivenko Vlada
-
+ 
         arguments:
-
+ 
         This method checks a number for zero: if the number is not zero, then "yes" otherwise "no"
         """
-        if self.highest_position == 1:
-            if self.array[0] == 0:
-                return True
-            else:
+        if self.array == [0]:
                 return False
         else:
-            return False
+            return True
 
     def add_one(self) -> Self:
         """
@@ -221,6 +218,8 @@ class NaturalNumber:
             number: an instance of the class NaturalNumber
         This method multiplies two natural numbers
         """
+        if self.array == [0] or number.array == [0]:
+            return NaturalNumber(1, [0])
         res = NaturalNumber(1, [0])
         num = NaturalNumber(1, [1])
         k = 0
@@ -244,7 +243,7 @@ class NaturalNumber:
         if self.compare(new_num) != 1:
             return self.subtract(new_num)
         else:
-            'Error'
+            return 'Error'
 
     def first_division_digit(self, number: Self) -> Self:
         """first_division_digit
@@ -321,26 +320,16 @@ class NaturalNumber:
         arguments:
             number: an instance of the class NaturalNumber
         This method finds the greatest common divisor of numbers
- 
         """
-        if self.is_zero() == False and number.is_zero() == True:
-            return number
-        if self.is_zero() == True and number.is_zero() == False:
-            return self
-        if self.is_zero() == True and number.is_zero() == True:
-            return NaturalNumber(1,[0])
-        if self.compare(number)==0: return self
         self_copy = deepcopy(self)
         number_copy = deepcopy(number)
-        while self_copy.is_zero() == False and number_copy.is_zero() == False:
-            if (self_copy.compare(number_copy) == 2):
+        
+        while not self_copy.multiply(number_copy).is_zero():
+            if self_copy.compare(number_copy) == 2:
                 self_copy = self_copy.remainder(number_copy)
-            elif (self_copy.compare(number_copy) == 1):
+            else:
                 number_copy = number_copy.remainder(self_copy)
-        if number_copy.is_zero() == True:
-            return self_copy
-        if self_copy.is_zero() == True:
-            return number_copy
+        return self_copy.add(number_copy)
 
         
     def lcm(self, number: Self) -> Self:

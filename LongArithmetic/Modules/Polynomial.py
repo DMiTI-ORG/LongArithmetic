@@ -9,8 +9,6 @@ class Polynomial:
 
     @staticmethod
     def str_to_num(string: str) -> Self:
-        #(-12/3)x^3 - (12/23)x^2 + (4/5)x
-        # [(-12/3)x^3, -, (12/23)x^2, +, (4/5)x]
         polynomial = string.replace('-(', ' - (').replace('+(', ' - (').split()
         highest_degree = int(polynomial[0].split('^')[-1]) + 1
         polynomial_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(highest_degree)]
@@ -123,9 +121,9 @@ class Polynomial:
         """
         new_array = self.array
         zero = RationalNumber((0, 1, [0]), (1, [1]))
-        for i in range(k):
+        for i in range(k - 1):
             new_array.append(zero)
-        new_polynomial = Polynomial(self.highest_degree + k, new_array)
+        new_polynomial = Polynomial(self.highest_degree + k - 1, new_array)
         return new_polynomial
 
     def highest_coefficient(self) -> RationalNumber:
@@ -142,10 +140,10 @@ class Polynomial:
         """
         module: MUL_PQ_P
         author: Zhulanov Aleksandr
-
+ 
         This method returned polynomial degree
         """
-        result = NaturalNumber(len(str(self.highest_degree)), list(str(self.highest_degree)))
+        result = NaturalNumber(len(str(self.highest_degree - 1)), list(str(self.highest_degree - 1)))
         return result
 
     def take_out_gdc_lcm(self) -> Self:
@@ -256,7 +254,7 @@ class Polynomial:
         author: <Nickolay>
         This function calculates the derivative of a polynomial
         """
-        result_degree = self.highest_degree - 1
+        result_degree = self.highest_degree - 2
         result = Polynomial(result_degree, [])
         current_degree = self.highest_degree
         for coefficient in self.array[:-1]:

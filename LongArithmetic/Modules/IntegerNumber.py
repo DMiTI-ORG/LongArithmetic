@@ -192,17 +192,16 @@ class IntegerNumber:
         This method divides one integer by another that is not equal to zero
         """
         if number.is_positive() != 0:
-            position_self = self.sign
-            position_number = number.sign
             number_1 = self.abs()
             number_2 = number.abs()
-            number_3 = number_1.quotient(number_2)
-            if position_self == position_number:
-                position = 0
-                return IntegerNumber(position, number_3.highest_position, number_3.array)
+            if number_1.compare(number_2) == 1:
+                return IntegerNumber(0, 1, [0])
             else:
-                position = 1
-                return IntegerNumber(position, number_3.highest_position, number_3.array)
+                number_3 = number_1.quotient(number_2)
+                if self.sign == number.sign:
+                    return IntegerNumber(0, number_3.highest_position, number_3.array)
+                else:
+                    return IntegerNumber(1, number_3.highest_position, number_3.array)
         else:
             return 'Error'
 

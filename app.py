@@ -282,7 +282,7 @@ class App(QtWidgets.QMainWindow):
             elif module == 1:
                 num_1 = Polynomial.str_to_num(screen.number_1.text())
                 num_2 = Polynomial.str_to_num(screen.number_2.text())
-                res = str(num_1.subtruct(num_2))
+                res = str(num_1.subtract(num_2))
                 self.local_module.ui.result.setText(res)
             
             elif module == 2:
@@ -338,13 +338,12 @@ class App(QtWidgets.QMainWindow):
 
             elif module == 11:
                 num_1 = Polynomial.str_to_num(screen.number_1.text())
-                num_2 = Polynomial.str_to_num(screen.number_2.text())
-                res = str(num_1.derivative(num_2))
+                res = str(num_1.derivative())
                 self.local_module.ui.result.setText(res)
 
             elif module == 12:
                 num_1 = Polynomial.str_to_num(screen.number_1.text())
-                res = str(num_1.multiple_roots_to_simple(num_2))
+                res = str(num_1.multiple_roots_to_simple())
                 self.local_module.ui.result.setText(res)
 
             
