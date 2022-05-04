@@ -292,8 +292,8 @@ class App(QtWidgets.QMainWindow):
                 self.local_module.ui.result.setText(res)
         
             elif module == 3:
-                num_1 = NaturalNumber.str_to_num(screen.number_1.text())
-                digit_2 = screen.digit_2.value()
+                num_1 = Polynomial.str_to_num(screen.number_1.text())
+                digit_2 = screen.digit_1.value()
                 res = str(num_1.multiply_by_monomial(digit_2))
                 self.local_module.ui.result.setText(res)
 

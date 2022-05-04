@@ -117,20 +117,21 @@ class RationalNumber:
         """
         module: ADD_QQ_Q
         author: Dolganov Ivan
-
         arguments:
             number: an instance of the class NaturalNumber
-
         This method adds fractions
         """
         denom = self.denominator.lcm(number.denominator)
         numer1 = denom.quotient(self.denominator)
+        numer1 = IntegerNumber(0, numer1.highest_position, numer1.array)
         numer2 = denom.quotient(number.denominator)
+        numer2 = IntegerNumber(0, numer2.highest_position, numer2.array)
         frac1 = self.numerator.multiply(numer1)
         frac2 = number.numerator.multiply(numer2)
         numer = frac1.add(frac2)
-        res = RationalNumber(numer, denom)
-
+        res = RationalNumber((numer.sign, numer.highest_position, numer.array), (denom.highest_position, denom.array))
+        if res.numerator.array[0] != 0:
+            res = res.reduce()
         return res
 
     def subtract(self, number: Self) -> Self:

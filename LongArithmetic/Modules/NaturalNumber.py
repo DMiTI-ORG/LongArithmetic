@@ -147,7 +147,6 @@ class NaturalNumber:
                 number.array.insert(0, 0)
                 number.highest_position += 1
         while posittion >= 0:
-            print(self.highest_position, self.array, '|', number.highest_position, number.array)
             if self.array[posittion] - number.array[posittion] >= 0:
                 new_array[posittion] = self.array[posittion] - number.array[posittion]
             else:
@@ -176,7 +175,6 @@ class NaturalNumber:
                 break
         if not any(new_array): new_array = [0]
 
-        print('>>>>', len(new_array), new_array)
         return NaturalNumber(len(new_array), new_array)
 
     def multiply_digit(self, digit: int) -> Self:
@@ -246,7 +244,7 @@ class NaturalNumber:
         if self.compare(new_num) != 1:
             return self.subtract(new_num)
         else:
-            return 'Error'
+            'Error'
 
     def first_division_digit(self, number: Self) -> Self:
         """first_division_digit
@@ -325,9 +323,12 @@ class NaturalNumber:
         This method finds the greatest common divisor of numbers
  
         """
-        if self.is_zero() == False and number.is_zero() == True: return number
-        if self.is_zero() == True and number.is_zero() == False: return self
-        if self.is_zero() == True and number.is_zero() == True: return NaturalNumber(1,[0])
+        if self.is_zero() == False and number.is_zero() == True:
+            return number
+        if self.is_zero() == True and number.is_zero() == False:
+            return self
+        if self.is_zero() == True and number.is_zero() == True:
+            return NaturalNumber(1,[0])
         if self.compare(number)==0: return self
         self_copy = deepcopy(self)
         number_copy = deepcopy(number)
@@ -336,8 +337,10 @@ class NaturalNumber:
                 self_copy = self_copy.remainder(number_copy)
             elif (self_copy.compare(number_copy) == 1):
                 number_copy = number_copy.remainder(self_copy)
-        if number_copy.is_zero() == True: return self_copy
-        if self_copy.is_zero() == True: return number_copy
+        if number_copy.is_zero() == True:
+            return self_copy
+        if self_copy.is_zero() == True:
+            return number_copy
 
         
     def lcm(self, number: Self) -> Self:

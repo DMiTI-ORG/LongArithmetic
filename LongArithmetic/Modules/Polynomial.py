@@ -288,5 +288,6 @@ class Polynomial:
     def __str__(self) -> str:
         string = ''
         for i in range(self.highest_degree):
-            string += '({:+}'.format(self.array[i]) + ')x^' + f'{self.highest_degree - 1 - i}'
+            if self.array[i].numerator.is_positive() != 0:
+                string += str(self.array[i]) + f'x^{self.highest_degree - i} '
         return string
