@@ -49,8 +49,8 @@ class NaturalNumber:
  
         This method checks a number for zero: if the number is not zero, then "yes" otherwise "no"
         """
-        if self.array == [0]:
-                return False
+        if any(self.array):
+            return False
         else:
             return True
 
@@ -323,8 +323,8 @@ class NaturalNumber:
         """
         self_copy = deepcopy(self)
         number_copy = deepcopy(number)
-        
-        while not self_copy.multiply(number_copy).is_zero():
+        print(self_copy.multiply(number_copy))
+        while not (self_copy.multiply(number_copy).is_zero()):
             if self_copy.compare(number_copy) == 2:
                 self_copy = self_copy.remainder(number_copy)
             else:
