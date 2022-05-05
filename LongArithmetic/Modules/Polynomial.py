@@ -94,7 +94,7 @@ class Polynomial:
         This method multiplies polynomial and rational
         """
         array_before = self
-        for i in range(len(self.array) - 1):
+        for i in range(len(self.array)):
             num_before = array_before.array[i]
             num_after = num_before.multiply(number)
             array_before.array[i] = num_after
