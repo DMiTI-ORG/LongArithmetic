@@ -1,3 +1,4 @@
+from copy import deepcopy
 from typing_extensions import Self
 from .RationalNumber import RationalNumber
 from .NaturalNumber import NaturalNumber
@@ -32,32 +33,17 @@ class Polynomial:
         polynomial: an istance of the class Polynomial
         This is the method of adding two polynomials with rational coefficients
         """
-        num = [0] * abs(self.highest_degree - polynomial.highest_degree)   #Creating an array of zeros
-        if self.highest_degree > polynomial.highest_degree:
-            arr = num.extend(polynomial.array)   #Equating arrays
-            i = 0
-            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * self.highest_degree
-            while i <= self.highest_degree:
-                print(self.array[i])
-                res_arr[i] = self.array[i].add(arr[i])   #Adding arrays
-                i += 1
-            res = Polynomial(self.highest_degree, res_arr)
-        elif self.highest_degree < polynomial.highest_degree:
-            arr = num.extend(self.array)
-            i = 0
-            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * polynomial.highest_degree
-            while i <= polynomial.highest_degree:
-                res_arr[i] = polynomial.array[i].add(arr[i])
-                i += 1
-            res = Polynomial(polynomial.highest_degree, res_arr)
-        else:
-            i = 0
-            res_arr = [RationalNumber((0, 1, [0]), (1, [1]))] * self.highest_degree
-            while i <= self.highest_degree:
-                res_arr[i] = self.array[i].add(polynomial.array[i])
-                i += 1
-            res = Polynomial(self.highest_degree, res_arr)
-        return res
+        first_polynomial = deepcopy(self)
+        second_polynomial = deepcopy(polynomial)
+        different = abs(first_polynomial.highest_degree - second_polynomial.highest_degree)
+        if first_polynomial.highest_degree > second_polynomial.highest_degree:
+            second_polynomial.array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(different)] + second_polynomial.array
+        elif first_polynomial.highest_degree < second_polynomial.highest_degree:
+            first_polynomial.array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(different)] + first_polynomial.array
+        result_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(len(first_polynomial.array))]
+        for i in range(len(result_array)):
+            result_array[i] = first_polynomial.array[i].add(second_polynomial.array[i])
+        return Polynomial(len(result_array) - 1, result_array)
         
     def subtract(self, polynomial: Self) -> Self:
         """
