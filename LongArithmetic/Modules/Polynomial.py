@@ -13,14 +13,10 @@ class Polynomial:
         polynomial = string.split('+')
         highest_degree = int(polynomial[0].split('^')[-1])
         polynomial_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(highest_degree + 1)]
-        print(polynomial, polynomial_array)
         for i in range(len(polynomial)):
             current_degree = int(polynomial[i].split('^')[-1])
             num = RationalNumber.str_to_num(polynomial[i].replace('(', '').split(')')[0])
             polynomial_array[highest_degree - current_degree] = num
-            print(f'polynomial_array[{highest_degree - current_degree}] = {num}')
-        print(highest_degree)
-        [print(f'{polynomial_array[i]}x^{highest_degree - i}') for i in range(highest_degree + 1)]
         return Polynomial(highest_degree, polynomial_array)
                 
 

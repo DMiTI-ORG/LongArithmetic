@@ -285,6 +285,7 @@ class NaturalNumber:
         """
         dividend = deepcopy(self)
         divider = deepcopy(number)
+        initial_length1 = dividend.highest_position
         result = NaturalNumber(0, [])
         difference = dividend.highest_position - divider.highest_position + 1
         while difference > 0:
@@ -298,6 +299,12 @@ class NaturalNumber:
                 result.highest_position += 1
                 result.array.append(digit)
                 dividend = dividend.subtract_k_by_number(current_divider, digit)
+            if dividend.highest_position < initial_length1 - 1 and dividend.highest_position > 0:
+                while dividend.highest_position < initial_length1 - 1 and difference > 0:
+                    initial_length1 = initial_length1 - 1
+                    result.array.append(0)
+                    difference = difference - 1
+            initial_length1 = initial_length1 - 1
         if result.array[0] == 0:
             result.array = result.array[1:]
             result.highest_position -= 1
