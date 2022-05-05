@@ -53,21 +53,17 @@ class Polynomial:
             polynomial: an instance of the Polynomial
         This method subtracts from one polynomial another
         """
-        polynomial_1 = None
-        if self.highest_degree >= polynomial.highest_degree:
-            degree_difference = self.highest_degree - polynomial.highest_degree
-            absent_degrees = list([0] * degree_difference)
-            polynomial.array = absent_degrees + polynomial.array
-            for i in range(0, self.highest_degree + 1):
-                polynomial_1 = self.array[i].subtract(polynomial.array[i])
-            return polynomial_1
-        else:
-            degree_difference = polynomial.highest_degree - self.highest_degree
-            absent_degrees = list([0] * degree_difference)
-            self.array = absent_degrees + self.array
-            for i in range(0, polynomial.highest_degree + 1):
-                polynomial_1 = self.array[i].subtract(polynomial.array[i])
-            return polynomial_1
+        first_polynomial = deepcopy(self)
+        second_polynomial = deepcopy(polynomial)
+        different = abs(first_polynomial.highest_degree - second_polynomial.highest_degree)
+        if first_polynomial.highest_degree > second_polynomial.highest_degree:
+            second_polynomial.array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(different)] + second_polynomial.array
+        elif first_polynomial.highest_degree < second_polynomial.highest_degree:
+            first_polynomial.array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(different)] + first_polynomial.array
+        result_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(len(first_polynomial.array))]
+        for i in range(len(result_array)):
+            result_array[i] = first_polynomial.array[i].subtract(second_polynomial.array[i])
+        return Polynomial(len(result_array) - 1, result_array)
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
         """
