@@ -9,24 +9,17 @@ class Polynomial:
 
     @staticmethod
     def str_to_num(string: str) -> Self:
-        polynomial = string.replace('-(', ' - (').replace('+(', ' - (').split()
-        highest_degree = int(polynomial[0].split('^')[-1]) + 1
-        polynomial_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(highest_degree)]
-        minus_one = False
+        polynomial = string.split('+')
+        highest_degree = int(polynomial[0].split('^')[-1])
+        polynomial_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(highest_degree + 1)]
+        print(polynomial, polynomial_array)
         for i in range(len(polynomial)):
-            if polynomial[i] != '-' and polynomial[i] != '+':
-                current_degree = int(polynomial[i].split('^')[-1])
-                if '/' in polynomial[i]:
-                    num = RationalNumber.str_to_num(polynomial[i].replace('(', '').split(')')[0])
-                else:
-                    num = RationalNumber.str_to_num(polynomial[i].replace(')', '/1)').replace('(', '').split(')')[0])
-                if minus_one:
-                    num.numerator = num.numerator.multiply_by_minus_one()
-                    minus_one = False
-                polynomial_array[highest_degree - 1- current_degree] = num
-            elif polynomial[i] == '-':
-                minus_one = True
-        [print(f'{polynomial_array[i]}x^{highest_degree - i - 1}') for i in range(highest_degree)]
+            current_degree = int(polynomial[i].split('^')[-1])
+            num = RationalNumber.str_to_num(polynomial[i].replace('(', '').split(')')[0])
+            polynomial_array[highest_degree - current_degree] = num
+            print(f'polynomial_array[{highest_degree - current_degree}] = {num}')
+        print(highest_degree)
+        [print(f'{polynomial_array[i]}x^{highest_degree - i}') for i in range(highest_degree + 1)]
         return Polynomial(highest_degree, polynomial_array)
                 
 
@@ -94,18 +87,18 @@ class Polynomial:
         """
         module: MUL_PQ_P
         author: Zhulanov Aleksandr
-
+ 
         arguments:
             number: an instance of the class Rational
-
+ 
         This method multiplies polynomial and rational
         """
         array_before = self
-        for i in range(self.highest_degree + 1):
+        for i in range(len(self.array) - 1):
             num_before = array_before.array[i]
             num_after = num_before.multiply(number)
             array_before.array[i] = num_after
-
+ 
         result = array_before
         return result
 
@@ -143,7 +136,7 @@ class Polynomial:
  
         This method returned polynomial degree
         """
-        result = NaturalNumber(len(str(self.highest_degree - 1)), list(str(self.highest_degree - 1)))
+        result = NaturalNumber(len(str(self.highest_degree)), list(str(self.highest_degree)))
         return result
 
     def take_out_gdc_lcm(self) -> Self:
@@ -285,7 +278,7 @@ class Polynomial:
 
     def __str__(self) -> str:
         string = ''
-        for i in range(self.highest_degree):
+        for i in range(self.highest_degree + 1):
             if self.array[i].numerator.is_positive() != 0:
-                string += str(self.array[i]) + f'x^{self.highest_degree -1 - i} '
+                string += f'{str(self.array[i])}x^{self.highest_degree - i} + '
         return string
