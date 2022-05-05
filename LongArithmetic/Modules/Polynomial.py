@@ -30,7 +30,7 @@ class Polynomial:
         module: ADD_PP_P
         author: Banit Maksim
         arguments:
-        polynomial: an istance of the class Polynomial
+            polynomial: an istance of the class Polynomial
         This is the method of adding two polynomials with rational coefficients
         """
         first_polynomial = deepcopy(self)
