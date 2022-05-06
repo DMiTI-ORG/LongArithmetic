@@ -141,16 +141,12 @@ class Polynomial:
 
         This method multiplies two polynomials
         """
-        result = Polynomial(0, [])
-        for i in range(self.highest_degree + 1):
-            new_arr_2 = polynomial.multiply_by_rational(self.array[i])
-            new_arr = new_arr_2.multiply_by_monomial(self.highest_degree - i)
-            if i == 0:
-                result = new_arr
-            else:
-                result = new_arr.add(result)
-
-        return result
+        degree = len(self.array) + len(polynomial.array) - 2
+        result = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(degree + 1)]
+        for i in range(len(self.array)):
+            for j in range(len(polynomial.array)):
+                result[i + j] = result[i + j].add(self.array[i].multiply(polynomial.array[j]))
+        return Polynomial(len(result) - 1, result)
 
     def quotient(self, polynomial: Self) -> Self:
         """
