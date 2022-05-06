@@ -200,7 +200,7 @@ class Polynomial:
 
         this method finds the greatest common divisor
         """
-        firstpoly = self
+        firstpoly = deepcopy(self)
         while polynomial.highest_degree != 0:
             remainder1 = firstpoly
             firstpoly = polynomial
@@ -232,8 +232,8 @@ class Polynomial:
                    new_polynomial2: gcd of polynomial and derivated polynomial
         This method converts multiple roots to simple.
         """
-        polynomial_highest = self.highest_degree
-        polynomial_array = self.array
+        polynomial_highest = deepcopy(self.highest_degree)
+        polynomial_array = deepcopyS(self.array)
         polynomial = Polynomial(polynomial_highest, polynomial_array)
         new_polynomial1 = polynomial.derivative()
         new_polynomial2 = polynomial.gcd(new_polynomial1)
