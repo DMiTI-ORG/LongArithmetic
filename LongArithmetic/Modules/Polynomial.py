@@ -248,4 +248,4 @@ class Polynomial:
         for i in range(self.highest_degree + 1):
             if self.array[i].numerator.is_positive() != 0:
                 string += f'{str(self.array[i])}x^{self.highest_degree - i} + '
-        return string
+        return string[:-2]

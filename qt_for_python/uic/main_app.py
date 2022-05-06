@@ -27,6 +27,9 @@ class Ui_MainWindow(object):
         self.about = QtWidgets.QMenu(self.menubar)
         self.about.setObjectName("about")
         MainWindow.setMenuBar(self.menubar)
+        self.info = QtGui.QAction(MainWindow)
+        self.info.setObjectName("info")
+        self.about.addAction(self.info)
         self.menubar.addAction(self.about.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -36,3 +39,4 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.about.setTitle(_translate("MainWindow", "Справка"))
+        self.info.setText(_translate("MainWindow", "О программе"))

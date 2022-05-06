@@ -1,1 +1,1 @@
-gcd
+        button = dlg.exec()

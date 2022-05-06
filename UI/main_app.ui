@@ -33,9 +33,15 @@
     <property name="title">
      <string>Справка</string>
     </property>
+    <addaction name="info"/>
    </widget>
    <addaction name="about"/>
   </widget>
+  <action name="info">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
