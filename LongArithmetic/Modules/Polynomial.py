@@ -163,24 +163,27 @@ class Polynomial:
         """
         module: DIV_PP_P
         author: Fomin Kirill
-
+ 
         arguments:
         polynomial: an instance of the class Polynomial
-
+ 
         This method returns quotient of dividing polynomials
         """
-        
-        first_polynomial = deepcopy(self)
-        second_polynomial = deepcopy(polynomial)
-
-        i = 0
-        while len(first_polynomial.array) >= len(second_polynomial.array):
-            q = first_polynomial.array[i].divide(second_polynomial.array[i])
-            for k in range(0, len(polynomial.array) - 1):
-                first_polynomial.array[i+k] = first_polynomial.array[i+k].subtract(second_polynomial.array[k+1].multiply(q))
-            i += 1
-
-        return Polynomial(len(first_polynomial) - 1, first_polynomial)
+        result = Polynomial(0, [RationalNumber((0, 1, [0]), (1, [1]))])
+        self_copy = Polynomial(self.highest_degree, self.array)
+        polynomial_copy = Polynomial(polynomial.highest_degree, polynomial.array)
+        if polynomial_copy.highest_degree == 0:
+            for i in range(len(self_copy.array)):
+                self_copy.array[i] = self_copy.array[i].divide(polynomial_copy.array[0])
+            result = self_copy
+        else:
+            while self_copy.highest_degree >= polynomial_copy.highest_degree:
+                temp = Polynomial(0, [self_copy.array[0].divide(polynomial_copy.array[0])])
+                temp = temp.multiply_by_monomial(self_copy.highest_degree - polynomial_copy.highest_degree)
+                result = result.add(temp)
+                temp = temp.multiply(polynomial_copy)
+                self_copy = self_copy.subtract(temp)
+        return result
 
     def remainder(self, polynomial: Self) -> Self:
         """
