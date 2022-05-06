@@ -20,7 +20,6 @@ class Polynomial:
         return Polynomial(highest_degree, polynomial_array)
                 
 
-
     def add(self, polynomial: Self) -> Self:
         """
         module: ADD_PP_P
@@ -39,7 +38,13 @@ class Polynomial:
         result_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(len(first_polynomial.array))]
         for i in range(len(result_array)):
             result_array[i] = first_polynomial.array[i].add(second_polynomial.array[i])
-        return Polynomial(len(result_array) - 1, result_array)
+
+        i = 0
+        while (i < len(result_array) - 1) and (result_array[i].numerator.is_positive() == 0):
+            i += 1
+        degree = len(result_array) - 1 - i
+        result_array = result_array[i:]
+        return Polynomial(degree, result_array)
         
     def subtract(self, polynomial: Self) -> Self:
         """
@@ -59,7 +64,13 @@ class Polynomial:
         result_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(len(first_polynomial.array))]
         for i in range(len(result_array)):
             result_array[i] = first_polynomial.array[i].subtract(second_polynomial.array[i])
-        return Polynomial(len(result_array) - 1, result_array)
+
+        i = 0
+        while (i < len(result_array) - 1) and (result_array[i].numerator.is_positive() == 0):
+            i += 1
+        degree = len(result_array) - 1 - i
+        result_array = result_array[i:]
+        return Polynomial(degree, result_array)
 
     def multiply_by_rational(self, number: RationalNumber) -> Self:
         """
@@ -158,22 +169,18 @@ class Polynomial:
 
         This method returns quotient of dividing polynomials
         """
-        result = Polynomial(0, [])
-        self_copy = Polynomial(self.highest_degree, self.array)
-        polynomial_copy = Polynomial(polynomial.highest_degree, polynomial.array)
-        while self_copy.highest_degree >= polynomial_copy.highest_degree:
-            result.array.append((self_copy.array[0].divide(polynomial_copy.array[0])))
-            temp = polynomial_copy
-            temp = temp.multiply_by_monomial(self_copy.highest_degree - polynomial_copy.highest_degree)
-            temp = temp.multiply_by_rational(result.array[-1])
-            self_copy = self_copy.subtract(temp)
-            result.highest_degree += 1
+        
+        first_polynomial = deepcopy(self)
+        second_polynomial = deepcopy(polynomial)
 
-        for i in range(self.highest_degree - polynomial.highest_degree - result.highest_degree + 1):
-            result.array.append(RationalNumber((0, 1, [0]), (1, [1])))
+        i = 0
+        while len(first_polynomial.array) >= len(second_polynomial.array):
+            q = first_polynomial.array[i].divide(second_polynomial.array[i])
+            for k in range(0, len(polynomial.array) - 1):
+                first_polynomial.array[i+k] = first_polynomial.array[i+k].subtract(second_polynomial.array[k+1].multiply(q))
+            i += 1
 
-        result.highest_degree = self.highest_degree - polynomial.highest_degree
-        return result
+        return Polynomial(len(first_polynomial) - 1, first_polynomial)
 
     def remainder(self, polynomial: Self) -> Self:
         """
@@ -233,7 +240,7 @@ class Polynomial:
         This method converts multiple roots to simple.
         """
         polynomial_highest = deepcopy(self.highest_degree)
-        polynomial_array = deepcopyS(self.array)
+        polynomial_array = deepcopy(self.array)
         polynomial = Polynomial(polynomial_highest, polynomial_array)
         new_polynomial1 = polynomial.derivative()
         new_polynomial2 = polynomial.gcd(new_polynomial1)
@@ -248,4 +255,4 @@ class Polynomial:
         for i in range(self.highest_degree + 1):
             if self.array[i].numerator.is_positive() != 0:
                 string += f'{str(self.array[i])}x^{self.highest_degree - i} + '
-        return string[:-2]
+        return string[:-2] if string else '0'
