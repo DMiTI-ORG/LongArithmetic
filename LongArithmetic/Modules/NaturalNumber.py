@@ -1,3 +1,4 @@
+from cgitb import reset
 from typing_extensions import Self
 from copy import deepcopy
 
@@ -228,6 +229,7 @@ class NaturalNumber:
             num = num.multiply_by_powered_ten(k)
             k = k + 1
             res = res.add(num)
+        res.highest_position = len(res.array)
         return res
 
     def subtract_k_by_number(self, number: Self, digit: int) -> Self:
@@ -308,6 +310,7 @@ class NaturalNumber:
         if result.array[0] == 0:
             result.array = result.array[1:]
             result.highest_position -= 1
+        result.highest_position = len(result.array)
         return result
 
     def remainder(self, number: Self) -> Self:
@@ -318,7 +321,9 @@ class NaturalNumber:
             number: an instance of the class NaturalNumber
         This method calculate
         """
-        return self.subtract_k_by_number(number.multiply(self.quotient(number)), 1)
+        quotient = self.quotient(number)
+        num = number.multiply(quotient)
+        return self.subtract(num)
 
     def gcd(self, number: Self) -> Self:
         """
