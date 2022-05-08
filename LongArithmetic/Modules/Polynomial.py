@@ -38,7 +38,8 @@ class Polynomial:
         result_array = [RationalNumber((0, 1, [0]), (1, [1])) for _ in range(len(first_polynomial.array))]
         for i in range(len(result_array)):
             result_array[i] = first_polynomial.array[i].add(second_polynomial.array[i])
-
+        for i in result_array:
+            print(str(i))
         i = 0
         while (i < len(result_array) - 1) and (result_array[i].numerator.is_positive() == 0):
             i += 1
@@ -192,12 +193,19 @@ class Polynomial:
         argruments:
             self - polynomial
             polynomial - polynomial
-
+ 
         this function return remainder from dividing a polynomial by a polynomial when dividing with a remainder
         """
-        quotient = self.quotient(polynomial)
-        polynomial_without_remainder = quotient.multiply(polynomial)
-        result = self.subtract(polynomial_without_remainder)
+        result = Polynomial(0, [RationalNumber((0, 1, [0]), (1, [1]))])
+        self_copy = Polynomial(self.highest_degree, self.array)
+        polynomial_copy = Polynomial(polynomial.highest_degree, polynomial.array)
+        if polynomial_copy.highest_degree != 0:
+            while self_copy.highest_degree >= polynomial_copy.highest_degree:
+                temp = Polynomial(0, [self_copy.array[0].divide(polynomial_copy.array[0])])
+                temp = temp.multiply_by_monomial(self_copy.highest_degree - polynomial_copy.highest_degree)
+                temp = temp.multiply(polynomial_copy)
+                self_copy = self_copy.subtract(temp)
+                result = self_copy
         return result
 
     def gcd(self, polynomial: Self) -> Self:
