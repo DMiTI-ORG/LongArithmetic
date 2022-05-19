@@ -1,0 +1,236 @@
+{
+    "Натуральные числа": [                                                  
+        {
+            "system_name":"COM_NN_D" ,       
+            "human_name": "Сравнение натуральных чисел",
+            "input_type": 1
+        },
+        {
+            "system_name":"NZER_N_B" ,       
+            "human_name": "Проверка на ноль",
+            "input_type": 2
+        },                                                
+        {
+            "system_name":"ADD_1N_N" ,       
+            "human_name": "Добавление 1 к натуральному числу",
+            "input_type": 2
+        },                                            
+        {
+            "system_name":"ADD_NN_N" ,       
+            "human_name": "Сложение натуральных чисел",
+            "input_type": 1
+        },                                             
+        {
+            "system_name":"SUB_NN_N" ,       
+            "human_name": "Вычитание из первого большего натурального числа второго меньшего или равного",
+            "input_type": 1
+        },                                                 
+        {
+            "system_name":"MUL_ND_N" ,       
+            "human_name": "Умножение натурального числа на цифру",
+            "input_type": 3
+        },                                                 
+        {
+            "system_name":"MUL_Nk_N" ,       
+            "human_name": "Умножение натурального числа на 10^k",
+            "input_type": 3
+        },                                                  
+        {
+            "system_name":"MUL_NN_N" ,       
+            "human_name": "Умножение натуральных чисел",
+            "input_type": 1
+        },                                                 
+        {
+            "system_name":"SUB_NDN_N" ,      
+            "human_name": "Вычитание из натурального другого натурального, умноженного на цифру",
+            "input_type": 4
+        },                                                  
+        {
+            "system_name":"DIV_NN_Dk" ,      
+            "human_name": "Вычисление первой цифры деления большего натурального на меньшее, домноженное на 10^k",
+            "input_type": 4
+        },                                                 
+        {
+            "system_name":"DIV_NN_N" ,       
+            "human_name": "Частное от деления большего натурального числа на меньшее или равное натуральное с остатком",
+            "input_type": 1
+        },                                                 
+        {
+            "system_name":"MOD_NN_N" ,       
+            "human_name": "Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком",
+            "input_type": 1
+        },                                                 
+        {
+            "system_name":"GCF_NN_N" ,       
+            "human_name": "НОД натуральных чисел",
+            "input_type": 1
+        },                                                  
+        {
+            "system_name":"LCM_NN_N" ,       
+            "human_name": "НОК натуральных чисел",
+            "input_type": 1
+        }               
+    ],
+    "Целые числа": [
+        {
+            "system_name":"ABS_Z_N" ,
+            "human_name": "Абсолютная величина числа, результат",
+            "input_type": 2
+        },   
+        {
+            "system_name":"POZ_Z_D" ,
+            "human_name": "Определение положительности числа",
+            "input_type": 2
+        },
+        {
+            "system_name":"MUL_ZM_Z" ,
+            "human_name": "Умножение целого на (-1)",
+            "input_type": 2
+        },  
+        {
+            "system_name":"TRANS_N_Z" ,
+            "human_name": "Преобразование натурального в целое",
+            "input_type": 2
+        },
+        {
+            "system_name":"TRANS_Z_N" ,
+            "human_name": "Преобразование целого неотрицательного в натуральное",
+            "input_type": 2
+        },
+        {
+            "system_name":"ADD_ZZ_Z" ,
+            "human_name": "Сложение целых чисел",
+            "input_type": 1
+        },
+        {
+            "system_name":"SUB_ZZ_Z" ,
+            "human_name": "Вычитание целых чисел",
+            "input_type": 1
+        },
+        {
+            "system_name":"MUL_ZZ_Z" ,
+            "human_name": "Умножение целых чисел",
+            "input_type": 1
+        },
+        {
+            "system_name":"DIV_ZZ_Z" ,
+            "human_name": "Частное от деления целого на целое",
+            "input_type": 1
+        },
+        {
+            "system_name":"MOD_ZZ_Z" ,
+            "human_name": "Остаток от деления целого на целое",
+            "input_type": 1
+        }
+    ],
+    "Рациональные числа": [
+        {
+            "system_name":"RED_Q_Q" ,
+            "human_name": "Сокращение дроби",
+            "input_type": 2
+        },
+            
+        {
+            "system_name":"INT_Q_B" ,
+            "human_name": "Проверка на целое",
+            "input_type": 2
+        },    
+        {
+            "system_name":"TRANS_Z_Q" ,
+            "human_name": "Преобразование целого в дробное",
+            "input_type": 2
+        },    
+        {
+            "system_name":"TRANS_Q_Z" ,
+            "human_name": "Преобразование дробного в целое",
+            "input_type": 2
+        },    
+        {
+            "system_name":"ADD_QQ_Q" ,
+            "human_name": "Сложение дробей",
+            "input_type": 1
+        },    
+        {
+            "system_name":"SUB_QQ_Q" ,
+            "human_name": "Вычитание дробей",
+            "input_type": 1
+        },    
+        {
+            "system_name":"MUL_QQ_Q" ,
+            "human_name": "Умножение дробей",
+            "input_type": 1
+        },    
+        {
+            "system_name":"DIV_QQ_Q" ,
+            "human_name": "Деление дробей",
+            "input_type": 1
+        }
+    ],
+    "Многочлены": [
+        {
+            "system_name":"ADD_PP_P" ,
+            "human_name": "Сложение многочленов",
+            "input_type": 1
+        },
+        {
+            "system_name":"SUB_PP_P" ,
+            "human_name": "Вычитание многочленов",
+            "input_type": 1
+        },
+        {
+            "system_name":"MUL_PQ_P" ,
+            "human_name": "Умножение многочлена на рациональное число",
+            "input_type": 1
+        },
+        {
+            "system_name":"MUL_Pxk_P",
+            "human_name": "Умножение многочлена на x^k",
+            "input_type": 3
+        },
+        {
+            "system_name":"LED_P_Q" ,
+            "human_name": "Старший коэффициент многочлена",
+            "input_type": 2
+        },
+        {
+            "system_name":"DEG_P_N" ,
+            "human_name": "Степень многочлена",
+            "input_type": 2
+        },
+        {
+            "system_name":"FAC_P_Q" ,
+            "human_name": "Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей",
+            "input_type": 2
+        },
+        {
+            "system_name":"MUL_PP_P" ,
+            "human_name": "Умножение многочленов",
+            "input_type": 1
+        },
+        {
+            "system_name":"DIV_PP_P" ,
+            "human_name": "Частное от деления многочлена на многочлен при делении с остатком",
+            "input_type": 1
+        },
+        {
+            "system_name":"MOD_PP_P" ,
+            "human_name": "Остаток от деления многочлена на многочлен при делении с остатком",
+            "input_type": 1
+        },
+        {
+            "system_name":"GCF_PP_P" ,
+            "human_name": "НОД многочленов",
+            "input_type": 1
+        },
+        {
+            "system_name":"DER_P_P" ,
+            "human_name": "Производная многочлена",
+            "input_type": 2
+        },
+        {
+            "system_name":"NMR_P_P" ,
+            "human_name": "Преобразование многочлена — кратные корни в простые",
+            "input_type": 2
+        } 
+    ]   
+}
