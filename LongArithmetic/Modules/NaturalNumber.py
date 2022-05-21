@@ -343,7 +343,6 @@ class NaturalNumber:
                 number_copy = number_copy.remainder(self_copy)
         return self_copy.add(number_copy)
 
-        
     def lcm(self, number: Self) -> Self:
         """
         module: LCM_NN_N
@@ -354,29 +353,29 @@ class NaturalNumber:
  
         This method passes lcm of the natural numbers
         """
-        mult = self.multiply(number)
-        nod = self.gcd(number)
-        nok = 0
-        new_number = 0
-        mult_number = ''
-        nod_number = ''
-        result = NaturalNumber(0, [])
-        for i in range(mult.highest_position):
-            mult_number += str(mult.array[i])
-        for i in range(nod.highest_position):
-            nod_number += str(nod.array[i])
-        mult_number = int(mult_number)
-        nod_number = int(nod_number)
-        if mult_number > 0 and nod_number != 0:
-            while new_number < mult_number:
-                new_number += nod_number
-                nok += 1
-            result = NaturalNumber(len(str(nok)), list(str(nok)))
-            for i in range(len(str(nok))):
-                result.array[i] = int(result.array[i])
-            return result
+        if self.compare(number) != 0:
+            nok = NaturalNumber(1, [0])
+            if self.compare(number) == 1:
+                mult = number.multiply(self)
+            else:
+                mult = self.multiply(number)
+            nod = self.gcd(number)
+
+            while mult.is_zero() == False:
+
+                mult = mult.subtract(nod)
+                if nod.array[0] == 0 and nod.highest_position != mult.highest_position:
+                    nod_len = 0
+                    while nod.array[nod_len] == 0:
+                        nod_len += 1
+                    nod_itog = NaturalNumber(nod.highest_position - nod_len, [])
+                    for i in range(nod_len, nod.highest_position):
+                        nod_itog.array.append(nod.array[i])
+                    nod = nod_itog
+                nok = nok.add_one()
+            return nok
         else:
-            return 'Error'
+            return self
 
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_position == other.highest_position)
