@@ -170,20 +170,27 @@ class Polynomial:
  
         This method returns quotient of dividing polynomials
         """
-        result = Polynomial(0, [RationalNumber((0, 1, [0]), (1, [1]))])
-        self_copy = Polynomial(self.highest_degree, self.array)
-        polynomial_copy = Polynomial(polynomial.highest_degree, polynomial.array)
+        coefficients = list()
+        self_copy = deepcopy(self)
+        polynomial_copy = deepcopy(polynomial)
         if polynomial_copy.highest_degree == 0:
             for i in range(len(self_copy.array)):
                 self_copy.array[i] = self_copy.array[i].divide(polynomial_copy.array[0])
             result = self_copy
         else:
-            while self_copy.highest_degree >= polynomial_copy.highest_degree:
-                temp = Polynomial(0, [self_copy.array[0].divide(polynomial_copy.array[0])])
-                temp = temp.multiply_by_monomial(self_copy.highest_degree - polynomial_copy.highest_degree)
-                result = result.add(temp)
-                temp = temp.multiply(polynomial_copy)
-                self_copy = self_copy.subtract(temp)
+            temp = self_copy
+            while temp.highest_degree >= polynomial_copy.highest_degree:
+                coefficients.append(temp.highest_coefficient().divide(polynomial_copy.highest_coefficient()))
+
+                monomial = polynomial_copy.multiply_by_rational(coefficients[-1])\
+                    .multiply_by_monomial(temp.highest_degree - polynomial.highest_degree)
+                polynomial_copy = deepcopy(polynomial)
+                temp = temp.subtract(monomial)
+
+            while len(coefficients) <= (self_copy.highest_degree - polynomial_copy.highest_degree):
+                coefficients.append(RationalNumber((0, 1, [0]), (1, [1])))
+
+            result = Polynomial(self_copy.highest_degree - polynomial_copy.highest_degree, coefficients)
         return result
 
     def remainder(self, polynomial: Self) -> Self:
