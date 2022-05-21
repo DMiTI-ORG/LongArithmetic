@@ -219,7 +219,7 @@ class Polynomial:
         this method finds the greatest common divisor
         """
         firstpoly = deepcopy(self)
-        while polynomial.highest_degree != 0:
+        while polynomial.array[0].numerator.array[0] != 0:
             remainder1 = firstpoly
             firstpoly = polynomial
             polynomial = remainder1.remainder(polynomial)
