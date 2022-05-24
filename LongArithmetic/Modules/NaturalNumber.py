@@ -1,6 +1,6 @@
-from cgitb import reset
 from typing_extensions import Self
 from copy import deepcopy
+from unittest import result
 
 class NaturalNumber:
     def __init__(self, highest_position: int, array: list):
@@ -347,35 +347,48 @@ class NaturalNumber:
         """
         module: LCM_NN_N
         author: Zhulanov Aleksandr
- 
+    
         arguments:
         number: an instance of the class NaturalNumber
  
         This method passes lcm of the natural numbers
         """
-        if self.compare(number) != 0:
-            nok = NaturalNumber(1, [0])
-            if self.compare(number) == 1:
-                mult = number.multiply(self)
-            else:
-                mult = self.multiply(number)
-            nod = self.gcd(number)
+        self_copy = deepcopy(self)
+        number_copy = deepcopy(number)
 
-            while mult.is_zero() == False:
+        #  NOK:=( x div NOD(x,y) ) * y;
+        gcd = self_copy.gcd(number_copy)
+        div = self.quotient(gcd)
+        result = div.multiply(number_copy)
+        return result
 
-                mult = mult.subtract(nod)
-                if nod.array[0] == 0 and nod.highest_position != mult.highest_position:
-                    nod_len = 0
-                    while nod.array[nod_len] == 0:
-                        nod_len += 1
-                    nod_itog = NaturalNumber(nod.highest_position - nod_len, [])
-                    for i in range(nod_len, nod.highest_position):
-                        nod_itog.array.append(nod.array[i])
-                    nod = nod_itog
-                nok = nok.add_one()
-            return nok
-        else:
-            return self
+
+
+
+
+        # if self.compare(number) != 0:
+        #     nok = NaturalNumber(1, [0])
+        #     if self.compare(number) == 1:
+        #         mult = number.multiply(self)
+        #     else:
+        #         mult = self.multiply(number)
+        #     nod = self.gcd(number)
+
+        #     while mult.is_zero() == False:
+
+        #         mult = mult.subtract(nod)
+        #         if nod.array[0] == 0 and nod.highest_position != mult.highest_position:
+        #             nod_len = 0
+        #             while nod.array[nod_len] == 0:
+        #                 nod_len += 1
+        #             nod_itog = NaturalNumber(nod.highest_position - nod_len, [])
+        #             for i in range(nod_len, nod.highest_position):
+        #                 nod_itog.array.append(nod.array[i])
+        #             nod = nod_itog
+        #         nok = nok.add_one()
+        #     return nok
+        # else:
+        #     return self
 
     def __eq__(self, other: Self) -> bool:
         return (self.array == other.array) and (self.highest_position == other.highest_position)
